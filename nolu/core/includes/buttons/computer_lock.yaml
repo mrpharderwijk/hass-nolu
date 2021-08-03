@@ -3,7 +3,7 @@
 #         COMPUTER_LOCK
 #
 #################################################
-# TODO: RENAME? To just lock? also check `dator`
+# TODO: RENAME? To just lock? also check `dator` definition
 lock:
   tap_action:
     loader: |

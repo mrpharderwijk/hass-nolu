@@ -3,7 +3,7 @@
 #         RECENT_DOWNLOADS
 #
 #################################################
-# TODO: RENAME?
+# TODO: RENAME? & check name
 recently_downloaded:
   name: Senast nedladdat
   state_display: >

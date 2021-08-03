@@ -20,7 +20,7 @@ button_card_templates: !include_dir_merge_named core/includes/buttons/
 #         KIOSK_MODE
 ####################################################################
 # https://github.com/maykar/kiosk-mode
-kiosk_mode: !include core/includes/common/kiosk_mode.yaml
+kiosk_mode: !include core/includes/kiosk_mode.yaml
 
 ####################################################################
 #         BASE CONFIG
@@ -31,4 +31,4 @@ background: center / cover repeat url("/local/images/wallpapers/big-sur-bg.jpg")
 ####################################################################
 #         VIEWS
 ####################################################################
-views: !include core/includes/common/core_view.llg.yaml
+views: !include core/includes/views/core_view.llg.yaml

@@ -17,6 +17,7 @@ using HACS. If you haven't installed HACS yet, do it now by [clicking here](http
 With great power comes great responsibility. To control all that power and the codebase I advice you to install the VSCode add-on. Go to Supervisor > Add-on Store > and search for VS Code.
 
 Recommended extensions to use:
+
 - [EditorConfig](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig)
 - [Better Jinja](https://marketplace.visualstudio.com/items?itemName=samuelcolvin.jinjahtml) by Samuel Colvin
 - [Material Icon Theme](https://marketplace.visualstudio.com/items?itemName=PKief.material-icon-theme) by PKief
@@ -54,6 +55,7 @@ At the root of the `custom`-directory (`nolu/custom`) you will find the `custom.
 `custom/package` - contains files that are read by the root `configuration.yaml` for the custom package. Define automations, configuration, input booleans, light groups, persons sensors etc. here.
 
 `custom/includes` - the includes folder contains all directories/files that are in anyway included by `package` or other files. I've use the following structure:
+
 - `includes/automations` - contains all automations (seperate directories)
 - `includes/config` - contains all setup files used for integrations and others inside the `configuration.yaml`
 - `includes/sensors` - contains sub directory `integration_sensors` and `template_sensors` which hold the those specific sensors
@@ -63,7 +65,7 @@ At the root of the `custom`-directory (`nolu/custom`) you will find the `custom.
 
 Open `nolu/custom/custom.config.yaml`. Creating a view is very simple. This can be done by typing in the lowercase name. The name cannot contain any spaces, use an underscore instead. Below contains more information and a typical example of a configuration.
 
-``` 
+```yaml
 # custom.config.yaml
 
 example_home:
@@ -76,7 +78,7 @@ example_home:
   rows:
     # `rows item` - a single row containing its elements (which are mostly what Home Assistant calls cards)
     - widgets:
-        # 
+        # To be defined (TODO:)...
 ```
 
 #### Badge Counters
@@ -85,10 +87,9 @@ Badge counters are a combination between custom grouped entities and custom enti
 
 The `entity_counters.group.yaml` contains a few predefined groups. A group starts with the name of the group (e.g. `all_climate_entities`). The group name is always followed by the `entities`-list in this list you define the entities that are part of that group.
 
-
 ### The `core` directory
 
-TBD
+[To be defined (TODO:)]
 
 ## Specials thanks, shoutouts and credits
 

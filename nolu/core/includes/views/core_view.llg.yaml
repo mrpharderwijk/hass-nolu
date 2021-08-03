@@ -6,13 +6,19 @@
 - path: {{ name }}
   icon: {{ data.icon|default('mdi:home') }}
   visible: {{ data.show_in_navbar|default('false') }}
-  
+
   # Title
   {% if data.title is defined %}
   title: {{ data.title }}
   {% else %}
   title: {{ name|replace("_", " ")|title }}
   {% endif %}
+
+  #################################################
+  #         ROOT
+  #
+  # Defines the root element with some main padding
+  #################################################
   type: custom:mod-card
   style: !include ../styles/root.styles.yaml
   card:
@@ -49,7 +55,7 @@
                 type: custom:layout-card
                 layout_type: custom:grid-layout
                 layout: !include ../styles/default_content.layout.yaml
-                cards: 
+                cards:
                   #################################################
                   #         ROWS
                   #################################################
@@ -65,7 +71,7 @@
                       columns: 6
                       cards:
                         {% if row.widgets is defined %}
-                        {% for widget in row.widgets %}         
+                        {% for widget in row.widgets %}
                         #################################################
                         #         WIDGETS
                         #################################################
@@ -143,7 +149,7 @@
                                     {% endif %}
                                 {% endif %}
 
-                        
+
 
                         #################################################
                         #         ENERGY / TEMPERATURE / HUMIDITY
@@ -224,7 +230,7 @@
                                   {% elif col_span is string %}
                                     {% if col_span == 'full'%}
                                 grid-column: 1 / -1 !important;
-                                
+
                                     {% endif %}
                                   {% endif%}
                                 {% endif %}
@@ -317,11 +323,11 @@
                           content: |
                             ## just a markdown
                         {% endif %}
-                    
+
                         {% endfor %}
                         {% endif %}
                   {% endfor %}
-                
+
                   #################################################
                   #         ROWS NOT DEFINED
                   #         TODO: create option to not define rows
@@ -331,11 +337,11 @@
                     style: !include ../styles/row_default.styles.yaml
                     card:
                       type: grid
-                      title: 
+                      title:
                       columns: 6
                       cards:
                         - type: markdown
                           content: |
                             ## just a markdown
                   {% endif %}
-{% endfor %} 
+{% endfor %}
