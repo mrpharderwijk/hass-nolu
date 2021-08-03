@@ -1,0 +1,233 @@
+weather:
+  entity_picture: |
+    [[[
+      return entity && entity.state 
+        ? `/local/images/animated-weather-icons/${entity.state}.svg`
+        : '?';
+    ]]]
+  name: |
+    [[[
+      return entity && entity.attributes && entity.attributes?.temperature 
+        ? `${entity.attributes.temperature.toFixed(0)}<sup>°</sup>` 
+        : '?';
+    ]]]
+
+  custom_fields:
+    wind: |
+      [[[
+        return entity && entity.attributes && entity.attributes?.wind_speed
+          ? `
+            <ha-icon icon="mdi:weather-windy"></ha-icon>
+            <span id="title">${entity.attributes.wind_speed.toFixed(0)} <b>km/h</b></span>
+            <span id="subtitle">Wind</span>
+          `
+          : '?';
+      ]]]
+
+    humidity: |
+      [[[
+        return entity && entity.attributes && entity.attributes?.humidity
+          ? `
+            <ha-icon icon="mdi:water-percent"></ha-icon>
+            <span id="title">${entity.attributes.humidity.toFixed(0)} <b>%</b></span>
+            <span id="subtitle">Humidity</span>
+          `
+          : '?';
+      ]]]
+
+    visibility: |
+      [[[
+        return entity && entity.attributes && entity.attributes?.visibility
+          ? `
+            <ha-icon icon="mdi:weather-fog"></ha-icon>
+            <span id="title">${entity.attributes.visibility.toFixed(0)} <b>km</b></span>
+            <span id="subtitle">Visibility</span>
+          `
+          : '?';
+      ]]]
+
+  show_icon: true
+  show_state: false
+  show_label: false
+  show_entity_picture: true
+  aspect_ratio: 1/1
+  styles:
+    ############################################################################
+    #       GRID (#container)
+    ############################################################################
+    grid:
+      - grid-template-areas: |
+          'i      i       i    i           .          n    n            n'
+          'wind   wind    .    humidity    humidity   .    visibility   visibility'
+      - grid-auto-columns: 1fr
+      - grid-auto-flow: column
+      - grid-template-rows: 1fr 1fr
+
+    ############################################################################
+    #       ENTITY_PICTURE (#icon)
+    ############################################################################
+    entity_picture:
+      - position: relative
+      - height: 100%
+      - width: auto
+
+    ############################################################################
+    #       ICON (#img-cell > ha-icon)
+    ############################################################################
+    icon:
+      - align-self: center
+      - justify-self: flex-end
+
+    ############################################################################
+    #       NAME (#name)
+    #       The name shows the degrees
+    ############################################################################
+    name:
+      - justify-self: flex-end
+      - font-size: 2rem
+      - font-weight: bold
+      - text-transform: lowercase
+
+    ############################################################################
+    #       CUSTOM FIELDS
+    ############################################################################
+    custom_fields:
+      ############################################################################
+      #       WIND (#wind)
+      ############################################################################
+      wind:
+        - grid-area: 'w'
+
+      ############################################################################
+      #       HUMIDITY (#humidity)
+      ############################################################################
+      humidity:
+        - grid-area: 'h'
+
+      ############################################################################
+      #       VISIBILITY (#visibility)
+      ############################################################################
+      visibility:
+        - grid-area: 'v'
+
+    ############################################################################
+    #       LABEL (#label)
+    #       Last status change
+    ############################################################################
+    label:
+      - width: 100%
+
+    ############################################################################
+    #       STATE
+    ############################################################################
+    state:
+      - justify-self: start
+
+    ############################################################################
+    #       CARD (#card)
+    ############################################################################
+    card:
+      - border-radius: var(--nolu-button-card-border-radius, 1rem)
+      - padding: 1rem
+      - height: 100%
+      - !include shared/styles/card_ripple.styles.yaml
+      - !include shared/styles/card_color.styles.yaml
+
+  # https://developers.home-assistant.io/docs/core/entity/weather/#recommended-values-for-state-and-condition
+  extra_styles: |
+    [[[
+      let cardBgColor = 'rgba(43, 104, 233, 1)';
+      let cardBgImage = 'linear-gradient(0deg, rgba(43, 104, 233, 1) 0%, rgba(85, 187, 240, 1) 100%)';
+
+      if (entity && entity.state) {
+        switch(entity.state) {
+          case 'pouring':
+          case 'rainy':
+            cardBgColor = 'rgb(117,121,128)';
+            cardBgImage = 'linear-gradient(0deg, rgba(117,121,128,1) 0%, rgba(90,113,157,1) 38%, rgba(94,108,136,1) 100%)';
+            break;
+
+          case 'clear-night':
+            cardBgColor = 'rgb(7,21,45)';
+            cardBgImage = 'linear-gradient(0deg, rgba(7,21,45,1) 0%, rgba(18,45,97,1) 38%, rgba(1,11,32,1) 100%)';
+            break;
+
+          case 'xxxxx':
+            cardBgColor = '';
+            cardBgImage = '';
+            break;
+        }
+      }
+
+      return `
+        #aspect-ratio {
+          height: 100%;
+        }
+        #name > sup {
+          color: rgba(255, 255, 255, 0.5);
+          font-size: 2rem;
+        }
+
+        #wind span,
+        #humidity span,
+        #visibility span {
+          display: block;
+          width: 100%;
+          text-align: center;
+        }
+
+        #wind ha-icon,
+        #humidity ha-icon,
+        #visibility ha-icon {
+          --mdc-icon-size: 20px;
+          margin-top: 0.5rem;
+        }
+
+        #wind #title,
+        #humidity #title,
+        #visibility #title {
+          font-size: 0.95rem;
+          font-weight: 500;
+          margin-top: 0.5rem;
+        }
+
+        #title b {
+          font-size: 0.85rem;
+          color: rgba(255, 255, 255, 0.6);
+        }
+
+        #wind #subtitle,
+        #humidity #subtitle,
+        #visibility #subtitle {
+          color: rgba(255, 255, 255, 0.6);
+          font-size: 0.90rem;
+          margin-top: 0.5rem;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+
+        #card {
+          background-color: ${cardBgColor};
+          background-image: ${cardBgImage};
+        }
+
+        @keyframes card_bounce {
+          0% {
+            transform: scale(1);
+          }
+          15% {
+            transform: scale(0.9);
+          }
+          25% {
+            transform: scale(1);
+          }
+          30% {
+            transform: scale(0.98);
+          }
+          100% {
+            transform: scale(1);
+          }
+        }
+      `;
+    ]]]

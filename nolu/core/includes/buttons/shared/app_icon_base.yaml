@@ -1,0 +1,152 @@
+#################################################
+#
+#         APP_ICON_BASE
+#
+#################################################
+app_icon_base:
+  show_state: false
+  show_icon: true
+  show_label: |
+    [[[
+      return variables && variables.badge_count;
+    ]]]
+  label: |
+    [[[ return variables && variables.badge_count ? variables.badge_count : 0 ]]]
+
+  ############################################################################
+  #       TAP ACTION (bounce)
+  ############################################################################
+  tap_action:
+    animation_card: |
+      [[[
+        const animation_speed_ms = 900;
+        const animation = `card_bounce ${animation_speed_ms}ms cubic-bezier(0.22, 1, 0.36, 1)`;
+        this.shadowRoot.getElementById("card").style.animation = animation;
+        window.setTimeout(() => {
+          this.shadowRoot.getElementById("card").style.animation = "none";
+        }, animation_speed_ms)
+      ]]]
+    action: toggle
+    haptic: medium
+
+  styles:
+    ############################################################################
+    #       GRID (#container)
+    ############################################################################
+    grid:
+      - grid-template-areas: |
+          "i"
+          "n"
+      - grid-template-columns: auto
+      - grid-template-rows: auto min-content
+      - gap: 2%
+      - align-items: center
+
+    ############################################################################
+    #       ICON (#img-cell > ha-icon)
+    ############################################################################
+    icon:
+      - grid-area: i
+      - width: 100%
+      - height: auto
+      - color: rgba(255, 255, 255, 0.7)
+
+    ############################################################################
+    #       NAME (#name)
+    #       The name is used underneath the app icon
+    ############################################################################
+    name:
+      - grid-area: n
+      - font-size: 0.85rem
+      - font-weight: 400
+      - letter-spacing: 0.05vw
+      - line-height: 1.4rem
+      - text-align: center
+      - max-width: 60px
+      - justify-self: center
+      - padding-top: 0.1rem
+      - color: rgb(255, 255, 255)
+
+    ############################################################################
+    #       LABEL (#label)
+    #       The label is used as a badge to show (device) count
+    ############################################################################
+    label:
+      - background-color: '#F02849'
+      - border-radius: 50%
+      - color: '#FFFFFF'
+      - display: inline
+      - font-size: 1rem
+      - font-weight: 400
+      - line-height: 1.25rem
+      - padding: 0.3rem 0.6rem 0.2rem 0.6rem
+      - position: absolute
+      - right: -10px
+      - top: -10px
+      - vertical-align: middle
+
+    ############################################################################
+    #       CARD (#ha-card)
+    ############################################################################
+    card:
+      - background-color: transparent
+      - overflow: visible
+      - width: auto
+      - height: auto
+      - padding: 0
+      - --mdc-ripple-color: rgba(255, 255, 255, 0.3)
+
+  extra_styles: |
+    [[[
+      const defaultColor = 'rgba(146, 151, 179, 0.13)';
+      const activeColor = 'rgba(255, 255, 255, 0.7)';
+
+      const backgroundColor = variables && variables.active
+        ? activeColor
+        : defaultColor;
+      const backgroundImage = variables && variables.app_icon_color
+        ? variables.app_icon_color
+        : null;
+
+      return `
+        #img-cell {
+          background-color: ${backgroundColor};
+          ${
+            backgroundImage 
+            ? `background-image: ${backgroundImage}`
+            : ``
+          }
+          border-radius: 1rem;
+          padding: 0.5rem!important;
+          width: 46px !important;
+          height: 46px !important;
+        }
+
+        #img-cell ha-icon {
+          --mdc-icon-size: 46px!important;
+        }
+
+        #ripple {
+          border-radius: 1rem!important;
+          height: 60px!important;
+        }
+
+        @keyframes card_bounce {
+          0% {
+            transform: scale(1);
+          }
+          15% {
+            transform: scale(0.9);
+          }
+          25% {
+            transform: scale(1);
+          }
+          30% {
+            transform: scale(0.98);
+          }
+          100% {
+            transform: scale(1);
+          }
+        }
+      `;
+    ]]]

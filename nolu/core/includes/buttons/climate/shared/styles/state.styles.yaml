@@ -1,0 +1,18 @@
+############################################################################
+#       STATE
+#       !IMPORTANT state and label have switched places
+#       compared to the base, since the state can be quite long
+#       and the label is short
+############################################################################
+state:
+  - align-self: flex-start
+  - background-color: transparent
+  - border-radius: none
+  - font-size: 1rem
+  - font-weight: 600
+  - grid-area: 'l'
+  - justify-self: flex-start
+  - letter-spacing: 0.05vw
+  - line-height: 1.25rem
+  - padding: 0rem
+  - !include ../../../shared/styles/card_color.styles.yaml

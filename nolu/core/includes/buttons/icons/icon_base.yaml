@@ -1,0 +1,8 @@
+#################################################
+#
+#         ICON_BASE
+#
+#################################################
+icon_base:
+  # disable the default button card icon
+  show_icon: false

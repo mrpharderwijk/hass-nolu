@@ -1,0 +1,11 @@
+#################################################
+#
+#         DEFAULT / ONE COLUMN LAYOUT
+#
+#         Works best with the blocks 
+#         columns amount set to 2
+#
+##################################################
+grid-gap: 3vw
+grid-template-rows: auto
+grid-template-columns: repeat(3, 1fr)

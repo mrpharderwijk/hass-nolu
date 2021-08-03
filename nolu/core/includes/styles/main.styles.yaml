@@ -1,0 +1,9 @@
+.: |
+  :host {
+    display: block;
+    grid-area: main !important;
+    grid-template-rows: auto !important;
+    margin: 0 auto !important;
+    max-width: 1200px !important;
+    width: 100%;
+  }

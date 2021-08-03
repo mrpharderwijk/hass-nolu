@@ -1,0 +1,9 @@
+>
+  [[[
+    var entity_picture = entity === undefined || entity.attributes.entity_picture;
+    if (variables.state === 'off' || variables.state === 'idle' || variables.state === 'standby' ||
+      variables.state === 'unknown' || variables.state === 'unavailable' || entity === undefined) {
+      return 'var(--nolu-color-inactive, rgb(245, 245, 245))';
+    }
+    return (variables.state != 'off' && variables.state != 'idle' && variables.state != 'standby') && (entity_picture == null) ? 'var(--nolu-color-active, rgb(22, 22, 22))' : 'var(--nolu-color-idle, rgb(143, 143, 143))';
+  ]]]

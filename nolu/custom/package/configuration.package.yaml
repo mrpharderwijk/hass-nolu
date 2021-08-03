@@ -1,0 +1,15 @@
+####################################################################
+#
+#         CUSTOM CONFIGURATION (sorted alphabetically)
+#
+# !IMPORTANT NOTE!
+# In this file you can add your custom configuration or native integrations, but
+# only the reference. Since we want to separate the logic out, otherwise this file
+# will become a mess. Let's keep it simple and easy to read.
+#
+####################################################################
+
+group: !include_dir_merge_named ../includes/config/groups/
+http: !include ../includes/config/http.config.yaml
+recorder: !include ../includes/config/recorder.config.yaml
+tts: !include_dir_merge_list ../includes/config/tts/

@@ -1,0 +1,7 @@
+{
+  "files.associations": {
+    "*.yaml": "home-assistant",
+    "*.llg.yaml": "jinja-yaml"
+  },
+  "yaml.customTags": []
+}

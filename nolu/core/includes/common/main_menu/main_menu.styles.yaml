@@ -1,0 +1,62 @@
+.: |
+  :host {
+    margin: 0 !important;
+  }
+hui-horizontal-stack-card$: |
+  .card-header {
+    font-size: 1rem !important;
+    font-weight: 600 !important;
+    padding: 0 !important;
+    margin-bottom: 1rem !important;
+  }
+
+  #root {
+    backdrop-filter: blur(10px);
+    background-color: var(--nolu-background-color-dark-transparent, rgba(0, 0, 0, 0.5));
+    border-radius: 2rem;
+    display: grid;
+    grid-gap: 3vw 2.5vw;
+    grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+    padding: 1.25rem 1rem;
+    position: relative;
+    overflow: visible;
+    margin: 0 !important;
+  }
+
+  #root button-card {
+    z-index: 1;
+    margin: 0;
+    max-width: 100% !important;
+  }
+
+  @media only screen
+    and (max-width: 374px) { 
+      #root {
+        padding: 1rem;
+      }
+    }
+    
+  @media only screen
+    and (min-width: 477px) {
+      #root {
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)) !important;
+      }
+    }
+
+  @media only screen 
+    and (min-width: 768px) 
+    and (max-width: 1112px) {
+      #root {
+        grid-gap: 3vw!important;
+      }
+    }
+
+  @media only screen
+    and (min-width: 794px) {
+      #root {
+        display: flex !important;
+        flex-flow: row nowrap;
+        align-items: center;
+        justify-content: flex-start;
+      }
+    }

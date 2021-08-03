@@ -1,0 +1,60 @@
+.: |
+layout-card$grid-layout$: |
+  #root {
+    margin: 0!important;
+  }
+
+  @media only screen 
+    and (min-width: 1px) 
+    and (max-width: 679px) {
+      #root {
+        grid-template-columns: repeat(1, 1fr)!important;
+      }
+    }
+
+  @media only screen 
+    and (min-width: 680px) 
+    and (max-width: 768px) {
+      #root {
+        grid-template-columns: repeat(2, 1fr)!important;
+      }
+    }
+
+  @media only screen 
+    and (min-width: 769px) 
+    and (max-width: 1023px) {
+      #root {
+        grid-template-columns: repeat(1, 1fr)!important;
+      }
+    }
+
+  @media only screen 
+    and (min-width: 1024px) 
+    and (max-width: 1199px) {
+      #root {
+        grid-template-columns: repeat(2, 1fr)!important;
+      }
+    }
+
+  @media only screen 
+    and (min-width: 1200px)
+    and (max-width: 1434px) {
+      #root {
+        grid-template-columns: repeat(1, 1fr)!important;
+      }
+    }
+
+  @media only screen
+    and (min-width: 1435px)
+    and (max-width: 1499px) { 
+      #root {
+        grid-template-columns: repeat(2, 1fr)!important;
+      }
+    }
+
+  @media only screen
+    and (min-width: 1500px) { 
+      #root {
+        grid-template-columns: repeat(3, 1fr)!important;
+      }
+    }

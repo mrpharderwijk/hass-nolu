@@ -1,0 +1,19 @@
+#################################################
+#
+#         MEDIA
+#
+#################################################
+media:
+  template:
+    - base
+    - media_base
+  styles:
+    custom_fields:
+      icon:
+        - width: 70%
+        - fill: '#9da0a2'
+        - opacity: >
+            [[[
+              const entity_picture = entity === undefined || entity.attributes.entity_picture;
+              return entity_picture == null ? 1 : 0;
+            ]]]

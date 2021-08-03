@@ -1,0 +1,16 @@
+.cloud
+.storage
+secrets.yaml
+known_devices.yaml
+home-assistant_v2.*
+*.log
+zigbee2mqtt
+harmony_*.conf
+
+/node-red/
+/tts/
+/custom_components/
+/www/community/
+/nolu/layout/
+
+google_assistant.service_account.json

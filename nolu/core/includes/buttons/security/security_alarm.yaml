@@ -1,0 +1,48 @@
+security_alarm:
+  variables:
+    state: |
+      [[[
+        return entity && entity.state ? entity.state : null; 
+      ]]]
+  show_state: false
+  show_label: false
+  show_name: false
+  show_icon: true
+  styles:
+    icon:
+      - color: |
+          [[[
+            return variables.isActive ? 'rgba(0, 0, 0, 0.6)' : 'rgba(255, 255, 255, 0.3)';
+          ]]]
+    name:
+      - font-size: 0.8rem
+      - font-weight: 600
+    card:
+      - background-color: |
+          [[[
+            return variables.isActive ? 'rgba(255, 255, 255, 0.8)' : 'transparent';
+          ]]]
+      - color: |
+          [[[
+            return variables.isActive ? 'rgba(0, 0, 0, 0.6)' : 'rgba(255, 255, 255, 0.3)';
+          ]]]
+      - height: 70px
+  align: null
+  extra_styles: |
+    ha-card {
+      border-radius: 50%!important;
+      padding: 0!important;
+      width: 50px!important;
+      height: 50px!important;
+    }
+    #img-cell {
+      height: 50px!important;
+      width: 50px!important;
+    }
+    #img-cell ha-icon {
+      --mdc-icon-size: 25px;
+      display: flex!important;
+      align-items: center;
+      justify-content: center;
+      width: 100%!important;
+    }

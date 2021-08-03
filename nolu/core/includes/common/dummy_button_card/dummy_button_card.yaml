@@ -1,0 +1,26 @@
+##################################################################################################
+#
+#     DUMMY_BUTTON - use this button as the first button in the lovelace views!!!
+#
+#       IMPORTANT!
+#       This button is a hack because in almost
+#       all other `base` template buttons the
+#       `extra_styles` property is used, which
+#       can cause these styles to be applied on
+#       all buttons when it is the first button-card
+#       for more info: https://github.com/custom-cards/button-card#injecting-css-with-extra_styles
+##################################################################################################
+type: custom:button-card
+entity: input_boolean.dummy_button # use an existing random entity
+name: Dummy Button
+style:
+  .: |
+    :host {
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+
+styles:
+  card:
+    - display: none # hide this button since it should not be shown in the front-end
+    - margin: 0

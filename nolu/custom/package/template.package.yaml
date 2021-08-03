@@ -1,0 +1,19 @@
+####################################################################
+#
+#         BINARY SENSORS - !DON'T EDIT THIS FILE!
+#
+# Place your custom binary sensors in the binary_sensors folder, like so:
+# `nolu/custom/includes/sensors/template_sensors/binary_sensors/my_binary_sensor.binary.yaml`
+#
+####################################################################
+binary_sensor: !include_dir_merge_list ../includes/sensors/template_sensors/binary_sensors/
+
+####################################################################
+#
+#         TEMPLATE SENSORS - !DON'T EDIT THIS FILE!
+#
+# Place your custom sensors in the sensors folder, like so:
+# `nolu/custom/includes/sensors/template_sensors/sensors/my_sensor.sensor.yaml`
+#
+####################################################################
+sensor: !include_dir_merge_list ../includes/sensors/template_sensors/sensors/

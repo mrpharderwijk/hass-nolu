@@ -1,0 +1,42 @@
+#################################################
+#
+#         CIRCLE
+#
+#################################################
+circle:
+  custom_fields:
+    s: >
+      [[[
+        if (variables.state === 'on' && variables.circle_input) {
+          const input = variables.circle_input;
+          const radius = 20.5;
+          const circumference = radius * 2 * Math.PI;
+          return `
+            <svg viewBox="0 0 50 50">
+              <style>
+                circle {
+                  transform: rotate(-90deg);
+                  transform-origin: 50% 50%;
+                  stroke-dasharray: ${circumference};
+                  stroke-dashoffset: ${circumference - input / 100 * circumference};
+                }
+                tspan {
+                  font-size: 10px;
+                }
+              </style>
+              <circle cx="25" cy="25" r="${radius}" stroke="rgb(22, 22, 22)" stroke-width="5" fill="none" stroke-linecap="round" />
+              <text x="50%" y="54%" fill="rgb(22, 22, 22)" font-size="14" font-weight="600" text-anchor="middle" alignment-baseline="middle" dominant-baseline="middle">${input}<tspan font-size="14">%</tspan></text>
+            </svg>
+          `;
+        }
+      ]]]
+  styles:
+    custom_fields:
+      s:
+        - grid-area: s
+        - display: initial
+        - width: 90%
+        - letter-spacing: 0.03vw
+        - margin: -6% -6% 0 0
+        - justify-self: end
+        - opacity: 1

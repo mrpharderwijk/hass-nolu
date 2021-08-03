@@ -1,0 +1,7 @@
+name: |
+  [[[
+    const name = entity && entity.attributes && entity.attributes.friendly_name 
+      ? entity.attributes.friendly_name 
+      : '';
+    return `${name ? `${name} airco` : 'Airco'}`;
+  ]]]

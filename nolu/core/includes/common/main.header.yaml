@@ -1,0 +1,23 @@
+#################################################
+#
+#         HEADER
+#
+#################################################
+type: custom:mod-card
+style:
+  .: |
+    :host {
+      grid-area: header !important;
+      grid-column-start: span 4 !important;
+      margin: 0 !important;
+    }
+
+card:
+  type: vertical-stack
+  cards:
+    #################################################
+    #     DEFAULT
+    #################################################
+    # KEEP THIS HERE!!! See dummy button card why...
+    - !include dummy_button_card/dummy_button_card.yaml
+    - !include main_menu/main_menu.llg.yaml

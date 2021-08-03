@@ -1,0 +1,12 @@
+#################################################
+#
+#         MOTION
+#
+#################################################
+motion:
+  template:
+    - base_binary
+  icon: |
+    [[[
+      return variables.state && variables.state === 'off' ? `mdi:walk` : `mdi:motion-sensor`;  
+    ]]]

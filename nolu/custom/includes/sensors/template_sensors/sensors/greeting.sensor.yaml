@@ -1,0 +1,18 @@
+- platform: template
+  sensors:
+    ###################################################################
+    #        FRONTEND GREETING TODO: fix below input_texts
+    ####################################################################
+    greeting:
+      friendly_name: Greeting
+      value_template: >-
+        {% set time = states('sensor.time') %}
+        {% if '00:00' < time < '06:00' %}
+          {{ states.input_text.good_night.state }}
+        {% elif '06:00' < time < '12:00' %}
+          {{ states.input_text.good_morning.state }}
+        {% elif '12:00' < time < '18:00' %}
+          {{ states.input_text.good_afternoon.state }}
+        {% else %}
+          {{ states.input_text.good_evening.state }}
+        {% endif %}

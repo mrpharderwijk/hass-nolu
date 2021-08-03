@@ -1,0 +1,132 @@
+#################################################
+#
+#         MEDIA_CONDITIONAL
+#
+#################################################
+media_conditional:
+  template:
+    - base
+    - media_base
+  state_display: >
+    [[[
+      if (entity.attributes.media_title === 'Nothing playing' || entity.attributes.media_title === 'No title' && variables.state === 'paused') {
+        return 'Inget spelas';
+      }
+      return entity.attributes.media_title === 'No title' && variables.state === 'playing' ? 'Ingen titel' : entity.attributes.media_title;
+    ]]]
+  custom_fields:
+    blur: >
+      [[[
+        if (entity.attributes.entity_picture !== undefined) return '<div></div>';
+      ]]]
+    overlay: >
+      [[[ 
+        if (entity.attributes.entity_picture === undefined && entity.state !== 'idle' && entity.state !== 'unavailable') return '<div></div>';
+      ]]]
+    media_image: >
+      <div></div>
+    play_pause: >
+      [[[
+        const style = `
+          <style>
+            .scale-up {
+              animation: scale-up 0.3s;
+              cubic-bezier(.05, .5, .3, 1) 1;
+              transform-origin: center center;
+            }
+
+            @keyframes scale-up {
+              0% {
+                opacity: 0;
+                transform: scale(0);
+              }
+              100% {
+                opacity: 1;
+                transform: scale(1);
+              }
+            }
+          </style>
+        `;
+        if (variables.state === 'playing') {
+          return `
+            <svg viewBox="0 0 166 166">${style}
+              <path class="scale-up" d="M0 0h59.9v166H0zm106.1 0H166v166h-59.9z"/>
+            </svg>
+          `;
+        }
+        if (variables.state === 'paused') {
+          return `
+            <svg viewBox="0 0 166 166">${style}
+              <path class="scale-up" d="M0 0l166 83L0 166z"/>
+            </svg>
+          `;
+        }
+      ]]]
+  styles:
+    name:
+      - z-index: 3
+      - margin-bottom: -1%
+    state:
+      - z-index: 3
+    card:
+      - padding: 5%
+      - border-radius: calc(var(--custom-button-card-border-radius) / 2)
+      - backdrop-filter: blur(0) #fix chrome bug
+    custom_fields:
+      blur:
+        - z-index: 2
+        - top: 75.5%
+        - left: 0%
+        - width: 100%
+        - height: 26%
+        - position: absolute
+        - background-color: rgba(0, 0, 0, 0.2)
+        - backdrop-filter: blur(0.4em)
+        - -webkit-backdrop-filter: blur(0.4em)
+      overlay:
+        - z-index: 2
+        - opacity: 1
+        - top: 75.5%
+        - left: 0%
+        - width: 100%
+        - height: 26%
+        - position: absolute
+        - background-color: rgba(255, 255, 255, 0.8)
+      media_image:
+        - z-index: 1
+        - top: 0
+        - left: 0
+        - width: 100%
+        - height: 100%
+        - position: absolute
+        - background-size: cover
+        - background-image: >
+            [[[ 
+              return entity.attributes.entity_picture === undefined ? 'none' : `url(${entity.attributes.entity_picture})`;
+            ]]]
+      play_pause:
+        - z-index: 3
+        - top: 0
+        - right: 0
+        - bottom: 0
+        - left: 0
+        - margin: auto
+        - width: 21%
+        - height: 21%
+        - position: absolute
+        - fill: '#dedede'
+        - filter: >
+            [[[
+              const entity_picture = entity === undefined || entity.attributes.entity_picture;
+              return entity_picture == null ? 'none' : 'drop-shadow(0 0 1.3vw rgba(0,0,0,0.7))';
+            ]]]
+      icon:
+        - z-index: 3
+        - width: 29%
+        - fill: >
+            [[[ 
+              return variables.state === 'off' || variables.state === 'idle' || variables.state === 'standby' ||
+              variables.state === 'unknown' || variables.state === 'unavailable' || entity === undefined ? 
+                '#9da0a2' : 
+                'rgba(255, 255, 255, 0.8)';
+            ]]]

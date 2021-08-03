@@ -1,0 +1,10 @@
+#################################################
+#
+#         CONTACT_DOOR
+#
+#################################################
+contact_door:
+  template:
+    - base_binary
+  icon: |
+    [[[ return entity === undefined || entity.state === 'off' ? `mdi:door-closed` : `mdi:door-open`; ]]]

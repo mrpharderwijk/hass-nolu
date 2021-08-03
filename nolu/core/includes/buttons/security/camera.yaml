@@ -1,0 +1,17 @@
+camera:
+  size: 100%
+  show_state: false
+  show_label: false
+  show_name: true
+  show_entity_picture: true
+  aspect_ratio: 1/1
+  style:
+    .: |
+      ha-card #img-cell img {
+        height: 100%!important;
+      }
+  styles:
+    grid:
+      - display: block
+    card:
+      - padding: 0

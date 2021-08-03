@@ -1,0 +1,199 @@
+#################################################
+#
+#         MAIN_MENU_ITEM
+#
+#################################################
+main_menu_item:
+  show_state: false
+  show_icon: true
+  show_label: true
+  label: |
+    [[[ 
+      if (variables && variables.badge_count && parseInt(variables.badge_count, 10) > 0) {
+        return variables.badge_count;
+      }
+    ]]]
+  variables:
+    # Defines if this is the current page
+    active: |
+      [[[
+        return !window.location.pathname.includes('not-found') && 
+          window.location.pathname.includes(this.___config.tap_action.navigation_path);
+      ]]]
+  tap_action:
+    animation_card: |
+      [[[
+        const animation_speed_ms = 900;
+        const animation = `card_bounce ${animation_speed_ms}ms cubic-bezier(0.22, 1, 0.36, 1)`;
+        this.shadowRoot.getElementById("card").style.animation = animation;
+        window.setTimeout(() => {
+          this.shadowRoot.getElementById("card").style.animation = "none";
+        }, animation_speed_ms)
+      ]]]
+    action: toggle
+    haptic: medium
+
+  styles:
+    ############################################################################
+    #       GRID (#container)
+    ############################################################################
+    grid:
+      - grid-template-areas: |
+          "i"
+          "n"
+      - grid-template-columns: auto
+      - grid-template-rows: auto min-content
+
+    ############################################################################
+    #       ICON (#img-cell > ha-icon)
+    ############################################################################
+    icon:
+      - grid-area: 'i'
+      - height: 48px
+      - color: |
+          [[[
+            const defaultColor = 'rgba(255, 255, 255, 0.7)';
+            const activeColor = 'rgba(255, 255, 255, 1)';
+            return variables && variables.active ? activeColor : defaultColor;
+          ]]]
+
+    ############################################################################
+    #       NAME (#name)
+    #       The name is used underneath the app icon
+    ############################################################################
+    name:
+      - grid-area: 'n'
+      - font-size: 0.9rem
+      - font-weight: 500
+      - letter-spacing: 0.05vw
+      - line-height: 1.5rem
+      - padding-top: 0.1rem
+      - text-align: center
+      - width: 60px
+
+    ############################################################################
+    #       LABEL (#label)
+    #       The label is used as a badge to show (device) count
+    ############################################################################
+    label:
+      - background-color: '#F02849'
+      - border-radius: 50%
+      - color: '#FFFFFF'
+      - display: inline
+      - font-size: 1rem
+      - font-weight: 400
+      - line-height: 1.25rem
+      - padding: 0.3rem 0.6rem 0.2rem 0.6rem
+      - position: absolute
+      - right: 0
+      - top: -10px
+      - vertical-align: middle
+
+    ############################################################################
+    #       CARD (#ha-card)
+    ############################################################################
+    card:
+      - background-color: transparent
+      - overflow: visible
+      - padding: 0
+
+  extra_styles: |
+    [[[
+      const cardBgColor = variables && variables.active ? 'var(--nolu-color-primary, rgba(32, 89, 201, 1))' : 'rgba(146, 151, 179, 0.13)';
+      const cardBgImage = variables && variables.active ? 'linear-gradient(0deg, rgba(20, 56, 125, 1) 0%, rgba(25, 71, 162, 1) 35%, rgba(32, 89, 201, 1) 100%)' : 'none';
+
+      const nameDefaultColor = 'rgba(255, 255, 255, 0.7)';
+      const nameActiveColor = 'rgba(255, 255, 255, 1)';
+      const nameColor = variables && variables.active ? nameActiveColor : nameDefaultColor;
+
+      return `
+        #img-cell {
+          background-color: ${cardBgColor};
+          background-image: ${cardBgImage};
+          border-radius: 1rem;
+          padding: 0.5rem!important;
+          width: 46px !important;
+          height: 46px !important;
+        }
+
+        #img-cell ha-icon {
+          --mdc-icon-size: 46px!important;
+          width: 100% !important;
+        }
+
+        @media only screen
+        and (max-width: 379px) {
+          #label {
+            right: 10%!important;
+          }
+        }
+
+        @media only screen
+        and (min-width: 480px) 
+        and (max-width: 650px) {
+          #label {
+            right: 10%!important;
+          }
+        }
+
+        @media only screen
+        and (min-width: 477px) {
+          #container {
+            grid-template-areas: 'i n' !important;
+            grid-template-columns: auto auto !important;
+            grid-template-rows: auto !important;
+            gap: 2% !important;
+            align-items: start;
+          }
+
+          ha-card {
+            background-color: ${cardBgColor} !important;
+            background-image: ${cardBgImage};
+            border-radius: 1rem;
+            padding: 0.5rem !important;
+            width: auto !important;
+            height: auto !important;
+          }
+
+          #img-cell {
+            background-color: transparent !important;
+            padding: 0 !important;
+            place-self: flex-end !important;
+            width: 32px !important;
+            height: 32px !important;
+          }
+
+          #img-cell ha-icon {
+            --mdc-icon-size: 32px!important;
+          }
+
+          #name {
+            grid-area: n;
+            justify-self: start !important;
+            line-height: 115%;
+            font-size: 1rem;
+            font-weight: 600;
+            text-align: left;
+            color: ${nameColor};
+          }
+        }
+
+        @keyframes card_bounce {
+          0% {
+            transform: scale(1);
+          }
+          15% {
+            transform: scale(0.9);
+          }
+          25% {
+            transform: scale(1);
+          }
+          30% {
+            transform: scale(0.98);
+          }
+          100% {
+            transform: scale(1);
+          }
+        }
+      `;
+    ]]]

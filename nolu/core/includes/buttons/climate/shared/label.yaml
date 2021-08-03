@@ -1,0 +1,6 @@
+|
+  [[[ 
+    return `
+      ${entity.attributes?.current_temperature || '--'}${entity.attributes?.unit_of_measurement || '°C'}
+    `;
+  ]]]

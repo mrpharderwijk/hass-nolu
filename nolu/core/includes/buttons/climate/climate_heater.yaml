@@ -1,0 +1,12 @@
+#################################################
+#
+#         HEATER
+#
+#################################################
+climate_heater:
+  template:
+    - climate_base
+  icon: mdi:thermostat
+  styles: !include_dir_merge_named shared/styles/
+  state_display: !include shared/state_display.yaml
+  label: !include shared/label.yaml

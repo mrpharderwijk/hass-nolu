@@ -1,0 +1,17 @@
+#################################################
+#
+#         TEMPERATURE
+#
+#################################################
+climate_temperature:
+  template:
+    - base
+  icon: mdi:thermometer
+  show_state: false
+  label: |
+    [[[ 
+      return `
+      
+        ${(Math.round(parseFloat(entity.state) * 10) / 10).toFixed(1) || '--'}${entity.attributes?.unit_of_measurement || '°C'}
+      `;
+    ]]]

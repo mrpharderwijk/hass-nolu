@@ -1,0 +1,13 @@
+>
+  [[[
+    const entity_picture = !entity || (entity.attributes.device_class && entity.attributes.device_class === 'tv') ? null : entity.attributes.entity_picture;
+    
+    if (variables.state === 'off' || variables.state === 'idle' || variables.state === 'standby' ||
+      variables.state === 'unknown' || variables.state === 'unavailable' || entity === undefined) {
+      return 'linear-gradient(0deg, rgba(115, 115, 115, 0.2) 0%, rgba(115, 115, 115, 0.2) 100%)';
+    }
+    
+    return (variables.state !== 'off' && variables.state !== 'idle' && variables.state !== 'standby') && !entity_picture ? 
+      'linear-gradient(0deg, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.8) 100%)' : 
+      'linear-gradient(0deg, rgba(0,0,0,.8) 0%, rgba(0,0,0,0) 100%), url(' + entity_picture + ')';
+  ]]]

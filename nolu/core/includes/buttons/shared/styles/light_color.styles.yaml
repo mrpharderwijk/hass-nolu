@@ -1,0 +1,6 @@
+|
+  [[[
+    return entity === undefined || entity.state === 'off'
+      ? 'var(--nolu-color-inactive, rgb(245, 245, 245))'
+      : 'var(--button-card-light-color-no-temperature)';
+  ]]]

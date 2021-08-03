@@ -1,0 +1,34 @@
+####################################################################
+#
+#         NOLU MAIN CONFIG
+#
+####################################################################
+#
+# This file contains the main (lovelace) configuration of Nolu.
+#
+# !IMPORTANT! Whenever development is done in files that are included
+# by this file, SAVE THIS FILE AS WELL to see the immediate changes.
+# TODO: make a cli watcher that save this file automatically
+
+####################################################################
+#         BUTTON CARD TEMPLATES
+####################################################################
+# https://github.com/custom-cards/button-card
+button_card_templates: !include_dir_merge_named core/includes/buttons/
+
+####################################################################
+#         KIOSK_MODE
+####################################################################
+# https://github.com/maykar/kiosk-mode
+kiosk_mode: !include core/includes/common/kiosk_mode.yaml
+
+####################################################################
+#         BASE CONFIG
+####################################################################
+title: Nolu
+background: center / cover repeat url("/local/images/wallpapers/big-sur-bg.jpg")
+
+####################################################################
+#         VIEWS
+####################################################################
+views: !include core/includes/common/core_view.llg.yaml

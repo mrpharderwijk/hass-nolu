@@ -1,0 +1,66 @@
+.: |
+  ha-card {
+    background-color: var(--nolu-background-color-inactive, rgb(22, 22, 22));
+    border-radius: var(--nolu-button-card-border-radius, 1rem);
+    color: var(--nolu-color-inactive, rgb(245, 245, 245));
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    transition: none;
+    padding: 10%;
+  }
+  ha-card > .header > .name {
+    position: absolute;
+    bottom: 10%;
+    left: 10%;
+    right: 10%;
+    text-align: left;
+    letter-spacing: 0.05vw;
+    font-weight: 600;
+  }
+  ha-card > .header > .name > span {
+    color: var(--nolu-color-inactive, rgb(245, 245, 245)) !important;
+    font-size: 1.2rem!important;
+    opacity: 1!important;
+  }
+  ha-card > .header > .icon {
+    color: var(--nolu-color-inactive, rgb(245, 245, 245)) !important;
+    --mdc-icon-size: 35px;
+    text-align: left;
+    width: 100%!important;
+  }
+  ha-card > .states {
+    background-color: var(--nolu-background-color-active, rgb(245, 245, 245)) !important;
+    border-radius: 1rem;
+    color: var(--nolu-color-active, rgba(0, 0, 0, 0.75));
+    padding: 0.25rem 0.5rem;
+    position: absolute;
+    right: 10%;
+    margin-top: .25rem;
+  }
+  ha-card > .states > .state {
+    display: flex!important;
+    flex-flow: row nowrap!important;
+    align-items: center!important;
+    justify-content: center!important;
+  }
+  ha-card > .states > .state > .state__value,
+  ha-card > .states > .state > .state__uom {
+    color: var(--nolu-color-active, rgb(22, 22, 22)) !important;
+    font-size: 1rem!important;
+    font-weight: 600!important;
+    line-height: normal!important;
+  }
+  ha-card > .states > .state > .state__value {
+    margin: 0!important;
+  }
+  ha-card > .states > .state > .state__uom {
+    opacity: 1!important;
+    margin: 0!important;
+  }
+  ha-card > .graph {
+    margin-top: 0!important;
+    pointer-events: none!important;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+  }

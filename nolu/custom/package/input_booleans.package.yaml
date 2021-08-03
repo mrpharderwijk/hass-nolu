@@ -1,0 +1,12 @@
+input_boolean:
+  ####################################################################
+  #
+  #                  INPUT_BOOLEANS
+  #
+  ####################################################################
+  # https://www.home-assistant.io/integrations/input_boolean/
+  #
+  # Example configuration:
+  # notify_home:
+  #   name: Notify when someone arrives home
+  #   icon: mdi:car

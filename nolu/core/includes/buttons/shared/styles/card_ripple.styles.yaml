@@ -1,0 +1,12 @@
+--mdc-ripple-color: |
+  [[[
+    const active = 'var(--nolu-ripple-active, rgb(0, 0, 0))';
+    const inactive = 'var(--nolu-ripple-inactive, rgba(255, 255, 255, 0.3))';
+
+    const onState = ['on', 'auto', 'home', 'active', 'enabled', 'heat', 'cool', 'open'];
+    const offState = ['off', 'unknown', 'unavailable', 'disabled', 'closed'];
+    
+    return variables && variables.state && onState.some(state => variables.state.toLowerCase().includes(state))
+      ? active 
+      : inactive;
+  ]]]

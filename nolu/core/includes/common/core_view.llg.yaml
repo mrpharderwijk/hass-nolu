@@ -1,0 +1,341 @@
+# lovelace_gen
+{% set default_grid_gap = '3vw' %}
+{% set default_font_size = '16px' %}
+
+{% for name, data in _global.custom_config.items() %}
+- path: {{ name }}
+  icon: {{ data.icon|default('mdi:home') }}
+  visible: {{ data.show_in_navbar|default('false') }}
+  
+  # Title
+  {% if data.title is defined %}
+  title: {{ data.title }}
+  {% else %}
+  title: {{ name|replace("_", " ")|title }}
+  {% endif %}
+  type: custom:mod-card
+  style: !include ../styles/root.styles.yaml
+  card:
+    type: custom:layout-card
+    layout_type: custom:grid-layout
+    layout:
+      grid-template-rows: auto
+      grid-template-areas: |
+        'main'
+    panel: true
+    cards:
+      #################################################
+      #         MAIN
+      #################################################
+      - type: custom:mod-card
+        style: !include ../styles/main.styles.yaml
+        card:
+          type: vertical-stack
+          cards:
+            #################################################
+            #         HEADER
+            #################################################
+            {% if ((data.show_header is defined) and (data.show_header == true)) or
+              (data.show_header is not defined) %}
+            - !include main.header.yaml
+            {% endif %}
+
+            #################################################
+            #         CONTENT
+            #################################################
+            - type: custom:mod-card
+              style: !include ../styles/default_content.styles.yaml
+              card:
+                type: custom:layout-card
+                layout_type: custom:grid-layout
+                layout: !include ../styles/default_content.layout.yaml
+                cards: 
+                  #################################################
+                  #         ROWS
+                  #################################################
+                  {% if data.rows is defined %}
+                  {% for row in data.rows %}
+                  - type: custom:mod-card
+                    style: !include ../styles/row_default.styles.yaml
+                    card:
+                      type: grid
+                      {% if row.title is defined %}
+                      title: {{ row.title }}
+                      {% endif %}
+                      columns: 6
+                      cards:
+                        {% if row.widgets is defined %}
+                        {% for widget in row.widgets %}         
+                        #################################################
+                        #         WIDGETS
+                        #################################################
+
+                        #################################################
+                        #         WEATHER
+                        #################################################
+                        {% if widget.type == 'default_weather' %}
+                        - type: custom:button-card
+                          entity: {{ widget.entity }}
+                          template:
+                            - weather
+                          tap_action:
+                            action: fire-dom-event
+                            browser_mod:
+                              command: popup
+                              title: 'Weather forecast'
+                              card:
+                                type: vertical-stack
+                                cards:
+                                  # TODO: make this generic
+                                  - type: weather-forecast
+                                    entity: '[[[ return entity.entity_id ]]]'
+
+
+
+                        #################################################
+                        #         MINI-MEDIA-PLAYER
+                        #################################################
+                        {% elif widget.type == 'mini_media_player' %}
+                        - type: custom:mini-media-player
+                          entity: {{ widget.entity }}
+                          style:
+                            .: |
+                              ha-card {
+                                border-radius: 1rem;
+                                overflow: hidden !important;
+                              }
+                              ha-card .mmp__bg,
+                              ha-card[artwork*="full-cover"].--has-artwork .mmp-player,
+                              ha-card .mmp-player,
+                              ha-card .mmp__container {
+                                border-radius: 1rem;
+                                overflow: hidden !important;
+                              }
+                          artwork: full-cover
+                          hide:
+                            power: true
+                            icon: true
+                            source: true
+                            info: true
+                          tap_action:
+                            action: fire-dom-event
+                            browser_mod:
+                              command: popup
+                              title: |
+                                [[[ return 'Media Player'; ]]]
+                              card:
+                                type: custom:mini-media-player
+                                entity: {{ widget.entity }}
+                                hide:
+                                  icon: true
+                                {% if (widget.speaker_group is defined) %}
+                                speaker_group:
+                                  platform: {{ widget.speaker_group.platform }}
+                                  {% if (widget.speaker_group.show_group_count is defined) %}
+                                  show_group_count: {{ widget.speaker_group.show_group_count }}
+                                  {% endif %}
+                                  entities:
+                                    {% if widget.speaker_group.entities is defined %}
+                                    {% for entity in widget.speaker_group.entities %}
+                                    - entity_id: entity.entity_id
+                                      name: entity.name
+                                    {% endfor %}
+                                    {% endif %}
+                                {% endif %}
+
+                        
+
+                        #################################################
+                        #         ENERGY / TEMPERATURE / HUMIDITY
+                        #################################################
+                        {% elif widget.type == 'energy' or
+                                widget.type == 'temperature' or
+                                widget.type == 'humidity' %}
+                        - type: custom:mini-graph-card
+                          {% if widget.name is defined %}
+                          name: {{ widget.name }}
+                          {% endif %}
+
+                          {% if widget.type == 'energy' %}
+                          icon: {{ widget.icon|default('mdi:lightning-bolt-outline') }}
+                          {% elif widget.type == 'temperature' %}
+                          icon: {{ widget.icon|default('mdi:temperature') }}
+                          {% elif widget.type == 'humidity' %}
+                          icon: {{ widget.icon|default('mdi:water-outline') }}
+                          {% else %}
+                          icon: {{ widget.icon|default('mdi:help-box') }}
+                          {% endif%}
+                          entities:
+                            - entity: {{ widget.entity }}
+                              show_state: false
+                              show_line: true
+                              show_fill: false
+                          decimals: 1
+                          show:
+                            labels: false
+                            labels_secondary: false
+                            average: false
+                            points: false
+                          align_icon: left
+                          align_state: right
+                          style: !include ../styles/graph_styles.yaml
+
+
+
+                        #################################################
+                        #         LIGHT / CLIMATE / BINARY / CAMERA
+                        #################################################
+                        {% elif widget.type == 'light' or
+                                widget.type == 'climate' or
+                                widget.type == 'binary' or
+                                widget.type == 'camera' %}
+                        - type: custom:button-card
+                          entity: {{ widget.entity }}
+                          name: {{ widget.name }}
+                          {% if (widget.lock is defined) and (widget.lock is true) %}
+                          lock:
+                            enabled: true
+                          {% endif %}
+                          {% if (widget.template is defined) %}
+                          template: {{ widget.template }}
+                          {# {% for template in widget.template %}
+                            - {{ template }}
+                          {% endfor %} #}
+                          {% endif %}
+
+
+
+                        #################################################
+                        #         CUSTOM_ENTITIES
+                        #################################################
+                        {% elif widget.type == 'custom_entities' %}
+                        - type: custom:mod-card
+                          style:
+                            .: |
+                              :host {
+                                align-items: center;
+                                background-color: var(--nolu-background-color-dark-transparent, rgba(0, 0, 0, 0.5));
+                                border-radius: 1rem;
+                                display: flex;
+                                {% if (col_span is defined) %}
+                                  {% if col_span is number and col_span > 1 %}
+                                grid-column: span {{ col_span }};
+
+                                  {% elif col_span is string %}
+                                    {% if col_span == 'full'%}
+                                grid-column: 1 / -1 !important;
+                                
+                                    {% endif %}
+                                  {% endif%}
+                                {% endif %}
+                                justify-content: center;
+                                padding: 1rem !important;
+                              }
+                              #states {
+                                padding: 0;
+                              }
+                            hui-vertical-stack-card$: |
+                              #root > *:not(:first-child) {
+                                margin-top: 1.5rem !important;
+                              }
+                          card:
+                            type: vertical-stack
+                            cards:
+
+                              # FIXME: couldn't use entities for some reason?
+                              {% for entity_item in widget.entity_list %}
+                              #################################################
+                              #         ENTITY
+                              #################################################
+                              - type: custom:mod-card
+                                style:
+                                  hui-horizontal-stack-card$: |
+                                    #root {
+                                      align-items: center;
+                                      justify-content: center;
+                                    }
+                                    #root > * {
+                                      margin-right: 0 !important;
+                                    }
+                                card:
+                                  type: horizontal-stack
+                                  cards:
+                                    #################################################
+                                    #         BUTTON
+                                    #################################################
+                                    - type: custom:button-card
+                                      entity: {{ entity_item.entity }}
+                                      name: {{ entity_item.name }}
+                                      icon: {{ entity_item.icon }}
+                                      template:
+                                        - round_icon
+
+                                    #################################################
+                                    #         TITLE
+                                    #################################################
+                                    - type: markdown
+                                      style:
+                                        .: |
+                                          :host {
+                                            margin-left: 1rem !important;
+                                          }
+                                          ha-card {
+                                            background-color: transparent !important;
+                                            outline: 0 !important;
+                                            box-shadow: none !important;
+                                          }
+                                          ha-markdown {
+                                            padding: 0 !important;
+                                          }
+                                        ha-markdown$: |
+                                          ha-markdown-element > * {
+                                            font-weight: 300 !important;
+                                          }
+                                          ha-markdown-element h1 {
+                                            color: var(--nolu-color-white, rgb(245, 245, 245));
+                                            font-size: 1.25rem;
+                                            line-height: 1rem !important;
+                                            margin: 0 0 .75rem 0 !important;
+                                          }
+                                          ha-markdown-element h2 {
+                                            color: var(--nolu-color-gray-lighter, rgb(151, 151, 151));
+                                            font-size: 1rem !important;
+                                            line-height: 0.85rem !important;
+                                            margin: 0 !important;
+                                            text-transform: capitalize;
+                                          }
+                                      content: |
+                                        # {{ entity_item.name }}
+                                        {# ## {{ states({{ entity_item.entity }}) }} #}
+                              {% endfor %}
+
+                        #################################################
+                        #         FALLBACK
+                        #################################################
+                        {% else %}
+                        - type: markdown
+                          content: |
+                            ## just a markdown
+                        {% endif %}
+                    
+                        {% endfor %}
+                        {% endif %}
+                  {% endfor %}
+                
+                  #################################################
+                  #         ROWS NOT DEFINED
+                  #         TODO: create option to not define rows
+                  #################################################
+                  {% else %}
+                  - type: custom:mod-card
+                    style: !include ../styles/row_default.styles.yaml
+                    card:
+                      type: grid
+                      title: 
+                      columns: 6
+                      cards:
+                        - type: markdown
+                          content: |
+                            ## just a markdown
+                  {% endif %}
+{% endfor %} 

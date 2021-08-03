@@ -1,0 +1,126 @@
+####################################################################
+#
+#         ENTITY COUNTERS - USED FOR THE BADGE INDICATORS
+#
+####################################################################
+#
+# Together with `sensors/template_sensors/sensors/entity_counters.yaml` this
+# file makes it possible to have the red counter badges per button. In detail
+# this file groups the entities, while sensors/template_sensors/sensors/entity_counters.yaml
+# does the actual counting of the entities
+
+# All Radiator Valves or Climate entities (ONLY climate entities can be used here!, if you have a single thermostat put it here as well)
+all_climate_entities:
+  entities:
+    # Tado
+    - climate.bathroom
+    - climate.entryway
+    - climate.living_room
+    - climate.lucas_room
+    - climate.master_bedroom
+    - climate.master_bedroom_make_up
+    - climate.noahs_room
+    # Airconwithme
+    - climate.luca_s_bedroom
+    - climate.master_bedroom_2
+    # TuyaSmart
+    - climate.40010688d8bfc0d3e211 # toilet heater
+
+# All Fans (Enter all your fans in here)
+all_fan_entities:
+  entities:
+
+# Window Sensors (This is used in the header badges, without this the header badge won't work)
+all_window_sensor_entities:
+  entities:
+    - binary_sensor.0x00158d00067be560_contact # Luca's window
+    - binary_sensor.0x00158d000678df5c_contact # Noah's window
+    - binary_sensor.0x00158d00067c1f38_contact # Dormer window
+    - binary_sensor.0x00158d000678df1b_contact # Office Skylight Window
+    - binary_sensor.0x00158d00067960c3_contact # Laundry Skylight Window
+
+# Door Sensors (This is used in the header badges, without this the header badge won't work)
+all_door_sensor_entities:
+  entities:
+    - binary_sensor.0x00158d00067967ca_contact # frontdoor
+    - binary_sensor.0x00158d0006796750_contact # backdoor
+    - binary_sensor.0x00158d00067c1ddd_contact # patio doors
+    - binary_sensor.0x00158d000678fe5b_contact # master bedroom doors
+
+# Motion Sensors (This is used in the header badges, without this the header badge won't work)
+all_motion_sensor_entities:
+  entities:
+    # Hue Motion Indoor
+    - binary_sensor.hue_motion_sensor_1_motion
+
+    # Hue Motion Outdoor
+    - binary_sensor.0x001788010645b9c8 # front yard
+    - binary_sensor.0x00178801064855db # shed
+
+    # Ultrasync
+    - binary_sensor.motion_ultrasync_entrance
+    - binary_sensor.motion_ultrasync_living_room
+    - binary_sensor.motion_ultrasync_lucas_room
+    - binary_sensor.motion_ultrasync_master_bedroom
+    - binary_sensor.motion_ultrasync_corridor
+
+# All Detectors (smoke/gas/fire etc)
+all_detector_entities:
+  entities:
+
+# All Binary Sensors (put all your binary sensors here e.g. smoke/gas/fire/door/window/motion etc. You can use this as a counter on the security button)
+all_binary_sensor_entities:
+  entities:
+    # Aqara Contact sensors
+    - binary_sensor.0x00158d00067967ca_contact # frontdoor
+    - binary_sensor.0x00158d0006796750_contact # living room backdoor
+    - binary_sensor.0x00158d00067c1ddd_contact # living room patio doors
+    - binary_sensor.0x00158d00067be560_contact # luca's window
+    - binary_sensor.0x00158d000678df5c_contact # noah's window
+    - binary_sensor.0x00158d000678fe5b_contact # master bedroom doors
+    - binary_sensor.0x00158d00067c1f38_contact # office dormer window
+    - binary_sensor.0x00158d000678df1b_contact # office skylight window
+    - binary_sensor.0x00158d00067960c3_contact # laundry skylight window
+
+    # Hue Motion Indoor
+    - binary_sensor.hue_motion_sensor_1_motion # luca's room TODO
+
+    # Hue Motion Outdoor
+    - binary_sensor.0x001788010645b9c8_occupancy # front yard
+    - binary_sensor.0x00178801064855db # shed
+
+    # Ultrasync
+    - binary_sensor.motion_ultrasync_entrance
+    - binary_sensor.motion_ultrasync_living_room
+    - binary_sensor.motion_ultrasync_lucas_room
+    - binary_sensor.motion_ultrasync_master_bedroom
+    - binary_sensor.motion_ultrasync_corridor
+
+# All Lights
+all_light_entities:
+  entities:
+    # Hue Lights (aliases)
+    - light.hue_lily_backyard
+    - light.hue_gu10_spots
+    - light.hue_econic
+    - light.hue_iris_living_room
+    - light.hue_bulb_varv
+    - light.xiaomi_bedside_lamp_noah
+    - light.hue_lightstrip_make_up
+    - light.xiaomi_bedside_lamps
+    - light.hue_bulb_shed
+
+    # Hue Power Plug
+    - switch.0x00178801089d2ddb # Pergola
+
+# All Devices
+all_device_switch_entities:
+  entities:
+
+# All Covers
+all_cover_entities:
+  entities:
+
+# All Garage Doors
+all_garage_door_entities:
+  entities:

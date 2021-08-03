@@ -1,0 +1,158 @@
+#################################################
+#
+#         REMOTE_BUTTON
+#
+#################################################
+remote_button_directional:
+  show_state: false
+  show_icon: true
+  show_label: false
+  tap_action:
+    animation_card: |
+      [[[
+        const animation_speed_ms = 900;
+        const animation = `card_bounce ${animation_speed_ms}ms cubic-bezier(0.22, 1, 0.36, 1)`;
+        this.shadowRoot.getElementById("card").style.animation = animation;
+        window.setTimeout(() => {
+          this.shadowRoot.getElementById("card").style.animation = "none";
+        }, animation_speed_ms)
+      ]]]
+    action: toggle
+    haptic: medium
+
+  styles:
+    ############################################################################
+    #       GRID (#container)
+    ############################################################################
+    grid:
+      - grid-template-areas: |
+          "i"
+          "n"
+      - grid-template-columns: auto
+      - grid-template-rows: auto min-content
+
+    ############################################################################
+    #       ICON (#img-cell > ha-icon)
+    ############################################################################
+    icon:
+      - grid-area: 'i'
+      - height: 48px
+      - color: rgba(255, 255, 255, 1)
+
+    ############################################################################
+    #       NAME (#name)
+    #       The name is used underneath the app icon
+    ############################################################################
+    name:
+      - grid-area: 'n'
+      - font-size: 0.9rem
+      - font-weight: 500
+      - letter-spacing: 0.05vw
+      - line-height: 1.5rem
+      - padding-top: 0.1rem
+      - text-align: center
+      - width: 60px
+
+    ############################################################################
+    #       CARD (#ha-card)
+    ############################################################################
+    card:
+      - background-color: transparent
+      - box-shadow: none
+      - overflow: visible
+      - padding: 0
+      # - --mdc-ripple-color: rgba(255, 255, 255, 0.3)
+
+  extra_styles: |
+    [[[
+      return `
+        :host {
+          margin: 0 !important;
+          display: flex !important;
+        }
+        #img-cell {
+          background-color: transparent;
+          border-radius: 50%;
+          padding: 0.5rem!important;
+          width: 46px !important;
+          height: 46px !important;
+        }
+
+        #img-cell ha-icon {
+          --mdc-icon-size: 46px!important;
+          width: 100% !important;
+        }
+
+        @media only screen
+        and (max-width: 379px) {
+          #label {
+            right: 10%!important;
+          }
+        }
+
+        @media only screen
+        and (min-width: 480px) 
+        and (max-width: 650px) {
+          #label {
+            right: 10%!important;
+          }
+        }
+
+        @media only screen
+        and (min-width: 477px) {
+          #container {
+            grid-template-areas: 'i n' !important;
+            grid-template-columns: auto auto !important;
+            grid-template-rows: auto !important;
+            gap: 2% !important;
+            align-items: start;
+          }
+
+          ha-card {
+            border-radius: 1rem;
+            padding: 0.5rem !important;
+            width: auto !important;
+            height: auto !important;
+          }
+
+          #img-cell {
+            padding: 0 !important;
+            place-self: flex-end !important;
+            width: 32px !important;
+            height: 32px !important;
+          }
+
+          #img-cell ha-icon {
+            --mdc-icon-size: 32px!important;
+          }
+
+          #name {
+            grid-area: n;
+            justify-self: start !important;
+            line-height: 115%;
+            font-size: 1rem;
+            font-weight: 600;
+            text-align: left;
+            color: var(--nolu-color-gray-light, rgba(227,228,232,1));
+          }
+        }
+
+        @keyframes card_bounce {
+          0% {
+            transform: scale(1);
+          }
+          15% {
+            transform: scale(0.9);
+          }
+          25% {
+            transform: scale(1);
+          }
+          30% {
+            transform: scale(0.98);
+          }
+          100% {
+            transform: scale(1);
+          }
+        }
+      `;
+    ]]]

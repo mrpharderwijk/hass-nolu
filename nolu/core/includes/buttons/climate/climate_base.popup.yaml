@@ -1,0 +1,10 @@
+action: fire-dom-event
+browser_mod:
+  command: popup
+  title: |
+    [[[ return variables.name || 'Climate Control'; ]]]
+  card:
+    type: vertical-stack
+    cards:
+      - type: thermostat
+        entity: '[[[ return entity.entity_id ]]]'

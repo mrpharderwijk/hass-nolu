@@ -1,0 +1,14 @@
+####################################################################
+#
+#                  SCRIPTS
+#
+####################################################################
+# https://www.home-assistant.io/integrations/script/
+#
+# Example configuration:
+# message_temperature:
+#   sequence:
+#     # This is Home Assistant Script Syntax
+#     - service: notify.notify
+#       data:
+#         message: "Current temperature is {{ states('sensor.temperature') }}"

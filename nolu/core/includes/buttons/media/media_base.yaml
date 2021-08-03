@@ -1,0 +1,31 @@
+#################################################
+#
+#         MEDIA_BASE
+#
+#################################################
+media_base:
+  tap_action:
+    action: >
+      [[[
+        return !(variables.state === 'off' || variables.state === 'idle' || variables.state === 'standby') ? 'call-service' : 'none';
+      ]]]
+    service: media_player.media_play_pause
+    service_data:
+      entity_id: >
+        [[[ return entity === undefined || entity.entity_id; ]]]
+  double_tap_action:
+    action: call-service
+    service: >
+      [[[ return variables.state === 'off' || variables.state === 'idle' || variables.state === 'standby' ? 'media_player.turn_on' : 'media_player.turn_off'; ]]]
+    service_data:
+      entity_id: >
+        [[[ return entity === undefined || entity.entity_id; ]]]
+  styles:
+    card:
+      - color: !include media_base_card_color.styles.yaml
+      - text-shadow: >
+          [[[
+            const entity_picture = !entity || (entity.attributes.device_class && entity.attributes.device_class === 'tv') ? null : entity.attributes.entity_picture;
+            return !entity_picture ? 'none' : '1px 1px 5px rgba(18, 22, 23, 0.9)';
+          ]]]
+      - background-color: !include media_base_card_background-color.styles.yaml

@@ -1,0 +1,596 @@
+#################################################
+#
+#         CUSTOM CONFIG
+#
+#################################################
+home:
+  title: 'Home'
+  icon: 'mdi:home-assistant'
+  url: 'home'
+  show_in_navbar: true
+  show_header: true
+  rows:
+    - widgets:
+        #################################################
+        #         WEATHER
+        #################################################
+        - type: default_weather
+          entity: weather.buienradar
+
+        #################################################
+        #         MEDIA PLAYER
+        #################################################
+        - type: mini_media_player
+          entity: media_player.dining_room
+          speaker_group:
+            platform: sonos
+            show_group_count: true
+            entities:
+              - entity_id: media_player.dining_room
+                name: Sonos Dining Area
+              - entity_id: media_player.kitchen
+                name: Sonos Kitchen Area
+              - entity_id: media_player.tv_room
+                name: Sonos TV Area
+
+        #################################################
+        #         ENERGY
+        #################################################
+        - type: energy
+          name: Current electricity usage
+          icon: mdi:lightning-bolt-outline
+          entity: sensor.dsmr_electricity_current_usage
+
+        - type: energy
+          name: Total electricity usage
+          icon: mdi:lightning-bolt-outline
+          entity: sensor.energy_consumption_tarif_1
+
+        - type: energy
+          name: Current gas usage
+          icon: mdi:fire
+          entity: sensor.dsmr_gas_current_usage
+
+        - type: energy
+          name: Total gas usage
+          icon: mdi:fire
+          entity: sensor.dsmr_gas_total_usage
+
+        - type: 'custom_entities'
+          name: 'Occupancy'
+          col_span: 'full'
+          entity_list:
+            - entity: input_boolean.home_occupied
+              name: 🏡 at home
+              icon: mdi:home-account
+
+            - entity: input_boolean.home_sleep
+              name: 😴 asleep
+              icon: mdi:power-sleep
+
+#################################################
+#
+#         LIGHTS
+#
+#################################################
+lights:
+  title: 'Lights'
+  icon: 'mdi:lightbulb-group-outline'
+  url: 'lights'
+  badge_entities: sensor.current_lights_on
+  show_in_navbar: true
+  show_header: true
+  rows:
+    - widgets:
+        #################################################
+        #         HUE GU10
+        #################################################
+        - type: 'light'
+          entity: 'light.hue_gu10_spots'
+          name: 'Frontyard Spots'
+          template:
+            - 'light'
+            - 'icon_hue_bulb_spot'
+
+        #################################################
+        #         HUE ECONIC
+        #################################################
+        - type: 'light'
+          entity: 'light.hue_econic'
+          name: 'Hue Econic'
+          template:
+            - 'light'
+            - 'icon_hue_wall_lantern'
+
+        #################################################
+        #         HUE IRIS
+        #################################################
+        - type: 'light'
+          entity: 'light.hue_iris_living_room'
+          name: 'Living Room Iris'
+          show_icon: false
+          template:
+            - 'light'
+            - 'icon_hue_iris'
+
+        #################################################
+        #         XIAOMI BEDSIDE LAMPS
+        #################################################
+        - type: 'light'
+          entity: 'light.xiaomi_bedside_lamps'
+          name: 'Master Bedroom Bedside'
+          template:
+            - 'light'
+            - 'icon_hue_bulb_candle'
+
+        #################################################
+        #         HUE BULB
+        #################################################
+        - type: 'light'
+          entity: 'light.hue_bulb_varv'
+          name: "Luca's Lamp"
+          lock: true
+          template:
+            - 'light'
+            - 'icon_hue_floor_shade'
+
+        #################################################
+        #         XIAOMI BEDSIDE LAMP (Noah)
+        #################################################
+        - type: 'light'
+          entity: 'light.xiaomi_bedside_lamp_noah'
+          name: "Noah's Lamp"
+          lock: true
+          template:
+            - 'light'
+
+        #################################################
+        #         HUE POWER PLUG
+        #################################################
+        - type: 'light'
+          entity: 'switch.0x00178801089d2ddb'
+          name: 'Pergola Lightstrip'
+          icon: 'mdi:string-lights'
+          template:
+            - 'light'
+
+        #################################################
+        #         HUE LILY
+        #################################################
+        - type: 'light'
+          entity: 'light.hue_lily_backyard'
+          name: 'Backyard Lily'
+          template:
+            - 'light'
+            - 'icon_hue_floor_spot'
+
+        #################################################
+        #         HUE BULB
+        #################################################
+        - type: 'light'
+          entity: 'light.hue_bulb_shed'
+          name: 'Shed Bulb'
+          template:
+            - 'light'
+            - 'icon_hue'
+
+#################################################
+#
+#         CLIMATE
+#
+#################################################
+climate:
+  title: 'Climate'
+  icon: 'mdi:thermometer'
+  url: 'climate'
+  badge_entities: sensor.current_climate_entities_on
+  show_in_navbar: true
+  show_header: true
+  rows:
+    #################################################
+    #         THERMOSTATS
+    #################################################
+    - title: 'Thermostats'
+      widgets:
+        #################################################
+        #         ENTRYWAY
+        #################################################
+        - type: 'climate'
+          entity: 'climate.entryway'
+          name: 'Entryway'
+          template:
+            - climate_thermostat
+
+        - type: 'climate'
+          entity: 'climate.40010688d8bfc0d3e211'
+          name: 'Toilet'
+          icon: |
+            [[[
+              return entity && entity.state && entity.state === 'off' ? `mdi:radiator-disabled` : `mdi:radiator`
+            ]]]
+          template:
+            - climate_thermostat
+
+        #################################################
+        #         LIVING ROOM
+        #################################################
+        - type: 'climate'
+          entity: 'climate.living_room'
+          name: 'Living Room'
+          template:
+            - climate_thermostat
+
+        #################################################
+        #         MASTER BEDROOM
+        #################################################
+        - type: 'climate'
+          entity: 'climate.master_bedroom'
+          name: 'Master Bedroom'
+          template:
+            - climate_thermostat
+
+        - type: 'climate'
+          entity: 'climate.master_bedroom_2'
+          name: 'Master Bedroom'
+          template:
+            - climate_airco
+
+        #################################################
+        #         LUCA'S ROOM
+        #################################################
+        - type: 'climate'
+          entity: 'climate.lucas_room'
+          name: "Luca's Room"
+          template:
+            - climate_thermostat
+
+        - type: 'climate'
+          entity: 'climate.luca_s_bedroom'
+          name: "Luca's Airco"
+          template:
+            - climate_airco
+
+        #################################################
+        #         NOAH'S ROOM
+        #################################################
+        - type: 'climate'
+          entity: 'climate.noahs_room'
+          name: "Noah's Room"
+          template:
+            - climate_thermostat
+
+        #################################################
+        #         BATHROOM
+        #################################################
+        - type: 'climate'
+          entity: 'climate.bathroom'
+          name: 'Bathroom'
+          template:
+            - climate_thermostat
+
+    #################################################
+    #         TEMPERATURE
+    #################################################
+    - title: 'Temperature'
+      widgets:
+        #################################################
+        #         FRONT YARD
+        #################################################
+        - type: 'temperature'
+          name: 'Front Yard'
+          entity: sensor.0x001788010645b9c8_temperature
+
+        #################################################
+        #         ENTRYWAY
+        #################################################
+        - type: 'temperature'
+          name: 'Entryway'
+          entity: sensor.entryway_temperature
+
+        #################################################
+        #         LIVING ROOM
+        #################################################
+        - type: 'temperature'
+          name: 'Living Room'
+          entity: sensor.living_room_temperature
+
+        #################################################
+        #         MASTER BEDROOM
+        #################################################
+        - type: 'temperature'
+          name: 'Master Bedroom'
+          entity: sensor.temperature_average_master_bedroom
+
+        #################################################
+        #         LUCA'S ROOM
+        #################################################
+        - type: 'temperature'
+          name: "Luca's Room"
+          entity: sensor.0x00158d00067c03c6_temperature
+
+        #################################################
+        #         NOAH'S ROOM
+        #################################################
+        - type: 'temperature'
+          name: "Noah's Room"
+          entity: sensor.temperature_average_noahs_room
+
+        #################################################
+        #         BATHROOM
+        #################################################
+        - type: 'temperature'
+          name: 'Bathroom'
+          entity: sensor.bathroom_temperature
+
+        #################################################
+        #         SHED
+        #################################################
+        - type: 'temperature'
+          name: 'Shed'
+          entity: sensor.shed_outdoor_motion_sensor_temperature
+
+    #################################################
+    #         HUMIDITY
+    #################################################
+    - title: 'Humidity'
+      widgets:
+        #################################################
+        #         ENTRYWAY
+        #################################################
+        - type: 'humidity'
+          name: 'Entryway'
+          entity: sensor.entryway_humidity
+
+        #################################################
+        #         LIVING ROOM
+        #################################################
+        - type: 'humidity'
+          name: 'Living Room'
+          entity: sensor.living_room_humidity
+
+        #################################################
+        #         MASTER BEDROOM
+        #################################################
+        - type: 'humidity'
+          name: 'Master Bedroom'
+          entity: sensor.humidity_average_master_bedroom
+
+        #################################################
+        #         LUCA'S ROOM
+        #################################################
+        - type: 'humidity'
+          name: "Luca's Room"
+          entity: sensor.humidity_average_lucas_room
+
+        #################################################
+        #         NOAH'S ROOM
+        #################################################
+        - type: 'humidity'
+          name: "Noah's Room"
+          entity: sensor.humidity_average_noahs_room
+
+        #################################################
+        #         BATHROOM
+        #################################################
+        - type: 'humidity'
+          name: 'Bathroom'
+          entity: sensor.bathroom_humidity
+
+#################################################
+#
+#         SECURITY
+#
+#################################################
+security:
+  title: 'Security'
+  icon: 'mdi:cctv'
+  url: 'security'
+  badge_entities: sensor.current_security_entities_on
+  show_in_navbar: true
+  show_header: true
+  rows:
+    #################################################
+    #         CCTV
+    #################################################
+    - title: 'CCTV'
+      widgets:
+        #################################################
+        #         FRONTSIDE
+        #################################################
+        - type: 'camera'
+          entity: camera.front_door
+          template:
+            - camera
+
+        - type: 'camera'
+          entity: camera.saturn_front_entrance
+          template:
+            - camera
+
+        - type: 'camera'
+          entity: camera.saturn_front_overview
+          template:
+            - camera
+
+        #################################################
+        #         BACKSIDE
+        #################################################
+        - type: 'camera'
+          entity: camera.saturn_garden_entrance
+          template:
+            - camera
+
+        - type: 'camera'
+          entity: camera.saturn_garden_overview
+          template:
+            - camera
+
+        #################################################
+        #         INSIDE
+        #################################################
+        - type: 'camera'
+          entity: camera.saturn_luca_room
+          template:
+            - camera
+
+        - type: 'camera'
+          entity: camera.saturn_noah_cam
+          template:
+            - camera
+
+    #################################################
+    #         CONTACT SENSORS
+    #################################################
+    - title: 'Doors & Windows'
+      widgets:
+        #################################################
+        #         ENTRYWAY
+        #################################################
+        - type: 'binary'
+          entity: 'binary_sensor.0x00158d00067967ca_contact'
+          name: 'Frontdoor'
+          template:
+            - contact_door
+
+        #################################################
+        #         LIVING ROOM
+        #################################################
+        - type: 'binary'
+          entity: 'binary_sensor.0x00158d0006796750_contact'
+          name: 'Backdoor'
+          template:
+            - contact_door
+
+        - type: 'binary'
+          entity: 'binary_sensor.0x00158d00067c1ddd_contact'
+          name: 'Patio doors'
+          template:
+            - contact_door
+
+        #################################################
+        #         MASTER BEDROOM
+        #################################################
+        - type: 'binary'
+          entity: 'binary_sensor.0x00158d000678fe5b_contact'
+          name: 'Master Bedroom'
+          template:
+            - contact_door
+
+        #################################################
+        #         LUCA'S ROOM
+        #################################################
+        - type: 'binary'
+          entity: 'binary_sensor.0x00158d00067be560_contact'
+          name: "Luca's Window"
+          template:
+            - contact_window
+
+        #################################################
+        #         NOAH'S ROOM
+        #################################################
+        - type: 'binary'
+          entity: 'binary_sensor.0x00158d000678df5c_contact'
+          name: "Noah's Window"
+          template:
+            - contact_window
+
+        #################################################
+        #         ATTIC
+        #################################################
+        - type: 'binary'
+          entity: 'binary_sensor.0x00158d00067c1f38_contact'
+          name: 'Office Dormer Window'
+          template:
+            - contact_window
+
+        - type: 'binary'
+          entity: 'binary_sensor.0x00158d000678df1b_contact'
+          name: 'Office Skylight Window'
+          template:
+            - contact_window
+
+    #################################################
+    #         MOTION SENSORS
+    #################################################
+    - title: 'Motion sensors'
+      widgets:
+        #################################################
+        #         FRONTYARD
+        #################################################
+        - type: 'binary'
+          entity: 'binary_sensor.0x001788010645b9c8_occupancy'
+          name: 'Frontyard'
+          template:
+            - motion
+
+        #################################################
+        #         ENTRYWAY
+        #################################################
+        - type: 'binary'
+          entity: 'binary_sensor.motion_entryway'
+          name: 'Entryway'
+          template:
+            - motion
+
+        #################################################
+        #         LIVING ROOM
+        #################################################
+        - type: 'binary'
+          entity: 'binary_sensor.motion_living_room'
+          name: 'Living Room'
+          template:
+            - motion
+
+        #################################################
+        #         MASTER BEDROOM
+        #################################################
+        - type: 'binary'
+          entity: 'binary_sensor.motion_master_bedroom'
+          name: 'Master Bedroom'
+          template:
+            - motion
+
+        #################################################
+        #         LUCA'S ROOM
+        #################################################
+        - type: 'binary'
+          entity: 'binary_sensor.motion_lucas_room'
+          name: "Luca's Room"
+          template:
+            - motion
+
+        #################################################
+        #         CORRIDOR
+        #################################################
+        - type: 'binary'
+          entity: 'binary_sensor.motion_corridor'
+          name: 'Corridor'
+          template:
+            - motion
+
+        #################################################
+        #         SHED
+        #################################################
+        - type: 'binary'
+          entity: 'binary_sensor.0x00178801064855db_occupancy'
+          name: 'Shed'
+          template:
+            - motion
+
+#################################################
+#
+#         NOT-FOUND - 404
+#         !keep this here!
+#
+#################################################
+not-found:
+  title: '404 not found'
+  icon: 'mdi:motion'
+  url: 'not-found'
+  show_in_navbar: false
+  show_header: true
+  widgets:
+    - type: 'text'
+      content: |
+        ## 404
+        Sorry, the page you requested could not be found

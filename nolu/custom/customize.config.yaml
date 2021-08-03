@@ -1,0 +1,9 @@
+####################################################################
+#
+#         CUSTOMIZE
+#
+####################################################################
+# https://www.home-assistant.io/docs/configuration/customizing-devices/
+
+sensor.dummy_sensor:
+  friendly_name: Dummy Sensor

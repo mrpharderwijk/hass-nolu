@@ -1,0 +1,7 @@
+input_boolean:
+  ####################################################################
+  #         dummy_button
+  ####################################################################
+  dummy_button:
+    name: input boolean for the dummy_button_card
+    initial: true

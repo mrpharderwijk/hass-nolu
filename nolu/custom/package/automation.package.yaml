@@ -1,0 +1,21 @@
+####################################################################
+#
+#         AUTOMATIONS - !DON'T EDIT THIS FILE!
+#
+# Place your custom automations in the automations folder, like so:
+# `nolu/custom/includes/automations/my_custom.automation.yaml`
+#
+# OR edit your custom automation in the UI of Home Assistant
+####################################################################
+
+####################################################################
+# Core automations
+# automations which are mandatory for the core
+####################################################################
+automation custom: !include_dir_merge_list ../includes/automations/
+
+####################################################################
+# UI automations
+# automations created in the UI of Hass
+####################################################################
+automation ui: !include ../../../automations.yaml

@@ -1,0 +1,7 @@
+####################################################################
+#         KIOSK_MODE
+####################################################################
+# https://github.com/maykar/kiosk-mode
+hide_header: true
+mobile_settings:
+  hide_header: true

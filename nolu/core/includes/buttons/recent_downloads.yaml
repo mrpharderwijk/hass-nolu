@@ -1,0 +1,33 @@
+#################################################
+#
+#         RECENT_DOWNLOADS
+#
+#################################################
+# TODO: RENAME?
+recently_downloaded:
+  name: Senast nedladdat
+  state_display: >
+    [[[
+      if (entity != undefined) {
+        const data = states[entity.entity_id].attributes.data;
+        const number = data[1].number == undefined ? '(' + data[1].aired.split('-')[0] + ')' : data[1].number;
+        return `${data[1].title} ${number}`;
+      }
+      return 'Okänd';
+    ]]]
+  custom_fields:
+    blur: >
+      [[[ return entity === undefined || '<div></div>'; ]]]
+  styles:
+    custom_fields:
+      media_image:
+        - background-position: center center
+        - background-image: >
+            [[[ return entity === undefined || `url(${states[entity.entity_id].attributes.data[1].fanart})`; ]]]
+      overlay:
+        - display: none
+    card:
+      - color: >
+          [[[ return entity === undefined ? 'rgba(255, 255, 255, 0.3)' : '#efefef'; ]]]
+      - text-shadow: >
+          [[[ return entity === undefined ? 'none' : '1px 1px 5px rgba(18, 22, 23, 0.9)'; ]]]

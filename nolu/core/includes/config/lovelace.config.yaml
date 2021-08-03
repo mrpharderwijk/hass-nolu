@@ -1,0 +1,9 @@
+# https://www.home-assistant.io/lovelace/
+mode: storage
+dashboards:
+  hass-nolu:
+    mode: yaml
+    title: Nolu
+    icon: mdi:home-assistant
+    show_in_sidebar: true
+    filename: nolu/nolu.yaml

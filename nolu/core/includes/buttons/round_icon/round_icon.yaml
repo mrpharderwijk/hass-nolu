@@ -1,0 +1,110 @@
+#################################################
+#
+#         BASE
+#
+#################################################
+round_icon:
+  variables:
+    state: |
+      [[[
+        return entity && entity.state ? entity.state : null; 
+      ]]]
+    timeout: >
+      [[[ return entity === undefined || Date.now() - Date.parse(entity.last_changed); ]]]
+    light_color: !include ../shared/styles/light_color.styles.yaml
+  show_state: false
+  show_icon: true
+  show_label: false
+  show_name: false
+  tap_action:
+    action: toggle
+    haptic: medium
+  styles:
+    ############################################################################
+    #       LOCK
+    ############################################################################
+    lock:
+      - justify-content: >
+          [[[
+            const active = 'center';
+            const inactive = 'flex-end';
+
+            const onState = ['on', 'home', 'active', 'enabled', 'heat', 'cool', 'open'];
+            const offState = ['off', 'unknown', 'unavailable', 'disabled', 'closed'];
+
+            if (!variables.state) {
+              return inactive;
+            }
+            
+            return onState.some(state => variables.state.toLowerCase().includes(state)) ? active : inactive;
+          ]]]
+      - align-items: >
+          [[[
+            const active = 'center';
+            const inactive = 'flex-start';
+
+            const onState = ['on', 'home', 'active', 'enabled', 'heat', 'cool', 'open'];
+            const offState = ['off', 'unknown', 'unavailable', 'disabled', 'closed'];
+
+            if (!variables.state) {
+              return inactive;
+            }
+            
+            return onState.some(state => variables.state.toLowerCase().includes(state)) ? active : inactive;
+          ]]]
+      - !include ../shared/styles/card_color.styles.yaml
+
+    ############################################################################
+    #       GRID (#container)
+    ############################################################################
+    grid:
+      - align-items: center
+      - justify-content: center;
+      - grid-template-areas: |
+          "i"
+      - grid-template-columns: auto
+      - grid-template-rows: auto
+
+    ############################################################################
+    #       ICON (#img-cell > ha-icon)
+    ############################################################################
+    icon:
+      - --mdc-icon-size: 25px
+      - align-items: center
+      - display: flex
+      - grid-area: 'i'
+      - justify-content: center
+      - position: static
+      - text-align: center
+      - width: 100%
+      - color: var(--nolu-color-white, rgb(245, 245, 245))
+
+    ############################################################################
+    #       CARD (#ha-card)
+    ############################################################################
+    card:
+      - padding: 0
+      - border-radius: 50%
+      - width: 40px
+      - height: 40px
+      - !include ../shared/styles/card_ripple.styles.yaml
+      - !include round_icon_background-color.styles.yaml
+
+  extra_styles: |
+    @keyframes card_bounce {
+      0% {
+        transform: scale(1);
+      }
+      15% {
+        transform: scale(0.9);
+      }
+      25% {
+        transform: scale(1);
+      }
+      30% {
+        transform: scale(0.98);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }

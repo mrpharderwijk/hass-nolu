@@ -1,0 +1,8 @@
+climate_base:
+  template:
+    - base
+  styles: !include_dir_merge_named shared/styles/
+  variables: !include shared/variables.yaml
+  state_display: !include shared/state_display.yaml
+  label: !include shared/label.yaml
+  tap_action: !include climate_base.popup.yaml

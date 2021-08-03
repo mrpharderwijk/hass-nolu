@@ -1,0 +1,20 @@
+####################################################################
+#
+#         AUTOMATIONS
+#
+####################################################################
+
+# Core automations
+# automations which are mandatory for the core
+automation core:
+  ####################################################################
+  #         STARTUP (set theme)
+  ####################################################################
+  - alias: 'CUSTOM - HASS STARTUP'
+    trigger:
+      platform: homeassistant
+      event: start
+    action:
+      service: frontend.set_theme
+      data:
+        name: nolu

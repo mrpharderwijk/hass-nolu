@@ -1,0 +1,5 @@
+grid-gap: 5vw
+grid-template-columns: 0 auto 0
+grid-template-rows: auto
+grid-template-areas: |
+  ". main ."

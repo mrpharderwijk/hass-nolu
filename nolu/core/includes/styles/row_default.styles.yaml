@@ -1,0 +1,59 @@
+# lovelace_gen
+
+.: |
+hui-grid-card$: |
+  .card-header {
+    font-size: 1rem!important;
+    font-weight: 600!important;
+    padding: 0!important;
+    margin-bottom: 1rem!important;
+  }
+
+  #root {
+    grid-gap: 3vw !important;
+    # grid-auto-flow: column !important;
+    grid-auto-rows: minmax(min-content, max-content);
+  }
+
+  @media only screen
+    and (max-width: 479px) { 
+      #root {
+        grid-gap: 3vw!important;
+      }
+    }
+
+  @media only screen
+    and (min-width: 480px)
+    and (max-width: 768px) { 
+      #root {
+        grid-gap: 2vw!important;
+      }
+    }
+
+  @media only screen
+    and (max-width: 679px) { 
+      #root {
+        grid-template-columns: repeat(2, 1fr) !important;
+      }
+    }
+
+  @media only screen 
+    and (min-width: 680px) {
+      #root {
+        grid-gap: 2vw !important;
+        grid-template-columns: repeat(4, 1fr) !important;
+      }
+    }
+
+  @media only screen 
+    and (min-width: 960px) {
+      #root {
+        grid-template-columns: repeat(5, 1fr) !important;
+      }
+  }
+  @media only screen
+    and (min-width: 1220px) {
+      #root {
+        grid-template-columns: repeat(6, 1fr) !important;
+      }
+    }

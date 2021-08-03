@@ -1,0 +1,10 @@
+#################################################
+#
+#         DEFAULT / ONE COLUMN LAYOUT
+#
+#         Works best with the blocks
+#         columns amount set to 6
+#
+##################################################
+grid-template-rows: auto
+grid-template-columns: 1fr

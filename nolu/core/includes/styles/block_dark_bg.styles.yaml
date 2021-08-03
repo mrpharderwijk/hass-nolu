@@ -1,0 +1,58 @@
+.: |
+  ha-card {
+    backdrop-filter: blur(10px);
+    background-color: var(--nolu-background-color-dark-transparent, rgba(0, 0, 0, 0.5));
+    border-radius: 2rem;
+    padding: 1.25rem 1rem;
+    margin: 0 !important;
+  }
+hui-grid-card$: |
+  .card-header {
+    font-size: 1rem !important;
+    font-weight: 600 !important;
+    padding: 0!important;
+    margin-bottom: 1rem!important;
+  }
+
+  #root {
+    grid-gap: 1vw!important;
+    grid-auto-rows: minmax(min-content, max-content);
+  }
+
+  @media only screen
+    and (max-width: 479px) { 
+      #root {
+        grid-gap: 3vw!important;
+      }
+    }
+
+  @media only screen
+    and (min-width: 480px)
+    and (max-width: 768px) { 
+      #root {
+        grid-gap: 2vw!important;
+      }
+    }
+
+  @media only screen
+    and (max-width: 679px) { 
+      #root {
+        grid-template-columns: repeat(2, 1fr)!important;
+      }
+    }
+
+  @media only screen 
+    and (min-width: 680px) 
+    and (max-width: 1023px) {
+      #root {
+        grid-template-columns: repeat(4, 1fr)!important;
+      }
+    }
+
+  @media only screen 
+    and (min-width: 1024px) 
+    and (max-width: 1220px) {
+      #root {
+        grid-template-columns: repeat(5, 1fr)!important;
+      }
+    }

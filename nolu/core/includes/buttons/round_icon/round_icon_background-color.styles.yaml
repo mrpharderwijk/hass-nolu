@@ -1,0 +1,30 @@
+background-color: |
+  [[[
+    const onColor = variables && variables.color_on 
+      ? variables.color_on 
+      : 'var(--nolu-color-primary, rgba(32, 89, 201, 1))';
+    const idleColor = variables && variables.color_idle
+      ? variables.color_idle 
+      : 'var(--nolu-color-primary-idle, rgba(32, 89, 201, 0.5))';
+    const offColor = variables && variables.color_off 
+      ? variables.color_off 
+      : 'var(--nolu-background-color-light-dark-transparent, rgba(0, 0, 0, 0.3))';
+
+    const onState = ['on', 'auto', 'home', 'active', 'enabled', 'heat', 'cool', 'open'];
+    const idleState = ['idle', 'standby', 'sleep', 'sleeping', 'locked'];
+    const offState = ['off', 'unknown', 'unavailable', 'disabled', 'closed'];
+
+    let bgColor = offColor;
+
+    if (variables && variables.state) {
+      if (onState.some(state => variables.state.toLowerCase().includes(state))) {
+        bgColor = onColor;
+      }
+
+      if (idleState.some(state => variables.state.toLowerCase().includes(state))) {
+        bgColor = idleColor;
+      }
+    }
+
+    return bgColor;
+  ]]]

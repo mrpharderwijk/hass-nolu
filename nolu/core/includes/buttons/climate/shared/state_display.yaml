@@ -1,0 +1,30 @@
+|
+  [[[
+    if (!entity.state || entity.state === 'off') {
+      return 'off';
+    }
+
+    const setTemperature = (Math.round(parseFloat(entity.attributes?.temperature) * 10) / 10).toFixed(1);
+    const currentTemperature = (Math.round(parseFloat(entity.attributes?.current_temperature) * 10) / 10).toFixed(1);
+    const hasCoolingMode = entity.attributes?.hvac_modes.includes('cool');
+
+    if (entity.state === 'fan_only') {
+      return `Fan mode only`;
+    }
+    
+    if (entity.state === 'cool') {
+      if (setTemperature > currentTemperature) {
+        return `Fan mode only`;
+      }
+    }
+    
+    if (setTemperature > currentTemperature) {
+      return `Heating ${setTemperature}°C`;
+    }
+
+    if (setTemperature < currentTemperature && hasCoolingMode) {
+      return `Cooling ${setTemperature}°C`;
+    }
+
+    return `Retaining ${setTemperature}°C`;
+  ]]]

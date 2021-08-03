@@ -1,0 +1,39 @@
+# lovelace_gen
+
+#################################################
+#
+#         MAIN MENU
+#
+#################################################
+type: custom:mod-card
+style: !include main_menu.styles.yaml
+card:
+  type: 'horizontal-stack'
+  columns: 6
+  cards:
+    {% for name, data in _global.custom_config.items() %}
+    {% if (data.show_in_navbar is defined) and
+      (data.show_in_navbar == true) or
+      (data.show_in_navbar is not defined) %}
+    - type: custom:button-card
+      name: {{ data.title }}
+      icon: {{ data.icon }}
+      {% if (data.badge_entities is defined) %}
+      variables:
+        badge_count: >
+          [[[
+            const total_count = states['{{ data.badge_entities }}'].state;
+            return total_count;
+          ]]]
+      {% endif %}
+      tap_action:
+        action: 'navigate'
+        {% if (data.url is defined) %}
+        navigation_path: '/hass-nolu/{{ data.url }}'
+        {% else %}
+        navigation_path: '/hass-nolu/not-found'
+        {% endif %}
+      template:
+        - main_menu_item
+    {% endif %}
+    {% endfor %}
