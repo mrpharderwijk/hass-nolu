@@ -20,7 +20,7 @@
   # Defines the root element with some main padding
   #################################################
   type: custom:mod-card
-  style: !include ../styles/root.styles.yaml
+  style: !include includes/styles/root.styles.yaml
   card:
     type: custom:layout-card
     layout_type: custom:grid-layout
@@ -34,7 +34,7 @@
       #         MAIN
       #################################################
       - type: custom:mod-card
-        style: !include ../styles/main.styles.yaml
+        style: !include includes/styles/main.styles.yaml
         card:
           type: vertical-stack
           cards:
@@ -43,18 +43,18 @@
             #################################################
             {% if ((data.show_header is defined) and (data.show_header == true)) or
               (data.show_header is not defined) %}
-            - !include main.header.yaml
+            - !include includes/main_header/main_header.card.yaml
             {% endif %}
 
             #################################################
             #         CONTENT
             #################################################
             - type: custom:mod-card
-              style: !include ../styles/default_content.styles.yaml
+              style: !include includes/styles/default_content.styles.yaml
               card:
                 type: custom:layout-card
                 layout_type: custom:grid-layout
-                layout: !include ../styles/default_content.layout.yaml
+                layout: !include includes/styles/default_content.layout.yaml
                 cards:
                   #################################################
                   #         ROWS
@@ -62,7 +62,7 @@
                   {% if data.rows is defined %}
                   {% for row in data.rows %}
                   - type: custom:mod-card
-                    style: !include ../styles/row_default.styles.yaml
+                    style: !include includes/styles/row_default.styles.yaml
                     card:
                       type: grid
                       {% if row.title is defined %}
@@ -184,7 +184,7 @@
                             points: false
                           align_icon: left
                           align_state: right
-                          style: !include ../styles/graph_styles.yaml
+                          style: !include includes/styles/graph_styles.yaml
 
 
 
@@ -334,7 +334,7 @@
                   #################################################
                   {% else %}
                   - type: custom:mod-card
-                    style: !include ../styles/row_default.styles.yaml
+                    style: !include includes/styles/row_default.styles.yaml
                     card:
                       type: grid
                       title:
