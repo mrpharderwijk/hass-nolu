@@ -3,46 +3,48 @@
 Nolu is a Home Assistant framework that aims to make a clean-looking and
 easy-to-use dashboard. The theme is a mixture between IOS, MacOS and parts picked up from the Home Assistant Community.
 
+- [NOLU](#nolu)
+  - [Prerequisites](#prerequisites)
+  - [The Nolu concept](#the-nolu-concept)
+    - [The `custom` directory](#the-custom-directory)
+      - [Creating a custom dashboard](#creating-a-custom-dashboard)
+      - [Badge Counters](#badge-counters)
+    - [The `core` directory](#the-core-directory)
+  - [FAQ](#faq)
+  - [Specials thanks, shoutouts and credits](#specials-thanks-shoutouts-and-credits)
+      - [VSCode](#vscode)
+
 ## Prerequisites
 
-### Add-ons
+For Nolu to work properly and the install process to run smoothly it is important that you have the following stuff up and running:
 
-#### HACS
+1. Home Assistant in `Advanced Mode`
+2. The following add-on's are installed through the add-on Store:
+   - [Samba Share](https://github.com/home-assistant/addons/blob/master/samba/DOCS.md)
+   - [SSH & Web Terminal (Home Assistant Community Add-on)](https://github.com/hassio-addons/addon-ssh)
+   - [Visual Studio Code](https://github.com/hassio-addons/addon-vscode) or [File Explorer](https://github.com/home-assistant/addons/tree/master/configurator)
+   - [HACS](https://hacs.xyz/docs/installation/installation/)
+3. Next up, you need to install the following HACS integrations:
+   - [browser_mod](https://github.com/thomasloven/hass-browser_mod)
+   - [lovelace_gen](https://github.com/thomasloven/hass-lovelace_gen)
+4. After this its time to install the HACS Frontend repositories:
+   - [button-card](https://github.com/custom-cards/button-card)
+   - [hui-element](https://github.com/thomasloven/lovelace-hui-element)
+   - [kiosk mode](https://github.com/maykar/kiosk-mode)
+   - [layout-card](https://github.com/thomasloven/lovelace-layout-card)
+   - [light entity card](https://github.com/ljmerza/light-entity-card)
+   - [mini-graph-card](https://github.com/kalkih/mini-graph-card)
+   - [mini-media-player](https://github.com/kalkih/mini-media-player)
+   - [simple weather card](https://github.com/kalkih/simple-weather-card)
+5. Now may be a good time to do a restart of your HASS
+6. When all is booted up, check `configuration` > `Lovelace Dashboards` > `Resources (tab)` and make sure all HACS Frontend resources are present
+7. Now download Nolu's source from Github or clone the Nolu repository locally
+8. Find the `nolu`-directory insided Nolu's source and copy it to the root of the `config`-directory of your Hass server
+9. From Nolu's source copy/paste the `configuration.yaml` and replace your own (or use the parts you need if you know what you're doing). The `# Nolu - mandatory` rules are the ones that really need to be part of the `homeassistant:` definition, otherwise `Nolu` will not be able to start properly.
+10. If you aren't using a `secrets.yaml` yet, know is the time to start using one! Rename the `secrets.sample.yaml` to `secrets.yaml` and add your privacy sensitive variables. Most of these variables are not used for the core part of `Nolu`, only the `hass_` variables are.
+11. Open the custom config located at `nolu/custom/custom.config.yaml` and use this file to build your dashboard (for more information over what is possible check below 'Creating a custom dashboard')
 
-This theme heavily relies on HACS. It uses several add-ons and repositories that can only be installed
-using HACS. If you haven't installed HACS yet, do it now by [clicking here](https://hacs.xyz/docs/installation/installation/).
-
-#### VSCode
-
-With great power comes great responsibility. To control all that power and the codebase I advice you to install the VSCode add-on. Go to Supervisor > Add-on Store > and search for VS Code.
-
-Recommended extensions to use:
-
-- [EditorConfig](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig)
-- [Better Jinja](https://marketplace.visualstudio.com/items?itemName=samuelcolvin.jinjahtml) by Samuel Colvin
-- [Material Icon Theme](https://marketplace.visualstudio.com/items?itemName=PKief.material-icon-theme) by PKief
-
-## Integrations (A-Z)
-
-- [button-card](https://github.com/custom-cards/button-card)
-- [browser_mod](https://github.com/thomasloven/hass-browser_mod)
-- [hui-element](https://github.com/thomasloven/lovelace-hui-element)
-- [kiosk mode](https://github.com/maykar/kiosk-mode)
-- [layout-card](https://github.com/thomasloven/lovelace-layout-card)
-- [light entity card](https://github.com/ljmerza/light-entity-card)
-- [light popup card](https://github.com/DBuit/light-popup-card)
-- [lovelace_gen](https://github.com/thomasloven/hass-lovelace_gen)
-- [mini-graph-card](https://github.com/kalkih/mini-graph-card)
-- [mini-media-player](https://github.com/kalkih/mini-media-player)
-- [simple weather card](https://github.com/kalkih/simple-weather-card)
-
-## Installation
-
-1. Download the latest stable version from releases page.
-2. Unpack the zip and place the `nolu`-directory in your Home Assistant `config`-folder.
-3. From the unpacked source copy/paste the `configuration.yaml` and replace your own (or use the parts you need if you know what you're doing). The `# Nolu - mandatory` rules are the ones that really need to be part of the `homeassistant:` definition, otherwise `Nolu` will not be able to start properly.
-4. If you aren't using a `secrets.yaml` yet, know is the time to start using one! Rename the `secrets.sample.yaml` to `secrets.yaml` and add your privacy sensitive variables. Most of these variables are not used for the core part of `Nolu`, only the `hass_` variables are.
-5. Open the custom config located at `nolu/custom/custom.config.yaml` and use this file to build your dashboard (for more information over what is possible check below 'Creating a custom dashboard')
+You survived the most difficult part :-P!
 
 ## The Nolu concept
 
@@ -91,9 +93,26 @@ The `entity_counters.group.yaml` contains a few predefined groups. A group start
 
 [To be defined (TODO:)]
 
+## FAQ
+
+- Q: HACS is disabled due to ratelimited error
+  - A: You can try and open the `.storage` -directory of your Hass server and remove the `HACS`-folder. This worked for us. If that doesn't help you could [check](https://community.home-assistant.io/t/github-rate-limit-error-hacs/229709) or it might mean you'll have to wait an hour for the limit to pass 😭 (see [this post](https://hacs.xyz/docs/faq/initial_startup/] for more info) for more info)
+- Q:  `Check Configuration` results in errors referring to browser_mod or lovelace_gen not found
+  - A: Open `configuration.yaml` in your file editor and comment out the `packages` and `customize` parts of the configuration (so also the indented lines underneath them until, but not included, the `default_config:` line)
+
 ## Specials thanks, shoutouts and credits
 
 I want to thank two people for inspiring me to create this theme/framework and without their awesome projects this wouldn't be possible.
 
 - [Mattias Persson](https://community.home-assistant.io/u/Mattias_Persson) and his [take on designing a Lovelace UI](https://community.home-assistant.io/t/a-different-take-on-designing-a-lovelace-ui/162594).
 - [Jimz011](https://community.home-assistant.io/u/jimz011) and his awesome work on creating the [Homekit Infused project](https://github.com/jimz011/homekit-infused).
+
+#### VSCode
+
+With great power comes great responsibility. To control all that power and the codebase I advice you to install the VSCode add-on. Go to Supervisor > Add-on Store > and search for VS Code.
+
+Recommended extensions to use:
+
+- [EditorConfig](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig)
+- [Better Jinja](https://marketplace.visualstudio.com/items?itemName=samuelcolvin.jinjahtml) by Samuel Colvin
+- [Material Icon Theme](https://marketplace.visualstudio.com/items?itemName=PKief.material-icon-theme) by PKief
