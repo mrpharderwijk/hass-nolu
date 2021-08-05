@@ -1,16 +1,23 @@
+# Hass defaults
 .cloud
+.HA_VERSION
 .storage
+groups.yaml
+scenes.yaml
+scripts.yaml
 secrets.yaml
-known_devices.yaml
 home-assistant_v2.*
 *.log
-zigbee2mqtt
-harmony_*.conf
-.HA_VERSION
 
+/blueprints/
+/www/images/
+
+# Integration / Add-on specific
+known_devices.yaml
+harmony_*.conf
+zigbee2mqtt
+
+/custom_components/
 /node-red/
 /tts/
-/custom_components/
-/blueprints/
 /www/community/
-/www/images/
