@@ -6,6 +6,7 @@ home-assistant_v2.*
 *.log
 zigbee2mqtt
 harmony_*.conf
+.HA_VERSION
 
 /node-red/
 /tts/
@@ -13,6 +14,3 @@ harmony_*.conf
 /blueprints/
 /www/community/
 /www/images/
-/nolu/layout/
-
-google_assistant.service_account.json
