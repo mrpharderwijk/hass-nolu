@@ -1,0 +1,41 @@
+# lovelace_gen
+
+type: custom:mini-media-player
+entity: {{ widget_entity }}
+style:
+  .: |
+    ha-card {
+      border-radius: 1rem;
+      overflow: hidden !important;
+    }
+    ha-card .mmp__bg,
+    ha-card[artwork*="full-cover"].--has-artwork .mmp-player,
+    ha-card .mmp-player,
+    ha-card .mmp__container {
+      border-radius: 1rem;
+      overflow: hidden !important;
+    }
+artwork: 'full-cover'
+hide:
+  power: true
+  icon: true
+  source: true
+  info: true
+tap_action:
+  action: 'fire-dom-event'
+  browser_mod:
+    command: 'popup'
+    title: 'Media Player'
+    card:
+      type: 'custom:mini-media-player'
+      entity: {{ widget_entity }}
+      hide:
+        icon: true
+      {% if (widget_speaker_group is defined) %}
+      speaker_group:
+        platform: {{ widget_speaker_group_platform }}
+        {% if (widget_speaker_group_show_group_count is defined) %}
+        show_group_count: {{ widget_speaker_group_show_group_count }}
+        {% endif %}
+        entities: {{ widget_speaker_group_entities }}
+      {% endif %}

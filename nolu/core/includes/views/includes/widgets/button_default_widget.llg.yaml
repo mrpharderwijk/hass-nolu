@@ -1,0 +1,17 @@
+# lovelace_gen
+
+type: custom:button-card
+entity: {{ widget_entity }}
+name: {{ widget_name }}
+
+{% if (widget_lock is defined) and (widget_lock is true) %}
+lock:
+  enabled: true
+{% endif %}
+
+{% if (widget_template is defined) %}
+template: {{ widget_template }}
+  {# {% for template in widget.template %}
+  - {{ template }}
+  {% endfor %} #}
+{% endif %}

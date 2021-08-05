@@ -1,0 +1,17 @@
+# lovelace_gen
+
+type: custom:button-card
+entity: {{ widget_entity }}
+template:
+  - weather
+tap_action:
+  action: fire-dom-event
+  browser_mod:
+    command: popup
+    title: 'Weather forecast'
+    card:
+      type: vertical-stack
+      cards:
+        # TODO: make this generic
+        - type: weather-forecast
+          entity: {{ widget_entity.entity_id }}

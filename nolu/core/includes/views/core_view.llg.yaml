@@ -7,7 +7,9 @@
   icon: {{ data.icon|default('mdi:home') }}
   visible: {{ data.show_in_navbar|default('false') }}
 
-  # Title
+  #################################################
+  #         TITLE
+  #################################################
   {% if data.title is defined %}
   title: {{ data.title }}
   {% else %}
@@ -80,26 +82,44 @@
                         #         WEATHER
                         #################################################
                         {% if widget.type == 'default_weather' %}
-                        - type: custom:button-card
-                          entity: {{ widget.entity }}
-                          template:
-                            - weather
-                          tap_action:
-                            action: fire-dom-event
-                            browser_mod:
-                              command: popup
-                              title: 'Weather forecast'
-                              card:
-                                type: vertical-stack
-                                cards:
-                                  # TODO: make this generic
-                                  - type: weather-forecast
-                                    entity: '[[[ return entity.entity_id ]]]'
+                        - !include
+                          - includes/widgets/weather_widget.llg.yaml
+                          - widget_entity: {{ widget.entity }}
 
 
 
                         #################################################
-                        #         MINI-MEDIA-PLAYER
+                        #         ENERGY / TEMPERATURE / HUMIDITY
+                        #################################################
+                        {% elif widget.type == 'energy' or
+                                widget.type == 'temperature' or
+                                widget.type == 'humidity' %}
+                        - !include
+                          - includes/widgets/graph_climate_widget.llg.yaml
+                          - widget_entity: {{ widget.entity }}
+                            widget_name: {{ widget.name }}
+                            widget_type: {{ widget.type }}
+                            widget_icon: {{ widget.icon }}
+
+
+
+                        #################################################
+                        #         LIGHT / CLIMATE / BINARY / CAMERA
+                        #################################################
+                        {% elif widget.type == 'light' or
+                                widget.type == 'climate' or
+                                widget.type == 'binary' or
+                                widget.type == 'camera' %}
+                        - !include
+                          - includes/widgets/button_default_widget.llg.yaml
+                          - widget_entity: {{ widget.entity }}
+                            widget_name: {{ widget.name }}
+                            widget_template: {{ widget.template }}
+
+
+
+                        #################################################
+                        #         MINI MEDIA PLAYER
                         #################################################
                         {% elif widget.type == 'mini_media_player' %}
                         - type: custom:mini-media-player
@@ -117,96 +137,49 @@
                                 border-radius: 1rem;
                                 overflow: hidden !important;
                               }
-                          artwork: full-cover
+                          artwork: 'full-cover'
                           hide:
                             power: true
                             icon: true
                             source: true
                             info: true
                           tap_action:
-                            action: fire-dom-event
+                            action: 'fire-dom-event'
                             browser_mod:
-                              command: popup
+                              command: 'popup'
                               title: 'Media Player'
                               card:
-                                type: custom:mini-media-player
+                                type: 'custom:mini-media-player'
                                 entity: {{ widget.entity }}
                                 hide:
                                   icon: true
+
                                 {% if (widget.speaker_group is defined) %}
                                 speaker_group:
                                   platform: {{ widget.speaker_group.platform }}
+
                                   {% if (widget.speaker_group.show_group_count is defined) %}
                                   show_group_count: {{ widget.speaker_group.show_group_count }}
                                   {% endif %}
+
                                   entities:
                                     {% if widget.speaker_group.entities is defined %}
-                                    {% for entity in widget.speaker_group.entities %}
+                                      {% for entity in widget.speaker_group.entities %}
                                     - entity_id: {{ entity.entity_id }}
                                       name: {{ entity.name }}
-                                    {% endfor %}
+                                      {% endfor %}
                                     {% endif %}
                                 {% endif %}
-
-
-
-                        #################################################
-                        #         ENERGY / TEMPERATURE / HUMIDITY
-                        #################################################
-                        {% elif widget.type == 'energy' or
-                                widget.type == 'temperature' or
-                                widget.type == 'humidity' %}
-                        - type: custom:mini-graph-card
-                          {% if widget.name is defined %}
-                          name: {{ widget.name }}
-                          {% endif %}
-
-                          {% if widget.type == 'energy' %}
-                          icon: {{ widget.icon|default('mdi:lightning-bolt-outline') }}
-                          {% elif widget.type == 'temperature' %}
-                          icon: {{ widget.icon|default('mdi:temperature') }}
-                          {% elif widget.type == 'humidity' %}
-                          icon: {{ widget.icon|default('mdi:water-outline') }}
-                          {% else %}
-                          icon: {{ widget.icon|default('mdi:help-box') }}
-                          {% endif%}
-                          entities:
-                            - entity: {{ widget.entity }}
-                              show_state: false
-                              show_line: true
-                              show_fill: false
-                          decimals: 1
-                          show:
-                            labels: false
-                            labels_secondary: false
-                            average: false
-                            points: false
-                          align_icon: left
-                          align_state: right
-                          style: !include includes/styles/graph_styles.yaml
-
-
-
-                        #################################################
-                        #         LIGHT / CLIMATE / BINARY / CAMERA
-                        #################################################
-                        {% elif widget.type == 'light' or
-                                widget.type == 'climate' or
-                                widget.type == 'binary' or
-                                widget.type == 'camera' %}
-                        - type: custom:button-card
-                          entity: {{ widget.entity }}
-                          name: {{ widget.name }}
-                          {% if (widget.lock is defined) and (widget.lock is true) %}
-                          lock:
-                            enabled: true
-                          {% endif %}
-                          {% if (widget.template is defined) %}
-                          template: {{ widget.template }}
-                          {# {% for template in widget.template %}
-                            - {{ template }}
-                          {% endfor %} #}
-                          {% endif %}
+                        {#
+                          !WARNING - BROKEN!
+                            TODO: make an include for this
+                        - !include
+                          - includes/widgets/media_player_widget.llg.yaml
+                          - widget_entity: {{ widget.entity }}
+                            widget_speaker_group_platform: {{ widget.speaker_group }}
+                            widget_speaker_group_show_group_count: {{ widget.show_group_count }}
+                            widget_speaker_group_entities: {{ widget.speaker_group.entities }}
+                        #}
 
 
 

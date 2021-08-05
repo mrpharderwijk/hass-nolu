@@ -1,0 +1,32 @@
+# lovelace_gen
+
+type: custom:mini-graph-card
+
+{% if widget_name is defined %}
+name: {{ widget_name }}
+{% endif %}
+
+{% if widget_type == 'energy' %}
+icon: {{ widget_icon|default('mdi:lightning-bolt-outline') }}
+{% elif widget_type == 'temperature' %}
+icon: {{ widget_icon|default('mdi:temperature') }}
+{% elif widget_type == 'humidity' %}
+icon: {{ widget_icon|default('mdi:water-outline') }}
+{% else %}
+icon: {{ widget_icon|default('mdi:help-box') }}
+{% endif%}
+
+entities:
+  - entity: {{ widget_entity }}
+    show_state: false
+    show_line: true
+    show_fill: false
+decimals: 1
+show:
+  labels: false
+  labels_secondary: false
+  average: false
+  points: false
+align_icon: left
+align_state: right
+style: !include ../styles/graph_styles.yaml
