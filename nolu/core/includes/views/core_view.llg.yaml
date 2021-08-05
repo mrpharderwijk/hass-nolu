@@ -127,8 +127,7 @@
                             action: fire-dom-event
                             browser_mod:
                               command: popup
-                              title: |
-                                [[[ return 'Media Player'; ]]]
+                              title: 'Media Player'
                               card:
                                 type: custom:mini-media-player
                                 entity: {{ widget.entity }}
@@ -143,8 +142,8 @@
                                   entities:
                                     {% if widget.speaker_group.entities is defined %}
                                     {% for entity in widget.speaker_group.entities %}
-                                    - entity_id: entity.entity_id
-                                      name: entity.name
+                                    - entity_id: {{ entity.entity_id }}
+                                      name: {{ entity.name }}
                                     {% endfor %}
                                     {% endif %}
                                 {% endif %}
