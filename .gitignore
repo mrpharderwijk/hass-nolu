@@ -12,6 +12,7 @@ harmony_*.conf
 /custom_components/
 /blueprints/
 /www/community/
+/www/images/
 /nolu/layout/
 
 google_assistant.service_account.json

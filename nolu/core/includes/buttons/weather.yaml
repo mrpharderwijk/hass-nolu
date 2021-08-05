@@ -1,14 +1,14 @@
 weather:
   entity_picture: |
     [[[
-      return entity && entity.state 
-        ? `/local/images/animated-weather-icons/${entity.state}.svg`
+      return entity && entity.state
+        ? `/local/nolu/animated-weather-icons/${entity.state}.svg`
         : '?';
     ]]]
   name: |
     [[[
-      return entity && entity.attributes && entity.attributes?.temperature 
-        ? `${entity.attributes.temperature.toFixed(0)}<sup>°</sup>` 
+      return entity && entity.attributes && entity.attributes?.temperature
+        ? `${entity.attributes.temperature.toFixed(0)}<sup>°</sup>`
         : '?';
     ]]]
 

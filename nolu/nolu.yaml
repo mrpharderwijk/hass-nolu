@@ -26,7 +26,7 @@ kiosk_mode: !include core/includes/kiosk_mode.yaml
 #         BASE CONFIG
 ####################################################################
 title: Nolu
-background: center / cover repeat url("/local/images/wallpapers/big-sur-bg.jpg")
+background: center / cover repeat url("/local/nolu/wallpapers/big-sur-bg.jpg")
 
 ####################################################################
 #         VIEWS
