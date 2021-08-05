@@ -10,6 +10,7 @@ harmony_*.conf
 /node-red/
 /tts/
 /custom_components/
+/blueprints/
 /www/community/
 /nolu/layout/
 
