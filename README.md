@@ -5,6 +5,7 @@ easy-to-use dashboard. The theme is a mixture between IOS, MacOS and parts picke
 
 - [NOLU](#nolu)
   - [Prerequisites](#prerequisites)
+  - [Installation instructions](#installation-instructions)
   - [The Nolu concept](#the-nolu-concept)
     - [The `custom` directory](#the-custom-directory)
       - [Creating a custom dashboard](#creating-a-custom-dashboard)
@@ -38,13 +39,16 @@ For Nolu to work properly and the install process to run smoothly it is importan
    - [simple weather card](https://github.com/kalkih/simple-weather-card)
 5. Now may be a good time to do a restart of your HASS
 6. When all is booted up, check `configuration` > `Lovelace Dashboards` > `Resources (tab)` and make sure all HACS Frontend resources are present
-7. Now download Nolu's source from Github or clone the Nolu repository locally
-8. Find the `nolu`-directory insided Nolu's source and copy it to the root of the `config`-directory of your Hass server
-9. From Nolu's source copy/paste the `configuration.yaml` and replace your own (or use the parts you need if you know what you're doing). The `# Nolu - mandatory` rules are the ones that really need to be part of the `homeassistant:` definition, otherwise `Nolu` will not be able to start properly.
-10. If you aren't using a `secrets.yaml` yet, know is the time to start using one! Rename the `secrets.sample.yaml` to `secrets.yaml` and add your privacy sensitive variables. Most of these variables are not used for the core part of `Nolu`, only the `hass_` variables are.
-11. Open the custom config located at `nolu/custom/custom.config.yaml` and use this file to build your dashboard (for more information over what is possible check below 'Creating a custom dashboard')
 
-You survived the most difficult part :-P!
+## Installation instructions
+
+1. Now download Nolu's source from Github or clone the Nolu repository locally
+2. Find the `nolu`-directory insided Nolu's source and copy it to the root of the `config`-directory of your Hass server
+3.  From Nolu's source copy/paste the `configuration.yaml` and replace your own (or use the parts you need if you know what you're doing). The `# Nolu - mandatory` rules are the ones that really need to be part of the `homeassistant:` definition, otherwise `Nolu` will not be able to start properly.
+4. If you aren't using a `secrets.yaml` yet, know is the time to start using one! Rename the `secrets.sample.yaml` to `secrets.yaml` and add your privacy sensitive variables. Most of these variables are not used for the core part of `Nolu`, only the `hass_` variables are.
+5. Open the custom config located at `nolu/custom/custom.config.yaml` and use this file to build your dashboard (for more information over what is possible check below 'Creating a custom dashboard')
+
+🎉 You survived the most difficult part 🎉!
 
 ## The Nolu concept
 
