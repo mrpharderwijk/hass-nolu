@@ -1,3 +1,6 @@
+####################################################################
+#         CORE RESOURCES
+####################################################################
 - url: /hacsfiles/button-card/button-card.js
   type: module
 - url: /hacsfiles/lovelace-card-mod/card-mod.js
@@ -16,3 +19,6 @@
   type: module
 - url: /hacsfiles/thermostat-popup-card/thermostat-popup-card.js
   type: module
+####################################################################
+#         OTHER RESOURCES
+####################################################################

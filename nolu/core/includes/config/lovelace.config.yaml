@@ -1,9 +1,21 @@
+####################################################################
+#
+#         LOVELACE CONFIG
+#
+####################################################################
 # https://www.home-assistant.io/lovelace/
 mode: yaml
 
+####################################################################
+#         RESOURCES
+####################################################################
 # Add the HACS resources manually, since I noticed adding a
 # a add-on through HACS doesn't always add this by propely
 resources: !include lovelace-resources.config.yaml
+
+####################################################################
+#         DASHBOARDS
+####################################################################
 dashboards:
   hass-nolu:
     mode: yaml
