@@ -1,0 +1,16 @@
+# lovelace_gen
+
+type: markdown
+style:
+  .: |
+    :host {
+      background-color: {{ widget_background_color }};
+      border-radius: var(--nolu-button-card-border-radius, 1rem);
+      padding: 1rem;
+    }
+  ha-markdown$: |
+    ha-markdown-element {
+      color: {{ widget_text_color }};
+    }
+
+content: {{ widget_content }}

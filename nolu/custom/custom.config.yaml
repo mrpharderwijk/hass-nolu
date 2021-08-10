@@ -12,10 +12,16 @@ home:
   rows:
     - widgets:
         #################################################
-        #         WEATHER
+        #         WEATHER EXAMPLE
         #################################################
         - type: default_weather
           entity: weather.noluhass
+
+        #################################################
+        #         MARKDOWN EXAMPLE
+        #################################################
+        - type: markdown
+          content: 'Just a markdown card'
 
 #################################################
 #
