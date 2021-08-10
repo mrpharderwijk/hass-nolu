@@ -1,15 +1,19 @@
 ####################################################################
-#         CORE RESOURCES
+#         CORE RESOURCES (A-Z ordered)
 ####################################################################
 - url: /hacsfiles/button-card/button-card.js
   type: module
-- url: /hacsfiles/lovelace-card-mod/card-mod.js
+- url: /hacsfiles/light-entity-card/light-entity-card.js?hacstag=168744428444
+  type: module
+- url: /hacsfiles/light-popup-card/light-popup-card.js
   type: module
 - url: /hacsfiles/kiosk-mode/kiosk-mode.js
   type: module
-- url: /hacsfiles/lovelace-layout-card/layout-card.js
+- url: /hacsfiles/lovelace-card-mod/card-mod.js
   type: module
-- url: /hacsfiles/light-entity-card/light-entity-card.js?hacstag=168744428444
+- url: /hacsfiles/lovelace-hui-element/hui-element.js
+  type: module
+- url: /hacsfiles/lovelace-layout-card/layout-card.js
   type: module
 - url: /hacsfiles/mini-graph-card/mini-graph-card-bundle.js
   type: module
