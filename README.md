@@ -6,9 +6,10 @@ easy-to-use dashboard. The theme is a mixture between IOS, MacOS and parts picke
 - [NOLU](#nolu)
   - [Prerequisites](#prerequisites)
   - [Installation instructions](#installation-instructions)
+  - [Creating your Nolu dashboard and views](#creating-your-nolu-dashboard-and-views)
+  - [Creating the Badge counters](#creating-the-badge-counters)
   - [The Nolu concept](#the-nolu-concept)
     - [The `custom` directory](#the-custom-directory)
-      - [Creating a custom dashboard](#creating-a-custom-dashboard)
       - [Badge Counters](#badge-counters)
     - [The `core` directory](#the-core-directory)
       - [`llg` files](#llg-files)
@@ -51,27 +52,10 @@ For Nolu to work properly and the install process to run smoothly it is importan
 
 🎉 You survived the most difficult part 🎉!
 
-## The Nolu concept
+## Creating your Nolu dashboard and views
 
-In the `configuration.yaml` you will see that I've split the framework in two parts. The `core`-part and the `custom`-part. The `core`-part should not be edited, as it may have consequences that are irreversible for the proper working of the theme. The `custom`-part however is free for the user to edit and play around with. I've left a basic custom directory structure intact for reference.
-
-### The `custom` directory
-
-At the root of the `custom`-directory (`nolu/custom`) you will find the `custom.config.yaml`. This file basically contains your views definition. So this file contains the different 'pages' for your setup. Under every page you can define your entities and some extra options that are made available. More on that later (TBD).
-
-`custom/package` - contains files that are read by the root `configuration.yaml` for the custom package. Define automations, configuration, input booleans, light groups, persons sensors etc. here.
-
-`custom/includes` - the includes folder contains all directories/files that are in anyway included by `package` or other files. I've use the following structure:
-
-- `includes/automations` - contains all automations (seperate directories)
-- `includes/config` - contains all setup files used for integrations and others inside the `configuration.yaml`
-- `includes/sensors` - contains sub directory `integration_sensors` and `template_sensors` which hold the those specific sensors
-- `includes/templats` - usefull or repeately used jinja templates
-
-#### Creating a custom dashboard
-
-Open `nolu/custom/custom.config.yaml`. Creating a view is very simple. This can be done by typing in the lowercase name. The name cannot contain any spaces, use an underscore instead. Below contains more information and a typical example of a configuration.
-
+1. Open `nolu/custom/custom.config.yaml`
+2. Creating views is very simple. This can be done by typing in the lowercase name. The name cannot contain any spaces, use an underscore instead. Below contains more information and a typical example of an example view called `example_home`:
 ```yaml
 # custom.config.yaml
 
@@ -88,14 +72,11 @@ example_home:
         # To be defined (TODO:)...
 ```
 
-#### Badge Counters
+## Creating the Badge counters
 
-Badge counters are a combination between custom grouped entities and custom entity sensors. The definition of the custom grouped entities can be found in `nolu/custom/includes/config/groups/entity_counters.group.yaml`. Besides the custom grouped entities Nolu uses custom entity sensors that calculate the amount of active entities. The definition of the custom entity sensors can be found in `nolu/custom/includes/sensors/template_sensors/sensors/entity_counters.sensor.yaml`.
-
-The `entity_counters.group.yaml` contains a few predefined groups. A group starts with the name of the group (e.g. `all_climate_entities`). The group name is always followed by the `entities`-list in this list you define the entities that are part of that group.
-
-!IMPORTANT! After you've added your (custom) entities, you can add the desired entities to the view of your liking:
-
+1. Open `nolu/custom/includes/config/groups/entity_counters.group.yaml` and define the entity groups. You can also create custom ones yourself, but start with the predefined stuff. Let's add some light-entities to `all_light_entities`.
+2. After placing your entities under the designated groups open `nolu/custom/includes/sensors/template_sensors/sensors/entity_counters.sensor.yaml`. This file contains all the counting logic for the groups you've just added the entities to. If you found the sensor for the group you want to use copy the sensor name to your clipboard. For our example the sensor is called `current_lights_on`. As you can see in the code the `value_template` uses the `group.all_light_entities`. Since it is a custom sensor the full reference is `sensor.current_lights_on`.
+3. Open the `nolu/custom/custom.config.yaml` and add the `badge_entities`-key and the `sensor.current_lights_on`-value to your view like so:
 ```yaml
 # custom.config.yaml
 
@@ -111,6 +92,31 @@ example_lights:
     - widgets:
 ...
 ```
+4. Restart Home Assistant
+5. After rebooting you should see the badge counters show up IF a light that is part of the `all_light_entities` is turned on
+
+## The Nolu concept
+
+In the `configuration.yaml` you will see that I've split the framework in two parts. The `core`-part and the `custom`-part. The `core`-part should not be edited, as it may have consequences that are irreversible for the proper working of the theme. The `custom`-part however is free for the user to edit and play around with. I've left a basic custom directory structure intact for reference.
+
+### The `custom` directory
+
+At the root of the `custom`-directory (`nolu/custom`) you will find the `custom.config.yaml`. This file basically contains your views definition. So this file contains the different 'pages' for your setup. Under every page you can define your entities and some extra options that are made available. More on that later (TBD).
+
+`custom/package` - contains files that are read by the root `configuration.yaml` for the custom package. Define automations, configuration, input booleans, light groups, persons sensors etc. here.
+
+`custom/includes` - the includes folder contains all directories/files that are in anyway included by `package` or other files. I've use the following structure:
+
+- `includes/automations` - contains all automations (seperate directories)
+- `includes/config` - contains all setup files used for integrations and others inside the `configuration.yaml`
+- `includes/sensors` - contains sub directory `integration_sensors` and `template_sensors` which hold the those specific sensors
+- `includes/templates` - usefull or repeately used jinja templates 
+
+#### Badge Counters
+
+Badge counters are a combination between custom grouped entities and custom entity sensors. The definition of the custom grouped entities can be found in `nolu/custom/includes/config/groups/entity_counters.group.yaml`. Besides the custom grouped entities Nolu uses custom entity sensors that calculate the amount of active entities. The definition of the custom entity sensors can be found in `nolu/custom/includes/sensors/template_sensors/sensors/entity_counters.sensor.yaml`.
+
+The `entity_counters.group.yaml` contains a few predefined groups. A group starts with the name of the group (e.g. `all_climate_entities`). The group name is always followed by the `entities`-list in this list you define the entities that are part of that group.
 
 ### The `core` directory
 
