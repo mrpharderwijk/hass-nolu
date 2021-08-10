@@ -182,6 +182,24 @@
                         #}
 
 
+                        #################################################
+                        #         MARKDOWN
+                        #################################################
+                        {% elif widget.type == 'markdown' %}
+                        - !include
+                          - includes/widgets/markdown_widget.llg.yaml
+                          - widget_content: {{ widget.content }}
+                            {% if (widget.background_color is defined) %}
+                            widget_background_color: {{ widget.background_color }}
+                            {% else %}
+                            widget_background_color: 'var(--nolu-background-color-inactive, rgb(22, 22, 22))'
+                            {% endif %}
+
+                            {% if (widget.text_color is defined) %}
+                            widget_text_color: {{ widget.text_color }}
+                            {% else %}
+                            widget_text_color: 'var(--nolu-color-inactive, rgb(245, 245, 245))'
+                            {% endif %}
 
                         #################################################
                         #         CUSTOM_ENTITIES
