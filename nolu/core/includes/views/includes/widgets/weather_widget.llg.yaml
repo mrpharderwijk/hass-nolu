@@ -12,6 +12,6 @@ tap_action:
     card:
       type: vertical-stack
       cards:
-        # TODO: make this generic
+        # TODO: style this ;-)
         - type: weather-forecast
-          entity: {{ widget_entity.entity_id }}
+          entity: {{ widget_entity }}

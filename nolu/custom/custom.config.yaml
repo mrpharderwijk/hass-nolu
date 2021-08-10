@@ -11,8 +11,11 @@ home:
   show_header: true
   rows:
     - widgets:
-        - type: markdown
-          content: 'Add some widgets to your custom.config.yaml'
+        #################################################
+        #         WEATHER
+        #################################################
+        - type: default_weather
+          entity: weather.noluhass
 
 #################################################
 #
