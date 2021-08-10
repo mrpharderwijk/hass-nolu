@@ -11,6 +11,7 @@ easy-to-use dashboard. The theme is a mixture between IOS, MacOS and parts picke
       - [Creating a custom dashboard](#creating-a-custom-dashboard)
       - [Badge Counters](#badge-counters)
     - [The `core` directory](#the-core-directory)
+      - [`llg` files](#llg-files)
   - [FAQ](#faq)
   - [Specials thanks, shoutouts and credits](#specials-thanks-shoutouts-and-credits)
       - [VSCode](#vscode)
@@ -93,9 +94,36 @@ Badge counters are a combination between custom grouped entities and custom enti
 
 The `entity_counters.group.yaml` contains a few predefined groups. A group starts with the name of the group (e.g. `all_climate_entities`). The group name is always followed by the `entities`-list in this list you define the entities that are part of that group.
 
+!IMPORTANT! After you've added your (custom) entities, you can add the desired entities to the view of your liking:
+
+```yaml
+# custom.config.yaml
+
+...
+example_lights:
+  name: 'Example Lights'
+  title: 'mdi:light-bulb'
+  url: 'lights'
+  show_in_navbar: true
+  show_header: true
+  badge_entities: sensor.current_lights_on # The `badge_entities` key should do the trick ;-)
+  rows:
+    - widgets:
+...
+```
+
 ### The `core` directory
 
 [To be defined (TODO:)]
+
+#### `llg` files
+
+The `llg`-files are an important part of the Nolu framework. These files are all `lovelace_gen`-types. This means that they contain Jinja code. They are, however, `yaml`-files. The Jinja code makes these files so much easier to work with and reduce the code we write for the framework. In short, the `nolu/custom/custom.config.yaml` which holds the simple interface yaml gets interpreted by `nolu/core/includes/views/core_view.llg.yaml`.
+
+There are three main reasons for suffixing these files with `*.llg.yaml`:
+1. A developer or editor working on this framework immediately identifies a `lovelace_gen`-file
+2. It is a good reminder to any developer or editor to put the `# lovelace_gen` comment on top of this file (see the [lovelace_gen documentation](https://github.com/thomasloven/hass-lovelace_gen#second-of-all))
+3. I use the ['Better Jinja'-extension](https://marketplace.visualstudio.com/items?itemName=samuelcolvin.jinjahtml) in VScode. This lets VScode know that the `yaml` file used can contain `Jinja` code. In the settings of VScode I've set the better jinja extension only to look at `*.llg.yaml`. Out of the box you get a lot of errors in VScode because it doesn't understand the mixture between `Jinja` and `yaml`. You can check the recommended plugins in VScode for this project in the `.vscode/extensions.json` and the VScode settings in `.vscode/settings.json`.
 
 ## FAQ
 

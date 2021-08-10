@@ -1,3 +1,5 @@
+I first had these steps, but they seem a bit to detailed...
+
 1. Install [Samba Share](https://github.com/home-assistant/addons/blob/master/samba/DOCS.md) (You'll need this to place the Nolu files on your Home Assistant server)
       1. Enable the toggles (Start on boot, Watchdog, Auto update) 
       2. Go over to the configuration tab of the Samba Share add-on and fill in the username and password and hit save
