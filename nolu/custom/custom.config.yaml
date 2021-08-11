@@ -24,10 +24,17 @@ home:
           content: 'Just a markdown card'
 
         #################################################
-        #         SWITCH EXAMPLE
+        #         POWER PLUG EXAMPLE
         #################################################
-        - type: power_plug
-          
+        - type: 'power_plug'
+          name: 'Power plug'
+          entity: 'switch.xxxxxxx'
+          graph_entities:
+            - entity: 'sensor.xxxxxxx'
+              show_state: true
+              show_graph: true
+            - entity: 'sensor.xxxxxxx'
+              show_graph: true
 
 #################################################
 #
