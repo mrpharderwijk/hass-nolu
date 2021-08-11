@@ -23,6 +23,19 @@ home:
         - type: markdown
           content: 'Just a markdown card'
 
+        #################################################
+        #         POWER PLUG EXAMPLE
+        #################################################
+        - type: 'power_plug'
+          name: 'Power plug'
+          entity: 'switch.xxxxxxx'
+          graph_entities:
+            - entity: 'sensor.xxxxxxx'
+              show_state: true
+              show_graph: true
+            - entity: 'sensor.xxxxxxx'
+              show_graph: true
+
 #################################################
 #
 #         NOT-FOUND - 404
