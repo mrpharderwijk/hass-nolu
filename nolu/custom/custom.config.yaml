@@ -11,8 +11,30 @@ home:
   show_header: true
   rows:
     - widgets:
+        #################################################
+        #         WEATHER EXAMPLE
+        #################################################
+        - type: default_weather
+          entity: weather.noluhass
+
+        #################################################
+        #         MARKDOWN EXAMPLE
+        #################################################
         - type: markdown
-          content: 'Add some widgets to your custom.config.yaml'
+          content: 'Just a markdown card'
+
+        #################################################
+        #         POWER PLUG EXAMPLE
+        #################################################
+        - type: 'power_plug'
+          name: 'Power plug'
+          entity: 'switch.xxxxxxx'
+          graph_entities:
+            - entity: 'sensor.xxxxxxx'
+              show_state: true
+              show_graph: true
+            - entity: 'sensor.xxxxxxx'
+              show_graph: true
 
 #################################################
 #

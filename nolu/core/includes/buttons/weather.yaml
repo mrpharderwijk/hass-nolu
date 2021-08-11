@@ -21,7 +21,7 @@ weather:
             <span id="title">${entity.attributes.wind_speed.toFixed(0)} <b>km/h</b></span>
             <span id="subtitle">Wind</span>
           `
-          : '?';
+          : '';
       ]]]
 
     humidity: |
@@ -32,7 +32,7 @@ weather:
             <span id="title">${entity.attributes.humidity.toFixed(0)} <b>%</b></span>
             <span id="subtitle">Humidity</span>
           `
-          : '?';
+          : '';
       ]]]
 
     visibility: |
@@ -43,7 +43,7 @@ weather:
             <span id="title">${entity.attributes.visibility.toFixed(0)} <b>km</b></span>
             <span id="subtitle">Visibility</span>
           `
-          : '?';
+          : '';
       ]]]
 
   show_icon: true
@@ -96,19 +96,19 @@ weather:
       #       WIND (#wind)
       ############################################################################
       wind:
-        - grid-area: 'w'
+        - grid-area: 'wind'
 
       ############################################################################
       #       HUMIDITY (#humidity)
       ############################################################################
       humidity:
-        - grid-area: 'h'
+        - grid-area: 'humidity'
 
       ############################################################################
       #       VISIBILITY (#visibility)
       ############################################################################
       visibility:
-        - grid-area: 'v'
+        - grid-area: 'visibility'
 
     ############################################################################
     #       LABEL (#label)

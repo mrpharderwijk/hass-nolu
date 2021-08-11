@@ -1,0 +1,83 @@
+# lovelace_gen
+
+#################################################
+#         POWER_PLUG
+#################################################
+type: custom:button-card
+entity: {{ widget_entity }}
+variables:
+  entity_state: |
+    [[[ 
+      return entity && entity.state 
+        ? entity.state 
+        : null; 
+    ]]]
+
+{% if (widget_graph_entities is defined) %}
+extra_styles: |
+  [[[
+    return `
+      ha-card #graph {
+        grid-area: unset !important;
+        pointer-events: none !important;
+      }
+      ha-card #state {
+        display: ${entity && entity.state ? `none !important` : `block !important`};
+      }
+
+      #graph > ha-card > .states {
+        background-color: red !important;
+      }
+    `;
+  ]]]
+
+custom_fields:
+  graph:
+    card:
+      type: 'custom:mini-graph-card'
+      entities:
+        {% for entity in widget_graph_entities %}
+        - entity: {{ entity.entity }}
+          show_state: {{ entity.show_state }}
+          show_graph: {{ entity.show_graph }}
+          show_line: {{ entity.show_line }}
+          show_fill: {{ entity.show_fill }}
+        {% endfor %}
+      decimals: 1
+      show:
+        name: false
+        icon: false
+        labels: false
+        labels_secondary: false
+        average: false
+        points: false
+      align_icon: left
+      align_state: right
+      style: !include ../styles/graph_embedded.styles.yaml
+      state_map:
+        - value: 0.0
+          label: 'off'
+{% endif %}
+
+# TEMPLATES  
+template:
+  - 'base'
+
+# LOCK
+{% if (widget_lock is defined) and (widget_lock is true) %}
+lock:
+  enabled: true
+{% endif %}
+
+# ICON
+icon: |
+  [[[
+    return variables && variables.entity_state && variables.entity_state === 'on'
+      ? 'mdi:power-plug-outline'
+      : 'mdi:power-plug-off-outline';
+  ]]]
+
+# NAME
+{% if widget_name is defined %}
+name: {{ widget_name }}
+{% endif %}

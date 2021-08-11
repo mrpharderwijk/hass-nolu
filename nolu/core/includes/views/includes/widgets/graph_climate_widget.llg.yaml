@@ -29,4 +29,4 @@ show:
   points: false
 align_icon: left
 align_state: right
-style: !include ../styles/graph_styles.yaml
+style: !include ../styles/graph_default.styles.yaml
