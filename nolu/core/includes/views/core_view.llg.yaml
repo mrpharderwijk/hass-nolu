@@ -115,6 +115,7 @@
                           - includes/widgets/button_default_widget.llg.yaml
                           - widget_entity: {{ widget.entity }}
                             widget_name: {{ widget.name }}
+                            widget_lock: {{ widget.lock }}
                             widget_template: {{ widget.template }}
 
 
