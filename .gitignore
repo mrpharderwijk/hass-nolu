@@ -28,6 +28,7 @@ zigbee2mqtt
 
 # Nolu custom specific
 nolu/custom/
+configuration.yaml
 
 # Misc
 /backup_*

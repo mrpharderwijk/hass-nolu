@@ -11,5 +11,7 @@
 
 group: !include_dir_merge_named ../includes/config/groups/
 http: !include ../includes/config/http.config.yaml
+lovelace_gen:
+  custom_config: !include ../custom.config.yaml
 recorder: !include ../includes/config/recorder.config.yaml
 tts: !include_dir_merge_list ../includes/config/tts/
