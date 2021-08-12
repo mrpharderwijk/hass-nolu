@@ -27,7 +27,6 @@ known_devices.yaml
 zigbee2mqtt
 
 # Nolu custom specific
-nolu/custom/
 configuration.yaml
 
 # Misc

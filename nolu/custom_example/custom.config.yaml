@@ -28,13 +28,8 @@ home:
         #################################################
         - type: 'power_plug'
           name: 'Power plug'
-          entity: 'switch.xxxxxxx'
-          graph_entities:
-            - entity: 'sensor.xxxxxxx'
-              show_state: true
-              show_graph: true
-            - entity: 'sensor.xxxxxxx'
-              show_graph: true
+          switch_entity: 'switch.xxxxxxx'
+          graph_entity: 'sensor.xxxxxxx'
 
 #################################################
 #

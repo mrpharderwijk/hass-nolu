@@ -109,7 +109,8 @@
                         {% elif widget.type == 'light' or
                                 widget.type == 'climate' or
                                 widget.type == 'binary' or
-                                widget.type == 'camera' %}
+                                widget.type == 'camera' or
+                                widget.type == 'fan' %}
                         - !include
                           - includes/widgets/button_default_widget.llg.yaml
                           - widget_entity: {{ widget.entity }}
@@ -126,52 +127,15 @@
                           - includes/widgets/power_plug_widget.llg.yaml
                           - widget_name: {{ widget.name }}
                             widget_lock: {{ widget.lock }}
-                            {% if widget.entity is defined %}
-                            widget_entity: {{ widget.entity }}
+                            {% if widget.switch_entity is defined %}
+                            widget_switch_entity: {{ widget.switch_entity }}
                             {% endif %}
-                            
-                            # GRAPH ENTITIES
-                            {% if (widget.graph_entities is defined) %}
-                            widget_graph_entities: 
-                            {% for graph_entity in widget.graph_entities %}
-                              - entity: {{ graph_entity.entity }}
-                                # SHOW_STATE
-                                {% if graph_entity.show_state is defined and
-                                  graph_entity.show_state is sameas true %}
-                                show_state: true
-                                {% else %}
-                                show_state: false
-                                {% endif %}
-
-                                # SHOW_GRAPH
-                                {% if graph_entity.show_graph is defined and
-                                  graph_entity.show_graph is sameas true %}
-                                show_graph: true
-                                {% else %}
-                                show_graph: false
-                                {% endif %}
-
-                                # SHOW_LINE
-                                {% if (graph_entity.show_line is defined and
-                                  graph_entity.show_line is sameas true) or 
-                                  graph_entity.show_line is not defined %}
-                                show_line: true
-                                {% else %}
-                                show_line: false
-                                {% endif %}
-
-                                # SHOW_FILL
-                                {% if graph_entity.show_fill is defined and
-                                  graph_entity.show_fill is sameas true %}
-                                show_fill: true
-                                {% else %}
-                                show_fill: false
-                                {% endif %}
-                            {% endfor %}
+                            {% if (widget.graph_entity is defined) %}
+                            widget_graph_entity: {{ widget.graph_entity }} 
                             {% endif %}
 
 
-                            
+
                         #################################################
                         #         MINI MEDIA PLAYER
                         #################################################

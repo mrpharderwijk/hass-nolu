@@ -4,7 +4,7 @@
 #         POWER_PLUG
 #################################################
 type: custom:button-card
-entity: {{ widget_entity }}
+entity: {{ widget_switch_entity }}
 variables:
   entity_state: |
     [[[ 
@@ -13,7 +13,7 @@ variables:
         : null; 
     ]]]
 
-{% if (widget_graph_entities is defined) %}
+{% if (widget_graph_entity is defined) %}
 extra_styles: |
   [[[
     return `
@@ -36,13 +36,11 @@ custom_fields:
     card:
       type: 'custom:mini-graph-card'
       entities:
-        {% for entity in widget_graph_entities %}
-        - entity: {{ entity.entity }}
-          show_state: {{ entity.show_state }}
-          show_graph: {{ entity.show_graph }}
-          show_line: {{ entity.show_line }}
-          show_fill: {{ entity.show_fill }}
-        {% endfor %}
+        - entity: {{ widget_graph_entity }}
+          show_state: true
+          show_graph: true
+          show_line: true
+          show_fill: false
       decimals: 1
       show:
         name: false
