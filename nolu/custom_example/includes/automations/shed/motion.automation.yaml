@@ -1,0 +1,39 @@
+####################################################################
+#         MOTION OFF
+####################################################################
+- alias: 'SHED - motion off'
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.xxxxxxx
+      from: 'on'
+      to: 'off'
+      for: '00:05:00'
+  condition:
+    condition: state
+    entity_id: light.xxxxxxx
+    state: 'on'
+  action:
+    - service: light.turn_off
+      target:
+        entity_id: light.xxxxxxx
+  mode: single
+
+####################################################################
+#         MOTION
+####################################################################
+- alias: 'SHED - motion on'
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.xxxxxxx
+      to: 'on'
+  condition:
+    condition: state
+    entity_id: light.xxxxxxx
+    state: 'off'
+  action:
+    - service: light.turn_on
+      target:
+        entity_id: light.xxxxxxx
+      data:
+        brightness_pct: 100
+  mode: single

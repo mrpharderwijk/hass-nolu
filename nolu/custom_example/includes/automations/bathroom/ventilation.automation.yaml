@@ -1,0 +1,36 @@
+####################################################################
+#
+#         TURN ON BATHROOM FAN ON MOTION
+#
+####################################################################
+- alias: 'BATHROOM - turn on ventilator - on motion detected'
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.xxxxxx
+      from: 'off'
+      to: 'on'
+
+  action:
+    # TURN ON FAN
+    - service: switch.turn_on
+      target:
+        entity_id: switch.xxxxxxxx
+
+####################################################################
+#
+#         TURN OFF BATHROOM FAN NO MOTION
+#
+####################################################################
+- alias: 'BATHROOM - turn off ventilator - no motion detected'
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.xxxxxxx
+      from: 'on'
+      to: 'off'
+      for: '00:10:00'
+
+  action:
+    # TURN ON FAN
+    - service: switch.turn_off
+      target:
+        entity_id: switch.xxxxxxxx

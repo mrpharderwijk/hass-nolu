@@ -15,4 +15,4 @@
 # `nolu/custom/includes/sensors/bundled_sensors/template_sensors/my_sensor.sensor.yaml`
 #
 ####################################################################
-sensor: !include_dir_merge_list ../includes/sensors/bundled_sensors/
+sensor: !include_dir_merge_list ../includes/sensors/

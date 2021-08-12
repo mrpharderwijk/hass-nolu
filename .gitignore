@@ -26,25 +26,8 @@ harmony_*.conf
 known_devices.yaml
 zigbee2mqtt
 
-# Nolu specific
-nolu/custom/includes/automations/
-nolu/custom/includes/config/groups/
-nolu/custom/includes/config/climates/
-nolu/custom/includes/config/device_trackers/
-nolu/custom/includes/config/notifiers/
-nolu/custom/includes/config/vendors/
-nolu/custom/packages/
-
-# Sensors
-nolu/custom/includes/sensors/
-nolu/custom/includes/switches/
-nolu/custom/includes/templates/
-
-# Should not be ignored
-!example_sensors.binary.yaml
-!entity_counters.*.yaml
-!system_monitor.integration.yaml
-!time_date.integration.yaml
+# Nolu custom specific
+nolu/custom/
 
 # Misc
 /backup_*
