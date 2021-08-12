@@ -44,11 +44,19 @@ For Nolu to work properly and the install process to run smoothly it is importan
 
 1. Now download Nolu's source from Github or clone the Nolu repository locally
 2. Find the `nolu`-directory insided Nolu's source and copy it to the root of the `config`-directory of your Hass server
-3.  From Nolu's source copy/paste the `configuration.yaml` and replace your own (or use the parts you need if you know what you're doing). The `# Nolu - mandatory` rules are the ones that really need to be part of the `homeassistant:` definition, otherwise `Nolu` will not be able to start properly.
+3.  From Nolu's source copy the contents of `configuration_example.yaml` and paste it in your own `configuration.yaml` (or use the parts you need if you know what you're doing). The `# Nolu - mandatory` rules are the ones that really need to be part of the `homeassistant:` definition, otherwise `Nolu` will not be able to start properly.
 4. If you aren't using a `secrets.yaml` yet, know is the time to start using one! Rename the `secrets.sample.yaml` to `secrets.yaml` and add your privacy sensitive variables. Most of these variables are not used for the core part of `Nolu`, only the `hass_` variables are.
 5. Open the custom config located at `nolu/custom_example/custom.config.yaml` and use this file to build your dashboard (for more information over what is possible check below 'Creating a custom dashboard')
 
 🎉 You survived the most difficult part 🎉!
+
+!IMPORTANT NOTE!
+As you might have noticed we have suffixed the default nolu custom parts with `_example`. The example-parts are:
+
+- `configuration_example.yaml` - contains the basic configuration
+- `nolu/custom_example/` - this folder contains the basic custom files
+
+You might want to proceed renaming the `configuration_example.yaml` to `configuration.yaml` and the `nolu/custom_example/`-folder to `nolu/custom/`. Don't forget to update the references to `nolu/custom_example/`-folder. By default there is a reference in the `configuration_example.yaml`.
 
 ## The Nolu concept
 
@@ -56,7 +64,7 @@ In the `configuration.yaml` you will see that I've split the framework in two pa
 
 ### The `custom` directory
 
-At the root of the `custom`-directory (`nolu/custom`) you will find the `custom.config.yaml`. This file basically contains your views definition. So this file contains the different 'pages' for your setup. Under every page you can define your entities and some extra options that are made available. More on that later (TBD).
+By default this is called `custom_example`. We assume you renamed it to `nolu/custom/` after the installation. At the root of the `custom`-directory (`nolu/custom`) you will find the `custom.config.yaml`. This file basically contains your views definition. So this file contains the different 'pages' for your setup. Under every page you can define your entities and some extra options that are made available. More on that later (TBD).
 
 `custom/package` - contains files that are read by the root `configuration.yaml` for the custom package. Define automations, configuration, input booleans, light groups, persons sensors etc. here.
 
