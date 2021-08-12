@@ -13,11 +13,36 @@ home-assistant_v2.*
 /www/images/
 
 # Integration / Add-on specific
-known_devices.yaml
-harmony_*.conf
-zigbee2mqtt
-
 /custom_components/
 /node-red/
 /tts/
 /www/community/
+/www/images/
+/www/nest_hello/
+
+.ps4-*.*.json
+google_assistant.service_account.json
+harmony_*.conf
+known_devices.yaml
+zigbee2mqtt
+
+# Nolu specific
+nolu/custom/includes/automations/
+nolu/custom/includes/config/groups/
+nolu/custom/includes/config/climates/
+nolu/custom/includes/config/device_trackers/
+nolu/custom/includes/config/notifiers/
+nolu/custom/includes/config/vendors/
+
+# Sensors
+nolu/custom/includes/sensors/
+nolu/custom/includes/switches/
+nolu/custom/includes/templates/
+
+# Should not be ignored
+!entity_counters.*.yaml
+!system_monitor.integration.yaml
+!time_date.integration.yaml
+
+# Misc
+/backup_*
