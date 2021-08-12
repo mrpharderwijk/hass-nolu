@@ -34,4 +34,5 @@ nolu/custom/packages/light_groups.package.yaml
 nolu/custom/packages/persons.package.yaml
 nolu/custom/packages/scenes.package.yaml
 nolu/custom/packages/scripts.package.yaml
+nolu/custom/packages/switches.package.yaml
 ```

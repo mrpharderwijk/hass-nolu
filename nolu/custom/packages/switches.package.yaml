@@ -1,0 +1,8 @@
+####################################################################
+#
+#         SWITCH
+#
+####################################################################
+# https://www.home-assistant.io/integrations/switch.template/
+#
+# switch: !include_dir_merge_list ../includes/switches/
