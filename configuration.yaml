@@ -20,7 +20,7 @@ homeassistant:
   # https://www.home-assistant.io/docs/configuration/packages/
   packages:
     core_package: !include_dir_merge_named nolu/core/packages/
-    custom_package: !include_dir_merge_named nolu/custom/packages/
+    custom_package: !include_dir_merge_named nolu/custom/example_packages/
 
   # Nolu - mandatory
   # Customize your entities
