@@ -1,0 +1,54 @@
+####################################################################
+#
+#         ENTITY COUNTERS - USED FOR THE BADGE INDICATORS
+#
+####################################################################
+#
+# Together with `sensors/template_sensors/sensors/entity_counters.yaml` this
+# file makes it possible to have the red counter badges per button. In detail
+# this file groups the entities, while sensors/template_sensors/sensors/entity_counters.yaml
+# does the actual counting of the entities
+
+# All Radiator Valves or Climate entities (ONLY climate entities can be used here!, if you have a single thermostat put it here as well)
+all_climate_entities:
+  entities:
+
+# All Fans (Enter all your fans in here)
+all_fan_entities:
+  entities:
+
+# Window Sensors (This is used in the header badges, without this the header badge won't work)
+all_window_sensor_entities:
+  entities:
+
+# Door Sensors (This is used in the header badges, without this the header badge won't work)
+all_door_sensor_entities:
+  entities:
+
+# Motion Sensors (This is used in the header badges, without this the header badge won't work)
+all_motion_sensor_entities:
+  entities:
+
+# All Detectors (smoke/gas/fire etc)
+all_detector_entities:
+  entities:
+
+# All Binary Sensors (put all your binary sensors here e.g. smoke/gas/fire/door/window/motion etc. You can use this as a counter on the security button)
+all_binary_sensor_entities:
+  entities:
+
+# All Lights
+all_light_entities:
+  entities:
+
+# All Devices
+all_device_switch_entities:
+  entities:
+
+# All Covers
+all_cover_entities:
+  entities:
+
+# All Garage Doors
+all_garage_door_entities:
+  entities:

@@ -1,0 +1,21 @@
+####################################################################
+#
+#                  LIGHT GROUPS
+#
+####################################################################
+# https://www.home-assistant.io/integrations/light.group/
+light:
+
+  ##################################################################
+  #
+  #                 EXAMPLE CONFIG
+  #
+  ##################################################################
+  #
+  # - platform: group
+  #   name: Kitchen Lights
+  #     entities:
+  #       - light.kitchen_ceiling_lights
+  #       - light.kitchen_under_cabinet_lights
+  #       - light.kitchen_spot_lights
+  #       - light.pendant_lights

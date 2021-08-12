@@ -1,0 +1,32 @@
+####################################################################
+#
+#         CONFIGURATION
+#         The main entry point for all magic
+#
+####################################################################
+homeassistant:
+  name: !secret hass_name
+  latitude: !secret hass_latitude
+  longitude: !secret hass_longitude
+  elevation: !secret hass_elevation
+  unit_system: !secret hass_unit_system
+  temperature_unit: !secret hass_temperature_unit
+  time_zone: !secret hass_time_zone
+  external_url: !secret hass_external_url
+
+  # Nolu - mandatory
+  # Splitting up packages in what the user can define
+  # and what is mandatory for Nolu
+  # https://www.home-assistant.io/docs/configuration/packages/
+  packages:
+    core_package: !include_dir_merge_named nolu/core/packages/
+    custom_package: !include_dir_merge_named nolu/custom_example/packages/
+
+  # Nolu - mandatory
+  # Customize your entities
+  # https://www.home-assistant.io/docs/configuration/customizing-devices/
+  customize: !include nolu/custom_example/customize.config.yaml
+
+# Default config to support the default integrations
+# https://www.home-assistant.io/integrations/default_config/
+default_config:

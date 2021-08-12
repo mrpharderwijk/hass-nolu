@@ -1,6 +1,0 @@
-####################################################################
-#         RECORDER
-####################################################################
-# https://www.home-assistant.io/integrations/recorder/
-#
-# db_url: !secret recorder_maria_db_url

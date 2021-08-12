@@ -1,6 +1,0 @@
-####################################################################
-#         TEXT TO SPEECH
-####################################################################
-# https://www.home-assistant.io/integrations/tts/
-- platform: google_translate
-  language: en

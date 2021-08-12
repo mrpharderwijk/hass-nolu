@@ -1,0 +1,23 @@
+####################################################################
+#
+#                  SCENES
+#
+####################################################################
+# https://www.home-assistant.io/integrations/scene/
+scene:
+
+  ##################################################################
+  #
+  #                 EXAMPLE CONFIG
+  #
+  ##################################################################
+  #
+  # - name: Romantic
+  #   icon: "mdi:flower-tulip"
+  #   entities:
+  #     light.tv_back_light: "on"
+  #     light.ceiling:
+  #       state: "on"
+  #       brightness: 200
+  #       color_mode: "xy"
+  #       xy_color: [0.33, 0.66]

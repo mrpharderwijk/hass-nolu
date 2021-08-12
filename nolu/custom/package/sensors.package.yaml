@@ -1,9 +1,0 @@
-####################################################################
-#
-#         SENSORS - !DON'T EDIT THIS FILE!
-#
-# Place your custom integration sensors in the integration sensors folder, like so:
-# `nolu/custom/includes/sensors/integration_sensors/my_integration_sensor.integration.yaml`
-#
-####################################################################
-sensor: !include_dir_merge_list ../includes/sensors/integration_sensors
