@@ -3,6 +3,7 @@
 #         SYSTEM_MONITOR
 #
 ####################################################################
+# https://www.home-assistant.io/integrations/systemmonitor/
 - platform: systemmonitor
   resources:
     - type: processor_use

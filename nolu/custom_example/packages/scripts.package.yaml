@@ -4,9 +4,14 @@
 #
 ####################################################################
 # https://www.home-assistant.io/integrations/script/
+
+##################################################################
 #
-# Example configuration:
-# message_temperature:
+#                 EXAMPLE CONFIG
+#
+##################################################################
+#
+# script_message_temperature:
 #   sequence:
 #     # This is Home Assistant Script Syntax
 #     - service: notify.notify

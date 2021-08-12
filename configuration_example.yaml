@@ -19,13 +19,13 @@ homeassistant:
   # and what is mandatory for Nolu
   # https://www.home-assistant.io/docs/configuration/packages/
   packages:
-    core_package: !include_dir_merge_named nolu/core/package/
-    custom_package: !include_dir_merge_named nolu/custom/package/
+    core_package: !include_dir_merge_named nolu/core/packages/
+    custom_package: !include_dir_merge_named nolu/custom_example/packages/
 
   # Nolu - mandatory
   # Customize your entities
   # https://www.home-assistant.io/docs/configuration/customizing-devices/
-  customize: !include nolu/custom/customize.config.yaml
+  customize: !include nolu/custom_example/customize.config.yaml
 
 # Default config to support the default integrations
 # https://www.home-assistant.io/integrations/default_config/

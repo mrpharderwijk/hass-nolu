@@ -3,7 +3,7 @@
 #         AUTOMATIONS - !DON'T EDIT THIS FILE!
 #
 # Place your custom automations in the automations folder, like so:
-# `nolu/custom/includes/automations/my_custom.automation.yaml`
+# `nolu/custom_example/includes/automations/my_custom.automation.yaml`
 #
 # OR edit your custom automation in the UI of Home Assistant
 ####################################################################

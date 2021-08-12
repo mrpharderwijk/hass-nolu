@@ -3,4 +3,3 @@ frontend: !include ../includes/config/frontend.config.yaml
 lovelace: !include ../includes/config/lovelace.config.yaml
 lovelace_gen:
   core_config: !include ../core.config.yaml
-  custom_config: !include ../../custom/custom.config.yaml

@@ -3,4 +3,7 @@
 ####################################################################
 # https://www.home-assistant.io/integrations/tts/
 - platform: google_translate
-  language: en
+  language: 'nl'
+  cache: true
+  cache_dir: '/tmp/tts'
+  time_memory: 300

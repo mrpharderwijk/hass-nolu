@@ -1,9 +1,0 @@
-####################################################################
-#
-#         MOTION SENSORS
-#
-####################################################################
-# https://www.home-assistant.io/integrations/template/
-#
-# - platform: template
-#   sensors:
