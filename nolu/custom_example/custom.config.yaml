@@ -12,10 +12,82 @@ home:
   rows:
     - widgets:
         #################################################
-        #         WEATHER EXAMPLE
+        #         BINARY SENSOR (motion & contact sensors)
         #################################################
-        - type: default_weather
-          entity: weather.noluhass
+        - type: 'binary'
+          entity: 'binary_sensor.xxxxxxx'
+          name: 'Frontdoor'
+          template:
+            - 'contact_door'
+            # OR
+            - 'contact_window'
+            # OR
+            - 'motion'
+
+        #################################################
+        #         CAMERA EXAMPLE
+        #################################################
+        - type: 'camera'
+          entity: camera.front_door
+          template:
+            - camera
+
+        #################################################
+        #         CLIMATE EXAMPLE
+        #################################################
+        - type: 'climate'
+          entity: 'climate.xxxxxxx'
+          name: 'Living room thermostat'
+          template:
+            - 'climate_thermostat'
+            # OR
+            - 'climate_airco'
+
+        #################################################
+        #         ENERGY EXAMPLE
+        #################################################
+        - type: 'energy'
+          name: 'Current electricity usage'
+          icon: 'mdi:lightning-bolt-outline'
+          entity: 'sensor.xxxxxxx'
+
+        #################################################
+        #         FAN EXAMPLE
+        #################################################
+        - type: 'fan'
+          entity: 'switch.xxxxxxx'
+          name: 'Bathroom Fan'
+          template:
+            - 'base'
+            - 'icon_fan'
+
+        #################################################
+        #         HUMIDITY SENSOR EXAMPLE
+        #################################################
+        - type: 'humidity'
+          name: 'Baby Room'
+          entity: 'sensor.xxxxxxx'
+
+        #################################################
+        #         LIGHT EXAMPLE
+        #################################################
+        - type: 'light'
+          entity: 'light.xxxxxxx'
+          name: 'Ceiling Spots'
+          template:
+            - 'icon_hue_bulb_spot'
+            # OR
+            - 'icon_hue_wall_lantern'
+            # OR
+            - 'icon_hue_iris'
+            # OR
+            - 'icon_hue_bulb_candle'
+            # OR
+            - 'icon_hue_floor_shade'
+            # OR
+            - 'icon_hue_floor_spot'
+            # OR
+            - 'icon_hue'
 
         #################################################
         #         MARKDOWN EXAMPLE
@@ -32,12 +104,17 @@ home:
           graph_entity: 'sensor.xxxxxxx'
 
         #################################################
-        #         ELECTRICITY
+        #         TEMPERATURE SENSOR EXAMPLE
         #################################################
-        - type: 'energy'
-          name: 'Current electricity usage'
-          icon: 'mdi:lightning-bolt-outline'
+        - type: 'temperature'
+          name: 'Baby Room'
           entity: 'sensor.xxxxxxx'
+
+        #################################################
+        #         WEATHER EXAMPLE
+        #################################################
+        - type: default_weather
+          entity: weather.noluhass
 
 #################################################
 #

@@ -102,29 +102,23 @@
                             widget_icon: {{ widget.icon }}
 
 
-
+                        
                         #################################################
-                        #         LIGHT / CLIMATE / BINARY / CAMERA
+                        #         LIGHT
                         #################################################
-                        {% elif widget.type == 'light' or
-                                widget.type == 'climate' or
-                                widget.type == 'binary' or
-                                widget.type == 'camera' or
-                                widget.type == 'fan' %}
+                        {% elif widget.type == 'light' %}
                         - !include
                           - includes/widgets/button_default_widget.llg.yaml
                           - widget_entity: {{ widget.entity }}
                             widget_name: {{ widget.name|default('No name') }}
                             widget_lock: {{ widget.lock|default(false) }}
                             widget_type: {{ widget.type }}
-                            {% if widget.type == 'light' and
-                              widget.icon is defined %}
+                            {% if widget.icon is defined %}
                             widget_icon: {{ widget.icon }}
                             {% endif %}
                             widget_template: 
                               {% if ((widget.template is not defined) or
-                                ('light' not in widget.template)) and
-                                widget.type == 'light' %}
+                                ('light' not in widget.template)) %}
                               - 'light'
                               {% endif %}
                               {% if widget.template is defined %}
@@ -132,6 +126,91 @@
                               - {{ template }}
                                 {% endfor %}
                               {% endif %}
+
+
+
+                        #################################################
+                        #         BINARY
+                        #################################################
+                        {% elif widget.type == 'binary' %}
+                        - !include
+                          - includes/widgets/button_default_widget.llg.yaml
+                          - widget_entity: {{ widget.entity }}
+                            widget_name: {{ widget.name|default('No name') }}
+                            widget_lock: {{ widget.lock|default(false) }}
+                            widget_type: {{ widget.type }}
+                            {% if widget.icon is defined %}
+                            widget_icon: {{ widget.icon }}
+                            {% endif %}
+                            {% if widget.template is defined %}
+                            widget_template:
+                              {% for template in widget.template %}
+                              - {{ template }}
+                              {% endfor %}
+                            {% endif %}
+
+
+
+                        #################################################
+                        #         CLIMATE
+                        #################################################
+                        {% elif widget.type == 'climate' %}
+                        - !include
+                          - includes/widgets/button_default_widget.llg.yaml
+                          - widget_entity: {{ widget.entity }}
+                            widget_name: {{ widget.name|default('No name') }}
+                            widget_lock: {{ widget.lock|default(false) }}
+                            widget_type: {{ widget.type }}
+                            {% if widget.template is defined %}
+                            widget_template:
+                              {% for template in widget.template %}
+                              - {{ template }}
+                              {% endfor %}
+                            {% endif %}
+
+
+
+                        #################################################
+                        #         CAMERA
+                        #################################################
+                        {% elif widget.type == 'camera' %}
+                        - !include
+                          - includes/widgets/button_default_widget.llg.yaml
+                          - widget_entity: {{ widget.entity }}
+                            widget_name: {{ widget.name|default('No name') }}
+                            widget_lock: {{ widget.lock|default(false) }}
+                            widget_type: {{ widget.type }}
+                            {% if widget.icon is defined %}
+                            widget_icon: {{ widget.icon }}
+                            {% endif %}
+                            {% if widget.template is defined %}
+                            widget_template:
+                              {% for template in widget.template %}
+                              - {{ template }}
+                              {% endfor %}
+                            {% endif %}
+
+
+
+                        #################################################
+                        #         FAN
+                        #################################################
+                        {% elif widget.type == 'fan' %}
+                        - !include
+                          - includes/widgets/button_default_widget.llg.yaml
+                          - widget_entity: {{ widget.entity }}
+                            widget_name: {{ widget.name|default('No name') }}
+                            widget_lock: {{ widget.lock|default(false) }}
+                            widget_type: {{ widget.type }}
+                            {% if widget.icon is defined %}
+                            widget_icon: {{ widget.icon }}
+                            {% endif %}
+                            {% if widget.template is defined %}
+                            widget_template:
+                              {% for template in widget.template %}
+                              - {{ template }}
+                              {% endfor %}
+                            {% endif %}
 
 
 
