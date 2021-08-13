@@ -31,6 +31,14 @@ home:
           switch_entity: 'switch.xxxxxxx'
           graph_entity: 'sensor.xxxxxxx'
 
+        #################################################
+        #         ELECTRICITY
+        #################################################
+        - type: 'energy'
+          name: 'Current electricity usage'
+          icon: 'mdi:lightning-bolt-outline'
+          entity: 'sensor.xxxxxxx'
+
 #################################################
 #
 #         NOT-FOUND - 404

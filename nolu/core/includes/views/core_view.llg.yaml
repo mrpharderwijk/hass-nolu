@@ -114,9 +114,24 @@
                         - !include
                           - includes/widgets/button_default_widget.llg.yaml
                           - widget_entity: {{ widget.entity }}
-                            widget_name: {{ widget.name }}
-                            widget_lock: {{ widget.lock }}
-                            widget_template: {{ widget.template }}
+                            widget_name: {{ widget.name|default('No name') }}
+                            widget_lock: {{ widget.lock|default(false) }}
+                            widget_type: {{ widget.type }}
+                            {% if widget.type == 'light' and
+                              widget.icon is defined %}
+                            widget_icon: {{ widget.icon }}
+                            {% endif %}
+                            widget_template: 
+                              {% if ((widget.template is not defined) or
+                                ('light' not in widget.template)) and
+                                widget.type == 'light' %}
+                              - 'light'
+                              {% endif %}
+                              {% if widget.template is defined %}
+                                {% for template in widget.template %}
+                              - {{ template }}
+                                {% endfor %}
+                              {% endif %}
 
 
 
@@ -208,17 +223,8 @@
                         - !include
                           - includes/widgets/markdown_widget.llg.yaml
                           - widget_content: {{ widget.content }}
-                            {% if (widget.background_color is defined) %}
-                            widget_background_color: {{ widget.background_color }}
-                            {% else %}
-                            widget_background_color: 'var(--nolu-background-color-inactive, rgb(22, 22, 22))'
-                            {% endif %}
-
-                            {% if (widget.text_color is defined) %}
-                            widget_text_color: {{ widget.text_color }}
-                            {% else %}
-                            widget_text_color: 'var(--nolu-color-inactive, rgb(245, 245, 245))'
-                            {% endif %}
+                            widget_background_color: {{ widget.background_color|default('var(--nolu-background-color-inactive, rgb(22, 22, 22))') }}
+                            widget_text_color: {{ widget.text_color|default('var(--nolu-color-inactive, rgb(245, 245, 245))') }}
 
                         #################################################
                         #         CUSTOM_ENTITIES

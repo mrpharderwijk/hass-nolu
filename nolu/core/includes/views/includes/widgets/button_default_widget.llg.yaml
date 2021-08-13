@@ -9,9 +9,10 @@ lock:
   enabled: true
 {% endif %}
 
+{% if widget_icon is defined %}
+icon: {{ widget_icon }}
+{% endif %}
+
 {% if (widget_template is defined) %}
 template: {{ widget_template }}
-  {# {% for template in widget.template %}
-  - {{ template }}
-  {% endfor %} #}
 {% endif %}
