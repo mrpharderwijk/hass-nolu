@@ -40,7 +40,7 @@ hui-grid-card$: |
   @media only screen 
     and (min-width: 680px) {
       #root {
-        grid-gap: 2vw !important;
+        grid-gap: 1vw !important;
         grid-template-columns: repeat(4, 1fr) !important;
       }
     }

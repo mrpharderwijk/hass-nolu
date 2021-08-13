@@ -7,14 +7,14 @@ name: {{ widget_name }}
 {% endif %}
 
 {% if widget_type == 'energy' %}
-icon: {{ widget_icon|default('mdi:lightning-bolt-outline') }}
+icon: {{ 'mdi:lightning-bolt-outline' }}
 {% elif widget_type == 'temperature' %}
-icon: {{ widget_icon|default('mdi:temperature') }}
+icon: {{ 'mdi:thermometer' }}
 {% elif widget_type == 'humidity' %}
-icon: {{ widget_icon|default('mdi:water-outline') }}
+icon: {{ 'mdi:water-outline' }}
 {% else %}
-icon: {{ widget_icon|default('mdi:help-box') }}
-{% endif%}
+icon: {{ 'mdi:help-box' }}
+{% endif %}
 
 entities:
   - entity: {{ widget_entity }}
@@ -23,6 +23,7 @@ entities:
     show_fill: false
 decimals: 1
 show:
+  icon: true
   labels: false
   labels_secondary: false
   average: false
