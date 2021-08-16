@@ -21,7 +21,8 @@ home:
   # Shows a custom greeting text
   greeting:
     title: 'Hello {{ user }}👋,'
-    subtitle: "It will be a {{ states('weather.my-wheater') }} day..."
+    # `sunny` can be replaced by templating language e.g. {{ states('weather.xxxx') }}
+    subtitle: 'It will be a sunny day...'
 
   rows:
     - widgets:
