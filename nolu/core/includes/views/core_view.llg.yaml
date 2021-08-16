@@ -71,7 +71,7 @@
                 {% if (data.greeting.subtitle is defined) %}
               - greeting_subtitle: {{ data.greeting.subtitle }}
                 {% endif %}
-              {% endif %}
+              {% endif %} 
             {% endif %}
 
             #################################################
