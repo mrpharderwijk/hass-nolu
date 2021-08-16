@@ -9,11 +9,6 @@ The power plug can be used, as is. If your plug supports power monitoring and ot
 ```yaml
 - type: 'power_plug'
   name: 'Power plug'
-  entity: 'switch.xxxxxx'
-  graph_entities:
-    - entity: 'sensor.xxxxx'
-      show_state: true
-      show_graph: true
-    - entity: 'sensor.xxxxx'
-      show_graph: true
+  switch_entity: 'switch.xxxxxx'
+  graph_entity: 'sensor.xxxxx'
 ```
