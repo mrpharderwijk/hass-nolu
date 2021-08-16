@@ -81,6 +81,8 @@ home:
             # OR
             - 'icon_hue_iris'
             # OR
+            - 'icon_hue_lightstrip'
+            # OR
             - 'icon_hue_bulb_candle'
             # OR
             - 'icon_hue_floor_shade'
