@@ -1,6 +1,6 @@
 .: |
   :host {
-    margin-top: 2rem !important;
+    margin-top: 2.5rem !important;
   }
 layout-card$grid-layout$: |
   #root {

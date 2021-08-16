@@ -1,0 +1,47 @@
+# lovelace_gen
+
+type: 'markdown'
+style:
+  .: |
+    ha-card {
+      background: transparent;
+      border-radius: 0;
+      box-shadow: none;
+      margin-top: 2.5rem;
+      padding: 0;
+    }
+    ha-markdown {
+      padding: 0!important;
+    }
+  ha-markdown$: |
+    ha-markdown-element > * {
+      text-align: left;
+    }
+    ha-markdown-element > h1 {
+      font-size: 2rem;
+      line-height: 1.5rem;
+      margin-bottom: 0;
+    }
+    ha-markdown-element > h2 {
+      margin-top: 1rem!important;
+      font-size: 1.25rem;
+      line-height: 1rem;
+      font-weight: 400 !important;
+    }
+    ha-markdown-element > h2 > b {
+      font-weight: 600 !important;
+    }
+    
+{% if (greeting_title is defined) or
+  (greeting_subtitle is defined) %}
+content: |
+  {% if greeting_title is defined %}
+  # {{ greeting_title }}
+  {% endif %}
+
+  {% if greeting_subtitle is defined %}
+  ## {{ greeting_subtitle }}
+  {% endif %}
+{% else %}
+content: 'No greeting defined'
+{% endif %}
