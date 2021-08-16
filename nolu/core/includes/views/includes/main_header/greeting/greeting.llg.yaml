@@ -1,0 +1,9 @@
+# lovelace_gen
+
+type: 'markdown'
+{% if content is defined %}
+content: |
+    {{ content }}
+{% else %}
+content: 'No content defined'
+{% endif %}

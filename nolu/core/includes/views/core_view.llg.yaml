@@ -45,7 +45,36 @@
             #################################################
             {% if ((data.show_header is defined) and (data.show_header == true)) or
               (data.show_header is not defined) %}
-            - !include includes/main_header/main_header.card.yaml
+              
+              #################################################
+              #
+              # NO GREETING
+              # this should be a `normal` include
+              #
+              #################################################
+              {% if data.greeting is not defined %}
+            - !include includes/main_header/main_header.llg.yaml
+              {% endif %}
+              
+              #################################################
+              #
+              # WITH GREETING
+              # this is a lovelace_gen include where we need
+              # pass the greeting variables 
+              #
+              #################################################
+              {% if data.greeting is defined %}
+            - !include 
+              - includes/main_header/main_header.llg.yaml
+              - greeting: 
+                  {% if data.greeting.title is defined %}
+                  title: {{ data.greeting.title }}
+                  {% endif %}
+
+                  {% if data.greeting.subtitle is defined %}
+                  subtitle: {{ data.greeting.subtitle }}
+                  {% endif %}
+              {% endif %}
             {% endif %}
 
             #################################################
@@ -62,7 +91,7 @@
                   #         ROWS
                   #################################################
                   {% if data.rows is defined %}
-                  {% for row in data.rows %}
+                    {% for row in data.rows %}
                   - type: custom:mod-card
                     style: !include includes/styles/row_default.styles.yaml
                     card:
@@ -420,7 +449,7 @@
 
                         {% endfor %}
                         {% endif %}
-                  {% endfor %}
+                    {% endfor %}
 
                   #################################################
                   #         ROWS NOT DEFINED
@@ -439,3 +468,12 @@
                             ## just a markdown
                   {% endif %}
 {% endfor %}
+
+
+#################################################
+#         SETTINGS
+#################################################
+{# path: settings
+icon: 'mdi:cog'
+visible: true
+title: 'Settings' #}

@@ -1,3 +1,5 @@
+# lovelace_gen
+
 #################################################
 #
 #         HEADER
@@ -21,3 +23,17 @@ card:
     # KEEP THIS HERE!!! See dummy button card why...
     - !include dummy_button/dummy_button.card.yaml
     - !include main_menu/main_menu.llg.yaml
+    {% if greeting is defined %}
+    - type: markdown
+      content: |
+        {% if greeting.title %}
+        # {{ greeting.title }}
+        {% endif %}
+
+        {% if greeting.subtitle is defined %}
+        ## {{ greeting.subtitle }}
+        {% endif %}
+    {# - !include
+      - greeting/greeting.llg.yaml
+      - content: {{ greeting }} #}
+    {% endif %}
