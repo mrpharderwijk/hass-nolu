@@ -37,7 +37,7 @@ For Nolu to work properly and the install process to run smoothly it is importan
    - [mini-graph-card](https://github.com/kalkih/mini-graph-card)
    - [mini-media-player](https://github.com/kalkih/mini-media-player)
    - [simple weather card](https://github.com/kalkih/simple-weather-card)
-   - [Card Mod](https://github.com/thomasloven/lovelace-card-mod)
+   - [card-mod](https://github.com/thomasloven/lovelace-card-mod)
 5. Now may be a good time to do a restart of your HASS
 6. When all is booted up, check `configuration` > `Lovelace Dashboards` > `Resources (tab)` and make sure all HACS Frontend resources are present
 
