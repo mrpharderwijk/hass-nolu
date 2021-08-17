@@ -8,14 +8,14 @@
       value_template: >-
         {% set hour = now().hour %}
         {% set minute = now().minute %}
-        {% if hour <= 5 %} 
-          Good Night <span>{{'\U0001F634'}}</span>
+        {% if hour <= 5 %}
+          {{ states('input_text.greeting_good_night') }}
         {% elif hour <= 11 and minute <= 59 %}
-          Good Morning <span>{{'\u2615\uFE0F'}}</span>
+          {{ states('input_text.greeting_good_morning') }}
         {% elif hour <= 17 and minute <= 59 %}
-          Good Afternoon <span>{{'\U0001F44B\U0001F3FB'}}</span>
+          {{ states('input_text.greeting_good_afternoon') }}
         {% elif hour <= 23 and minute <= 59 %}
-          Good Evening <span>{{'\U0001F44B\U0001F3FB'}}</span>
+          {{ states('input_text.greeting_good_evening') }}
         {% else %}
-          Good day <span>&#x1f44b;</span>
+          {{ states('input_text.greeting_good_day') }}
         {% endif %}

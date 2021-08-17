@@ -1,0 +1,20 @@
+####################################################################
+#
+#                  INPUT SELECTS
+#
+####################################################################
+# https://www.home-assistant.io/integrations/input_text/
+input_text:
+  ##################################################################
+  #                GREETINGS
+  ##################################################################
+  greeting_good_morning:
+    initial: Good morning ☕
+  greeting_good_afternoon:
+    initial: Good afternoon 👋🏻
+  greeting_good_evening:
+    initial: Good evening 🌙
+  greeting_good_night:
+    initial: Good night 😴
+  greeting_good_day:
+    initial: Good day 👋🏻

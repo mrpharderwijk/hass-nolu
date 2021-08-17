@@ -19,13 +19,13 @@ style:
     }
     ha-markdown-element > h1 {
       font-size: 2rem;
-      line-height: 1.5rem;
+      line-height: 2.25rem;
       margin-bottom: 0;
     }
     ha-markdown-element > h2 {
       margin-top: 1rem!important;
       font-size: 1.25rem;
-      line-height: 1rem;
+      line-height: 1.5rem;
       font-weight: 400 !important;
     }
     ha-markdown-element > h2 > b {
