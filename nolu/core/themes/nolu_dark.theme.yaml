@@ -1,0 +1,153 @@
+##########################################################
+#     Colors
+##########################################################
+##########################################################
+#
+# Nolu base variables
+#
+##########################################################
+nolu-color-gray: rgb(142, 142, 147)
+nolu-color-gray-alt: rgb(29, 29, 31)
+nolu-color-gray-2: rgb(99, 99, 102)
+nolu-color-gray-3: rgb(72, 72, 74)
+nolu-color-gray-4: rgb(58, 58, 60)
+nolu-color-gray-5: rgb(44, 44, 46)
+nolu-color-gray-6: rgb(28, 28, 30)
+nolu-color-gray-x: rgb(206, 206, 206)
+
+nolu-color-primary: var(--nolu-color-blue)
+
+nolu-color-black: rgb(0, 0, 0)
+nolu-color-black-transparent: rgba(0, 0, 0, 0.5)
+nolu-color-black-dark: rgb(22, 22, 22)
+nolu-color-black-light: rgb(146, 151, 179)
+nolu-color-black-light-transparent: rgba(44, 46, 59, 0.13)
+
+nolu-color-white: rgb(245, 245, 245)
+
+nolu-color-gray-light: rgb(227, 228, 232)
+nolu-color-gray-lighter: rgb(151, 151, 151);
+nolu-color-gray-gradient: linear-gradient(0deg, rgba(155,156,160,1) 0%, rgba(227,228,232,1) 100%)
+
+##########################################################
+#     NATIVE COLORS
+##########################################################
+primary-color: var(--nolu-color-blue)
+primary-text-color: var(--nolu-color-white)
+primary-background-color: var(--nolu-color-gray-6)
+
+secondary-background-color: var(--nolu-color-gray-6)
+
+app-header-background-color: var(--nolu-color-gray-5)
+app-header-text-color: var(--primary-text-color)
+
+card-background-color: var(--nolu-color-gray-4)
+
+sidebar-icon-color: var(--nolu-color-white)
+switch-checked-button-color: var(--nolu-color-gray-x)
+switch-unchecked-button-color: var(--nolu-color-gray-x)
+
+# table-row-background-color: var(--primary-background-color)
+# table-row-alternative-background-color: var(--secondary-background-color)
+# sidebar-background-color: var(--card-background-color)
+# divider-color: rgba(225, 225, 225, 0.12)
+
+#edited
+# ha-card-box-shadow: none
+# ha-card-background: none
+# grid-card-gap: 5%
+# masonry-view-card-margin: 0px
+# ha-card-header-color: 'rgba(255, 255, 255, 0.8)'
+# ha-card-header-font-family: sans-serif
+# ha-card-header-font-size: 2.4vw
+# state-icon-color: '#9da0a2'
+# state-icon-active-color: '#3182b7'
+# switch-checked-color: '#7a7d7f'
+# switch-unchecked-button-color: '#3b4041'
+# switch-unchecked-track-color: '#0c0d0d'
+# paper-slider-knob-color: '#a4abb1'
+# paper-slider-knob-start-color: '#a4abb1'
+# paper-slider-pin-color: '#626a6f'
+# paper-slider-active-color: '#626a6f'
+# paper-slider-container-color: '#202020'
+# mdc-dialog-scrim-color: rgba(0, 0, 0, 0.5)
+# paper-toast-color: var(--primary-text-color)
+# paper-toast-background-color: '#1b1b1bf2'
+# vertical-stack-card-margin: 0
+
+#custom variables
+# ha-card-background-color: rgba(34,38,39,0.9)
+# ha-card-header-background-color: rgba(48,52,52,0.8)
+# custom-layout-card-padding: 3.3vw
+# custom-button-card-border-radius: 1rem
+
+##########################################################
+#
+#     ALIASES
+#
+##########################################################
+
+# default
+nolu-background-color-active: var(--nolu-color-gray-x)
+nolu-color-active: var(--nolu-color-black-dark)
+
+nolu-background-color-inactive: var(--nolu-color-gray-6)
+nolu-color-inactive: var(--nolu-color-gray)
+
+# invert
+nolu-background-color-invert-active: var(--nolu-color-black-dark)
+nolu-color-invert-active: var(--nolu-color-gray-x)
+
+nolu-background-color-invert-inactive: var(--nolu-color-gray)
+nolu-color-invert-inactive: var(--nolu-color-gray-6)
+
+nolu-background-color-idle: rgb(40, 40, 40) # TODO define in colors
+nolu-color-idle: rgb(143, 143, 143) # TODO define in colors
+
+nolu-ripple-active: rgba(60, 60, 60, 0.3) # TODO define in colors
+nolu-ripple-inactive: rgba(245, 245, 245, 0.3) # TODO define in colors
+
+nolu-background-color-dark-transparent: var(--nolu-color-black-transparent)
+nolu-background-color-light-dark-transparent: rgba(0, 0, 0, 0.3) # TODO define in colors
+
+##########################################################
+#     Borders
+##########################################################
+nolu-button-card-border-radius: 1rem
+
+##########################################################
+#     Spacing
+##########################################################
+
+####################################################
+#                                                  #
+#                     CARD-MOD                     #
+#                                                  #
+####################################################
+
+card-mod-theme: nolu
+
+card-mod-root: |
+  .: |
+    ha-app-layout {
+      background-color: red!important;
+    }
+
+card-mod-view-yaml: |
+  .: |
+    hui-view {
+      min-height: 100vh;
+    }
+
+  grid-layout:
+    $: |
+      #root {
+        margin: 0 !important;
+      }
+      hui-grid-card {
+        background-color: green!important;
+      }
+    hui-grid-card$: |
+      h1 {
+        color: red !important;
+      }

@@ -1,0 +1,67 @@
+path: 'settings'
+title: 'Settings'
+icon: 'mdi:cog'
+visible: true
+background: none
+type: 'custom:mod-card'
+style: !include ../styles/list_root.styles.yaml
+card:
+  type: 'custom:layout-card'
+  layout_type: 'custom:grid-layout'
+  layout:
+    grid-template-rows: 'auto'
+    grid-template-areas: |
+      'main'
+  panel: true
+  cards:
+    #################################################
+    #         MAIN
+    #################################################
+    - type: 'custom:mod-card'
+      style: !include ../styles/main.styles.yaml
+      card:
+        type: 'vertical-stack'
+        cards:
+          #################################################
+          #         TITLE
+          #################################################
+          - type: markdown
+            style:
+              .: |
+                ha-card {
+                  background-color: transparent;
+                  box-shadow: none;
+                }
+                ha-card ha-markdown {
+                  padding-left: 1rem;
+                  padding-right: 1rem;
+                }
+            content: |
+              # Settings
+
+          #################################################
+          #         CONTENT
+          #################################################
+          - type: 'custom:mod-card'
+            style:
+              .: |
+                :host {
+                  border-top: 1px solid var(--nolu-color-gray);
+                  border-bottom: 1px solid var(--nolu-color-gray);
+                  background-color: var(--nolu-color-gray-4);
+                }
+            card:
+              type: 'vertical-stack'
+              cards:
+                - type: 'custom:slider-button-card'
+                  entity: 'input_boolean.setting_dark_mode'
+                  name: 'Dark mode'
+                  icon: 'mdi:brightness-6'
+                  compact: true
+                  slider:
+                    use_state_color: false
+                    toggle_on_click: true
+                    show_track: false
+                  action_button:
+                    mode: 'toggle'
+                    show: true

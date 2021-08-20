@@ -1,8 +1,14 @@
 # lovelace_gen
 
 type: custom:button-card
+
+{% if widget_entity is defined %}
 entity: {{ widget_entity }}
+{% endif %}
+
+{% if widget_name %}
 name: {{ widget_name }}
+{% endif %}
 
 {% if (widget_lock is defined) and (widget_lock is true) %}
 lock:

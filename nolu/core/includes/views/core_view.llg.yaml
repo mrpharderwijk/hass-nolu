@@ -2,16 +2,18 @@
 {% set default_grid_gap = '3vw' %}
 {% set default_font_size = '16px' %}
 
-{% for name, data in _global.custom_config.items() %}
-- path: {{ name }}
-  icon: {{ data.icon|default('mdi:home') }}
-  visible: {{ data.show_in_navbar|default('false') }}
+{% for custom_name, custom_data in _global.custom_config.items() %}
+  {% if (custom_name is defined) and
+    (custom_data is defined) %}
+- path: {{ custom_name }}
+  icon: {{ custom_data.icon|default('mdi:home') }}
+  visible: {{ custom_data.show_in_navbar|default('false') }}
 
   #################################################
   #         TITLE
   #################################################
-  {% if data.title is defined %}
-  title: {{ data.title }}
+  {% if custom_data.title is defined %}
+  title: {{ custom_data.title }}
   {% else %}
   title: {{ name|replace("_", " ")|title }}
   {% endif %}
@@ -22,7 +24,7 @@
   # Defines the root element with some main padding
   #################################################
   type: custom:mod-card
-  style: !include includes/styles/root.styles.yaml
+  style: !include includes/styles/main_root.styles.yaml
   card:
     type: custom:layout-card
     layout_type: custom:grid-layout
@@ -43,33 +45,33 @@
             #################################################
             #         HEADER
             #################################################
-            {% if ((data.show_header is defined) and (data.show_header == true)) or
-              (data.show_header is not defined) %}
+            {% if ((custom_data.show_header is defined) and (custom_data.show_header == true)) or
+              (custom_data.show_header is not defined) %}
             - !include includes/main_header/main_header.llg.yaml
             {% endif %}
 
             #################################################
             #         GREETING
             #################################################
-            {% if (data.greeting is defined) %}
+            {% if (custom_data.greeting is defined) %}
             - !include
               - includes/greeting/greeting.llg.yaml
                 # Both `greeting`-variables are defined
-              {% if (data.greeting.title is defined) and
-                (data.greeting.subtitle is defined) %}
-              - greeting_title: {{ data.greeting.title }}
-                greeting_subtitle: {{ data.greeting.subtitle }}
+              {% if (custom_data.greeting.title is defined) and
+                (custom_data.greeting.subtitle is defined) %}
+              - greeting_title: {{ custom_data.greeting.title }}
+                greeting_subtitle: {{ custom_data.greeting.subtitle }}
 
                 # One of the `greeting`-variables are defined
               {% else %}
                 # `greeting.title` is defined
-                {% if (data.greeting.title is defined) %}
-              - greeting_title: {{ data.greeting.title }}
+                {% if (custom_data.greeting.title is defined) %}
+              - greeting_title: {{ custom_data.greeting.title }}
                 {% endif %}
 
                 # `greeting.subtitle` is defined
-                {% if (data.greeting.subtitle is defined) %}
-              - greeting_subtitle: {{ data.greeting.subtitle }}
+                {% if (custom_data.greeting.subtitle is defined) %}
+              - greeting_subtitle: {{ custom_data.greeting.subtitle }}
                 {% endif %}
               {% endif %} 
             {% endif %}
@@ -87,8 +89,8 @@
                   #################################################
                   #         ROWS
                   #################################################
-                  {% if data.rows is defined %}
-                    {% for row in data.rows %}
+                  {% if custom_data.rows is defined %}
+                    {% for row in custom_data.rows %}
                   - type: custom:mod-card
                     style: !include includes/styles/row_default.styles.yaml
                     card:
@@ -331,6 +333,8 @@
                             widget_background_color: {{ widget.background_color|default('var(--nolu-background-color-inactive, rgb(22, 22, 22))') }}
                             widget_text_color: {{ widget.text_color|default('var(--nolu-color-inactive, rgb(245, 245, 245))') }}
 
+
+
                         #################################################
                         #         CUSTOM_ENTITIES
                         #################################################
@@ -367,8 +371,7 @@
                           card:
                             type: vertical-stack
                             cards:
-
-                              # FIXME: couldn't use entities for some reason?
+                            
                               {% for entity_item in widget.entity_list %}
                               #################################################
                               #         ENTITY
@@ -464,13 +467,10 @@
                           content: |
                             ## just a markdown
                   {% endif %}
+  {% endif %}
 {% endfor %}
-
 
 #################################################
 #         SETTINGS
 #################################################
-{# path: settings
-icon: 'mdi:cog'
-visible: true
-title: 'Settings' #}
+- !include includes/settings/settings.view.yaml

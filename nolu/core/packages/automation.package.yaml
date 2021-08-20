@@ -10,11 +10,27 @@ automation core:
   ####################################################################
   #         STARTUP (set theme)
   ####################################################################
-  - alias: 'CUSTOM - HASS STARTUP'
+  - alias: 'CORE - HASS STARTUP'
     trigger:
-      platform: homeassistant
-      event: start
+      - platform: 'homeassistant'
+        event: 'start'
     action:
-      service: frontend.set_theme
-      data:
-        name: nolu
+      - service: 'frontend.set_theme'
+        data:
+          name: 'Nolu'
+          mode: 'light'
+
+  - alias: 'CORE - SETTING - TOGGLE THEME'
+    trigger:
+      - platform: 'state'
+        entity_id: 'input_boolean.setting_dark_mode'
+    action:
+      - service: 'frontend.set_theme'
+        data:
+          name: 'Nolu'
+          mode: >
+            {% if is_state('input_boolean.setting_dark_mode', 'on') %} 
+              dark
+            {% else  %}
+              light
+            {% endif %}

@@ -130,8 +130,8 @@ weather:
       - border-radius: var(--nolu-button-card-border-radius, 1rem)
       - padding: 1rem
       - height: 100%
+      - color: var(--nolu-color-white)
       - !include shared/styles/card_ripple.styles.yaml
-      - !include shared/styles/card_color.styles.yaml
 
   # https://developers.home-assistant.io/docs/core/entity/weather/#recommended-values-for-state-and-condition
   extra_styles: |

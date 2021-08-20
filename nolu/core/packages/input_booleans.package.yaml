@@ -1,7 +1,13 @@
+####################################################################
+#
+#                  INPUT_BOOLEANS
+#
+####################################################################
+# https://www.home-assistant.io/integrations/input_boolean/
 input_boolean:
   ####################################################################
-  #         dummy_button
+  #         dark_mode
   ####################################################################
-  dummy_button:
-    name: input boolean for the dummy_button_card
+  setting_dark_mode:
+    name: Dark mode
     initial: true

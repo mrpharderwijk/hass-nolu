@@ -1,0 +1,65 @@
+#################################################
+#
+#         BASE
+#
+#################################################
+list_item:
+  show_state: false
+  show_icon: true
+  show_label: false
+  styles:
+    ############################################################################
+    #       GRID (#container)
+    ############################################################################
+    grid:
+      - align-items: start
+      - grid-template-areas: |
+          "i    n"
+      - grid-template-columns: min-content auto min-content
+      - grid-gap: 1rem
+      - grid-template-rows: auto
+
+    ############################################################################
+    #       ICON (#img-cell > ha-icon)
+    ############################################################################
+    icon:
+      - --mdc-icon-size: 25px
+      - grid-area: 'i'
+      - text-align: left
+      - width: 100%
+      - !include ../shared/styles/card_color.styles.yaml
+
+    ############################################################################
+    #       NAME (#name)
+    #       The name is used underneath the app icon
+    ############################################################################
+    name:
+      - color: var(--nolu-color-white)
+      - font-size: 1rem
+      - font-weight: 400
+      - grid-area: 'n'
+      - justify-self: flex-start
+      - letter-spacing: 0.05vw
+      - line-height: 1.25rem
+
+    ############################################################################
+    #       STATE
+    ############################################################################
+    state:
+      - border-radius: 1rem
+      - font-size: 1rem
+      - font-weight: 600
+      - grid-area: 's'
+      - margin-top: .25rem
+      - padding: 0.25rem 0.5rem
+      - place-self: start end
+
+    ############################################################################
+    #       CARD (#ha-card)
+    ############################################################################
+    card:
+      - background: transparent
+      - border-radius: none
+      - box-shadow: none
+      - padding: 0.3rem 1rem
+      - !include ../shared/styles/card_ripple.styles.yaml
