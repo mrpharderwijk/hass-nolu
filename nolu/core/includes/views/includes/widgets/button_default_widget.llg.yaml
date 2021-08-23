@@ -1,8 +1,12 @@
 # lovelace_gen
 
-type: custom:button-card
+type: 'custom:button-card'
 entity: {{ widget_entity }}
 name: {{ widget_name }}
+
+{% if widget_type == 'camera' %}
+show_live_stream: false
+{% endif %}
 
 {% if (widget_lock is defined) and (widget_lock is true) %}
 lock:
