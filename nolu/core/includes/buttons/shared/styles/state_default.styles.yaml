@@ -1,0 +1,9 @@
+- border-radius: 1rem
+- font-size: 1rem
+- font-weight: 600
+- grid-area: 's'
+- margin-top: .25rem
+- padding: 0.25rem 0.5rem
+- place-self: start end
+- !include card_background-color-invert.styles.yaml
+- !include card_color-invert.styles.yaml

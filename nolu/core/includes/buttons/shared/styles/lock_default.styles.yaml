@@ -1,0 +1,29 @@
+- justify-content: >
+    [[[
+      const active = 'center';
+      const inactive = 'flex-end';
+
+      const onState = ['on', 'home', 'active', 'enabled', 'heat', 'cool', 'heat_cool', 'fan', 'open'];
+      const offState = ['off', 'unknown', 'unavailable', 'disabled', 'closed'];
+
+      if (!variables.state) {
+        return inactive;
+      }
+      
+      return onState.some(state => variables.state.toLowerCase() === state) ? active : inactive;
+    ]]]
+- align-items: >
+    [[[
+      const active = 'center';
+      const inactive = 'flex-start';
+
+      const onState = ['on', 'home', 'active', 'enabled', 'heat', 'cool', 'heat_cool', 'fan', 'open'];
+      const offState = ['off', 'unknown', 'unavailable', 'disabled', 'closed'];
+
+      if (!variables.state) {
+        return inactive;
+      }
+      
+      return onState.some(state => variables.state.toLowerCase() === state) ? active : inactive;
+    ]]]
+- !include card_color.styles.yaml
