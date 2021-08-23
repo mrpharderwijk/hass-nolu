@@ -115,78 +115,18 @@
 
 
                         #################################################
-                        #         ENERGY / TEMPERATURE / HUMIDITY
-                        #################################################
-                        {% elif widget.type == 'energy' or
-                                widget.type == 'temperature' or
-                                widget.type == 'humidity' %}
-                        - !include
-                          - includes/widgets/graph_climate_widget.llg.yaml
-                          - widget_entity: {{ widget.entity }}
-                            widget_name: {{ widget.name }}
-                            widget_type: {{ widget.type }}
-                            widget_icon: {{ widget.icon }}
-
-
-                        
-                        #################################################
-                        #         LIGHT
-                        #################################################
-                        {% elif widget.type == 'light' %}
-                        - !include
-                          - includes/widgets/button_default_widget.llg.yaml
-                          - widget_entity: {{ widget.entity }}
-                            widget_name: {{ widget.name|default('No name') }}
-                            widget_lock: {{ widget.lock|default(false) }}
-                            widget_type: {{ widget.type }}
-                            {% if widget.icon is defined %}
-                            widget_icon: {{ widget.icon }}
-                            {% endif %}
-                            widget_template: 
-                              {% if ((widget.template is not defined) or
-                                ('light' not in widget.template)) %}
-                              - 'light'
-                              {% endif %}
-                              {% if widget.template is defined %}
-                                {% for template in widget.template %}
-                              - {{ template }}
-                                {% endfor %}
-                              {% endif %}
-
-
-
-                        #################################################
                         #         BINARY
                         #################################################
                         {% elif widget.type == 'binary' %}
                         - !include
                           - includes/widgets/button_default_widget.llg.yaml
                           - widget_entity: {{ widget.entity }}
-                            widget_name: {{ widget.name|default('No name') }}
-                            widget_lock: {{ widget.lock|default(false) }}
+                            widget_name: {{ widget.name | default('No name') }}
+                            widget_lock: {{ widget.lock | default(false) }}
                             widget_type: {{ widget.type }}
                             {% if widget.icon is defined %}
                             widget_icon: {{ widget.icon }}
                             {% endif %}
-                            {% if widget.template is defined %}
-                            widget_template:
-                              {% for template in widget.template %}
-                              - {{ template }}
-                              {% endfor %}
-                            {% endif %}
-
-
-
-                        #################################################
-                        #         CLIMATE
-                        #################################################
-                        {% elif widget.type == 'climate' %}
-                        - !include
-                          - includes/widgets/button_default_widget.llg.yaml
-                          - widget_entity: {{ widget.entity }}
-                            widget_name: {{ widget.name|default('No name') }}
-                            widget_lock: {{ widget.lock|default(false) }}
-                            widget_type: {{ widget.type }}
                             {% if widget.template is defined %}
                             widget_template:
                               {% for template in widget.template %}
@@ -203,8 +143,8 @@
                         - !include
                           - includes/widgets/button_default_widget.llg.yaml
                           - widget_entity: {{ widget.entity }}
-                            widget_name: {{ widget.name|default('No name') }}
-                            widget_lock: {{ widget.lock|default(false) }}
+                            widget_name: {{ widget.name | default('No name') }}
+                            widget_lock: {{ widget.lock | default(false) }}
                             widget_type: {{ widget.type }}
                             {% if widget.icon is defined %}
                             widget_icon: {{ widget.icon }}
@@ -215,6 +155,39 @@
                               - {{ template }}
                               {% endfor %}
                             {% endif %}
+
+
+                        #################################################
+                        #         CLIMATE
+                        #################################################
+                        {% elif widget.type == 'climate' %}
+                        - !include
+                          - includes/widgets/button_default_widget.llg.yaml
+                          - widget_entity: {{ widget.entity }}
+                            widget_name: {{ widget.name | default('No name') }}
+                            widget_lock: {{ widget.lock | default(false) }}
+                            widget_type: {{ widget.type }}
+                            {% if widget.template is defined %}
+                            widget_template:
+                              {% for template in widget.template %}
+                              - {{ template }}
+                              {% endfor %}
+                            {% endif %}
+
+
+
+                        #################################################
+                        #         CLIMATE (graph)
+                        #################################################
+                        {% elif widget.type == 'energy' or
+                                widget.type == 'temperature' or
+                                widget.type == 'humidity' %}
+                        - !include
+                          - includes/widgets/graph_climate_widget.llg.yaml
+                          - widget_entity: {{ widget.entity }}
+                            widget_name: {{ widget.name }}
+                            widget_type: {{ widget.type }}
+                            widget_icon: {{ widget.icon }}
 
 
 
@@ -225,8 +198,8 @@
                         - !include
                           - includes/widgets/button_default_widget.llg.yaml
                           - widget_entity: {{ widget.entity }}
-                            widget_name: {{ widget.name|default('No name') }}
-                            widget_lock: {{ widget.lock|default(false) }}
+                            widget_name: {{ widget.name | default('No name') }}
+                            widget_lock: {{ widget.lock | default(false) }}
                             widget_type: {{ widget.type }}
                             {% if widget.icon is defined %}
                             widget_icon: {{ widget.icon }}
@@ -237,6 +210,134 @@
                               - {{ template }}
                               {% endfor %}
                             {% endif %}
+
+
+
+                        #################################################
+                        #         ICONS
+                        #################################################
+                        {% elif widget.type == 'icons' %}
+                        - type: custom:mod-card
+                          style:
+                            .: |
+                              :host {
+                                align-items: flex-start;
+                                display: flex;
+                                justify-content: flex-start;
+                                padding: 0 1.25rem !important;
+                              }
+                              #states {
+                                padding: 0;
+                              }
+                              ha-card {
+                                width: 100%;
+                                height: 100%;
+                              }
+                            hui-horizontal-stack-card$: |
+                              #root {
+                                flex-flow: row wrap;
+                              }
+                              #root > * {
+                                display: flex;
+                                flex: 1 1 auto;
+                                margin: 0 !important;
+                              }
+                              #root > mod-card:nth-child(1) {
+                                align-items: flex-start;
+                                justify-content: flex-start;
+                              }
+                              #root > mod-card:nth-child(2) {
+                                align-items: flex-start;
+                                justify-content: flex-end;
+                              }
+                              #root > mod-card:nth-child(3) {
+                                align-items: flex-end;
+                                justify-content: flex-start;
+                              }
+                              #root > mod-card:nth-child(4) {
+                                align-items: flex-end;
+                                justify-content: flex-end;
+                              }
+                          card:
+                            type: horizontal-stack
+                            cards:
+
+                              # FIXME: couldn't use entities for some reason?
+                              {% for entity_item in widget.entity_list %}
+                                {% if loop.index <= 4 %}
+                              #################################################
+                              #         ENTITY
+                              #################################################
+                              - type: custom:mod-card
+                                style:
+                                  hui-vertical-stack-card$: |
+                                    #root {
+                                      align-items: center;
+                                      justify-content: center;
+                                    }
+                                    #root > * {
+                                      margin-right: 0 !important;
+                                    }
+                                card:
+                                  type: vertical-stack
+                                  cards:
+                                    #################################################
+                                    #         BUTTON
+                                    #################################################
+                                    - type: custom:button-card
+                                      entity: {{ entity_item.entity }}
+                                      name: {{ entity_item.name }}
+                                      icon: {{ entity_item.icon }}
+                                      variables:
+                                        active: >
+                                          [[[
+                                            return entity.state === 'on' ? true : false;
+                                          ]]]
+                                        backgroundColorDefault: |
+                                          [[[
+                                            return 'rgb(2,0,36)';
+                                          ]]]
+                                        backgroundColorActive: |
+                                          [[[
+                                            return 'rgba(9,9,121)';
+                                          ]]]
+                                        backgroundGradientActive: |
+                                          [[[
+                                            return 'linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%)';
+                                          ]]]
+                                        backgroundGradientDefault: |
+                                          [[[
+                                            return 'linear-gradient(180deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%)';
+                                          ]]]
+                                      template:
+                                        - 'app_icon_base'
+                                {% endif %}
+                              {% endfor %}
+
+                        
+                        #################################################
+                        #         LIGHT
+                        #################################################
+                        {% elif widget.type == 'light' %}
+                        - !include
+                          - includes/widgets/button_default_widget.llg.yaml
+                          - widget_entity: {{ widget.entity }}
+                            widget_name: {{ widget.name | default('No name') }}
+                            widget_lock: {{ widget.lock | default(false) }}
+                            widget_type: {{ widget.type }}
+                            {% if widget.icon is defined %}
+                            widget_icon: {{ widget.icon }}
+                            {% endif %}
+                            widget_template: 
+                              {% if ((widget.template is not defined) or
+                                ('light' not in widget.template)) %}
+                              - 'light'
+                              {% endif %}
+                              {% if widget.template is defined %}
+                                {% for template in widget.template %}
+                              - {{ template }}
+                                {% endfor %}
+                              {% endif %}
 
 
 
@@ -288,7 +389,7 @@
                         #         MINI MEDIA PLAYER
                         #################################################
                         {% elif widget.type == 'mini_media_player' %}
-                        - type: custom:mini-media-player
+                        - type: 'custom:mini-media-player'
                           entity: {{ widget.entity }}
                           style:
                             .: |

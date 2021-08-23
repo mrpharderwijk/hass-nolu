@@ -98,22 +98,32 @@ app_icon_base:
 
   extra_styles: |
     [[[
-      const defaultColor = 'rgba(146, 151, 179, 0.13)';
-      const activeColor = 'rgba(255, 255, 255, 0.7)';
-
+      const defaultColor = backgroundColorDefault 
+        ? backgroundColorDefault
+        : 'rgba(146, 151, 179, 0.13)';
+      const activeColor = backgroundColorActive 
+        ? backgroundColorActive 
+        : 'rgba(255, 255, 255, 0.7)';
       const backgroundColor = variables && variables.active
         ? activeColor
         : defaultColor;
-      const backgroundImage = variables && variables.app_icon_color
-        ? variables.app_icon_color
+
+      const defaultGradient = backgroundGradientDefault
+        ? backgroundGradientDefault
         : null;
+      const activeGradient = backgroundGradientActive
+        ? backgroundGradientActive
+        : null;
+      const backgroundImage = variables && variables.active
+        ? activeGradient
+        : defaultGradient;
 
       return `
         #img-cell {
           background-color: ${backgroundColor};
           ${
             backgroundImage 
-            ? `background-image: ${backgroundImage}`
+            ? `background-image: ${backgroundImage};`
             : ``
           }
           border-radius: 1rem;
