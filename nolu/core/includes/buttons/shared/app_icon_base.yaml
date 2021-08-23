@@ -49,7 +49,12 @@ app_icon_base:
       - grid-area: i
       - width: 100%
       - height: auto
-      - color: rgba(255, 255, 255, 0.7)
+      - color: |
+          [[[
+            variables && variables.iconColor
+              ? variables.iconColor
+              : 'rgba(255, 255, 255, 0.7)'
+          ]]]
 
     ############################################################################
     #       NAME (#name)
@@ -98,21 +103,21 @@ app_icon_base:
 
   extra_styles: |
     [[[
-      const defaultColor = backgroundColorDefault 
-        ? backgroundColorDefault
+      const defaultColor = variables && variables.backgroundColorDefault 
+        ? variables.backgroundColorDefault
         : 'rgba(146, 151, 179, 0.13)';
-      const activeColor = backgroundColorActive 
-        ? backgroundColorActive 
+      const activeColor = variables && variables.backgroundColorActive 
+        ? variables.backgroundColorActive 
         : 'rgba(255, 255, 255, 0.7)';
       const backgroundColor = variables && variables.active
         ? activeColor
         : defaultColor;
 
-      const defaultGradient = backgroundGradientDefault
-        ? backgroundGradientDefault
+      const defaultGradient = variables && variables.backgroundGradientDefault
+        ? variables.backgroundGradientDefault
         : null;
-      const activeGradient = backgroundGradientActive
-        ? backgroundGradientActive
+      const activeGradient = variables && variables.backgroundGradientActive
+        ? variables.backgroundGradientActive
         : null;
       const backgroundImage = variables && variables.active
         ? activeGradient

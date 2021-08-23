@@ -288,10 +288,14 @@
                                       entity: {{ entity_item.entity }}
                                       name: {{ entity_item.name }}
                                       icon: {{ entity_item.icon }}
-                                      variables:
+                                      {# variables:
                                         active: >
                                           [[[
                                             return entity.state === 'on' ? true : false;
+                                          ]]]
+                                        iconColor: |
+                                          [[[
+                                            return 'rgb(255, 255, 255)';
                                           ]]]
                                         backgroundColorDefault: |
                                           [[[
@@ -308,7 +312,7 @@
                                         backgroundGradientDefault: |
                                           [[[
                                             return 'linear-gradient(180deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%)';
-                                          ]]]
+                                          ]]] #}
                                       template:
                                         - 'app_icon_base'
                                 {% endif %}
