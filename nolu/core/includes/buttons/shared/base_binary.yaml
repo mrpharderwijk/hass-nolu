@@ -33,59 +33,17 @@ base_binary:
     ############################################################################
     #       LOCK
     ############################################################################
-    lock:
-      - justify-content: >
-          [[[
-            const active = 'center';
-            const inactive = 'flex-end';
-
-            const onState = ['on', 'home', 'active', 'enabled', 'heat', 'cool', 'open'];
-            const offState = ['off', 'unknown', 'unavailable', 'disabled', 'closed'];
-
-            if (!variables.state) {
-              return inactive;
-            }
-            
-            return onState.some(state => variables.state.toLowerCase().includes(state)) ? active : inactive;
-          ]]]
-      - align-items: >
-          [[[
-            const active = 'center';
-            const inactive = 'flex-start';
-
-            const onState = ['on', 'home', 'active', 'enabled', 'heat', 'cool', 'open'];
-            const offState = ['off', 'unknown', 'unavailable', 'disabled', 'closed'];
-
-            if (!variables.state) {
-              return inactive;
-            }
-            
-            return onState.some(state => variables.state.toLowerCase().includes(state)) ? active : inactive;
-          ]]]
-      - !include styles/card_color.styles.yaml
+    lock: !include styles/lock_default.styles.yaml
 
     ############################################################################
     #       GRID (#container)
     ############################################################################
-    grid:
-      - grid-template-areas: |
-          "i    s"
-          "n    n"
-          "l    l"
-      - grid-template-columns: repeat(2, 1fr)
-      - grid-template-rows: auto repeat(2, min-content)
-      - gap: 2%
-      - align-items: start
+    grid: !include styles/grid_default.styles.yaml
 
     ############################################################################
     #       ICON (#img-cell > ha-icon)
     ############################################################################
-    icon:
-      - grid-area: 'i'
-      - --mdc-icon-size: 35px
-      - text-align: left
-      - width: 100%
-      - !include styles/card_color.styles.yaml
+    icon: !include styles/icon_default.styles.yaml
 
     ############################################################################
     #       NAME (#name)
@@ -116,26 +74,12 @@ base_binary:
     ############################################################################
     #       STATE
     ############################################################################
-    state:
-      - border-radius: 1rem
-      - font-size: 1rem
-      - font-weight: 600
-      - grid-area: 's'
-      - margin-top: .25rem
-      - padding: 0.25rem 0.5rem
-      - place-self: start end
-      - !include styles/card_background-color-invert.styles.yaml
-      - !include styles/card_color-invert.styles.yaml
+    state: !include styles/state_default.styles.yaml
 
     ############################################################################
     #       CARD (#ha-card)
     ############################################################################
-    card:
-      - border-radius: var(--nolu-button-card-border-radius, 1rem)
-      - padding: 10%
-      - !include styles/card_ripple.styles.yaml
-      - !include styles/card_color.styles.yaml
-      - !include styles/card_background-color.styles.yaml
+    card: !include styles/card_default.styles.yaml
 
   extra_styles: |
     @keyframes card_bounce {

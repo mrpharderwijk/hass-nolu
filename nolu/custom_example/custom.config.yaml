@@ -113,8 +113,18 @@ home:
         #################################################
         #         MARKDOWN EXAMPLE
         #################################################
-        - type: markdown
+        - type: 'markdown'
           content: 'Just a markdown card'
+
+        #################################################
+        #         PERSON
+        #################################################
+        - type: 'person'
+          entity: 'person.xxxxxxx'
+          name: 'Person'
+          background:
+            image: '/local/nolu/profile_images/profile.png'
+            cover: true # boolean: true/false
 
         #################################################
         #         POWER PLUG EXAMPLE

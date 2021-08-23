@@ -1,0 +1,5 @@
+- border-radius: var(--nolu-button-card-border-radius, 1rem)
+- padding: 10%
+- !include card_ripple.styles.yaml
+- !include card_color.styles.yaml
+- !include card_background-color.styles.yaml

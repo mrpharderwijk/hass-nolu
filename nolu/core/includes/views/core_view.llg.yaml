@@ -241,6 +241,33 @@
 
 
                         #################################################
+                        #         PERSON
+                        #################################################
+                        {% elif widget.type == 'person' %}
+                        - type: 'custom:button-card'
+                          entity: {{ widget.entity }}
+                          show_last_changed: true
+                          {% if (widget.background is defined) %}
+                            {% if widget.background.image is defined %}
+                          entity_picture: {{ widget.background.image }}
+                          show_entity_picture: true
+                            {% endif %}
+
+                            {% if (widget.background.cover is defined) or
+                              (widget.last_changed is defined) %}
+                          variables:
+                            cover: {{ widget.background.cover }}
+                            {% endif %}
+                          {% endif %}
+                          {% if widget.name %}
+                          name: {{ widget.name }}
+                          {% endif %}
+                          template:
+                            - 'person'
+
+
+
+                        #################################################
                         #         POWER_PLUG
                         #################################################
                         {% elif widget.type == 'power_plug' %}
