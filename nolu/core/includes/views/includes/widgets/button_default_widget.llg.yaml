@@ -4,6 +4,10 @@ type: 'custom:button-card'
 entity: {{ widget_entity }}
 name: {{ widget_name }}
 
+{% if widget_show_last_changed is defined %}
+show_last_changed: {{ widget_show_last_changed }}
+{% endif %}
+
 {% if widget_type == 'camera' %}
 show_live_stream: false
 {% endif %}

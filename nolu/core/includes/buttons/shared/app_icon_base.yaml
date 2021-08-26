@@ -51,8 +51,8 @@ app_icon_base:
       - height: auto
       - color: |
           [[[
-            variables && variables.iconColor
-              ? variables.iconColor
+            variables && variables.icon_color
+              ? variables.icon_color
               : 'rgba(255, 255, 255, 0.7)'
           ]]]
 
@@ -67,7 +67,7 @@ app_icon_base:
       - letter-spacing: 0.05vw
       - line-height: 1.4rem
       - text-align: center
-      - max-width: 60px
+      - width: 80px
       - justify-self: center
       - padding-top: 0.1rem
       - color: rgb(255, 255, 255)
@@ -103,23 +103,28 @@ app_icon_base:
 
   extra_styles: |
     [[[
-      const defaultColor = variables && variables.backgroundColorDefault 
-        ? variables.backgroundColorDefault
+      const activeStates = ['on', 'home', 'active', 'enabled', 'heat', 'cool', 'heat_cool', 'fan', 'open'];
+      const isActive = entity && entity.state
+        ? activeStates.some(state => state === entity.state)
+        : false;
+
+      const defaultColor = variables && variables.bg_color_default 
+        ? variables.bg_color_default
         : 'rgba(146, 151, 179, 0.13)';
-      const activeColor = variables && variables.backgroundColorActive 
-        ? variables.backgroundColorActive 
+      const activeColor = variables && variables.bg_color_active 
+        ? variables.bg_color_active 
         : 'rgba(255, 255, 255, 0.7)';
-      const backgroundColor = variables && variables.active
+      const backgroundColor = variables && isActive
         ? activeColor
         : defaultColor;
 
-      const defaultGradient = variables && variables.backgroundGradientDefault
-        ? variables.backgroundGradientDefault
+      const defaultGradient = variables && variables.bg_gradient_default
+        ? variables.bg_gradient_default
         : null;
-      const activeGradient = variables && variables.backgroundGradientActive
-        ? variables.backgroundGradientActive
+      const activeGradient = variables && variables.bg_gradient_active
+        ? variables.bg_gradient_active
         : null;
-      const backgroundImage = variables && variables.active
+      const backgroundImage = variables && isActive
         ? activeGradient
         : defaultGradient;
 
