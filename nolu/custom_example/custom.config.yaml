@@ -141,6 +141,7 @@ home:
           name: 'Power plug' # string | required - name to show
           switch_entity: 'switch.xxxxxxx' # string | required - entity to switch on click
           graph_entity: 'sensor.xxxxxxx' # string | optional - entity show the graph for
+          hours_to_show: 72 # integer | optional - graph time period
 
         #################################################
         #         TEMPERATURE SENSOR EXAMPLE
