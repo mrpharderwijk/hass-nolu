@@ -1,6 +1,6 @@
 # lovelace_gen
 
-type: custom:mini-graph-card
+type: 'custom:mini-graph-card'
 
 {% if widget_name is defined %}
 name: {{ widget_name }}

@@ -1,0 +1,5 @@
+- --mdc-icon-size: 35px
+- grid-area: 'i'
+- text-align: left
+- width: 100%
+- !include card_color.styles.yaml

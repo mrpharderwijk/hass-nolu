@@ -1,0 +1,7 @@
+- font-size: 1.2rem
+- font-weight: 600
+- grid-area: 'n'
+- justify-self: flex-start
+- letter-spacing: 0.05vw
+- line-height: 1.25rem
+- !include card_color.styles.yaml

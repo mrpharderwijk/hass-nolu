@@ -1,0 +1,15 @@
+# lovelace_gen
+
+type: 'markdown'
+style:
+  .: |
+    :host {
+      width: 94px !important;
+      height: 94px !important;
+    }
+    ha-markdown$: |
+    ha-markdown-element p {
+      display: none;
+    }
+content: |
+  {{ icon_item_type }}

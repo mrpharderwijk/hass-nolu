@@ -1,0 +1,21 @@
+- platform: template
+  sensors:
+    ###################################################################
+    #        FRONTEND GREETING TODO: fix below with input_texts
+    ####################################################################
+    greeting:
+      friendly_name: Greeting
+      value_template: >-
+        {% set hour = now().hour %}
+        {% set minute = now().minute %}
+        {% if hour <= 5 %}
+          {{ states('input_text.greeting_good_night') }}
+        {% elif hour <= 11 and minute <= 59 %}
+          {{ states('input_text.greeting_good_morning') }}
+        {% elif hour <= 17 and minute <= 59 %}
+          {{ states('input_text.greeting_good_afternoon') }}
+        {% elif hour <= 23 and minute <= 59 %}
+          {{ states('input_text.greeting_good_evening') }}
+        {% else %}
+          {{ states('input_text.greeting_good_day') }}
+        {% endif %}

@@ -41,6 +41,16 @@ For Nolu to work properly and the install process to run smoothly it is importan
 5. Now may be a good time to do a restart of your HASS
 6. When all is booted up, check `configuration` > `Lovelace Dashboards` > `Resources (tab)` and make sure all HACS Frontend resources are present
 
+### VSCode
+
+With great power comes great responsibility. To control all that power and the codebase I advice you to install the VSCode add-on. Go to Supervisor > Add-on Store > and search for VS Code.
+
+Recommended extensions to use:
+
+- [EditorConfig](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig)
+- [Better Jinja](https://marketplace.visualstudio.com/items?itemName=samuelcolvin.jinjahtml) by Samuel Colvin
+- [Material Icon Theme](https://marketplace.visualstudio.com/items?itemName=PKief.material-icon-theme) by PKief
+
 ## Installation instructions
 
 1. Now download Nolu's source from Github or clone the Nolu repository locally
@@ -119,13 +129,3 @@ I want to thank two people for inspiring me to create this theme/framework and w
 
 - [Mattias Persson](https://community.home-assistant.io/u/Mattias_Persson) and his [take on designing a Lovelace UI](https://community.home-assistant.io/t/a-different-take-on-designing-a-lovelace-ui/162594).
 - [Jimz011](https://community.home-assistant.io/u/jimz011) and his awesome work on creating the [Homekit Infused project](https://github.com/jimz011/homekit-infused).
-
-#### VSCode
-
-With great power comes great responsibility. To control all that power and the codebase I advice you to install the VSCode add-on. Go to Supervisor > Add-on Store > and search for VS Code.
-
-Recommended extensions to use:
-
-- [EditorConfig](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig)
-- [Better Jinja](https://marketplace.visualstudio.com/items?itemName=samuelcolvin.jinjahtml) by Samuel Colvin
-- [Material Icon Theme](https://marketplace.visualstudio.com/items?itemName=PKief.material-icon-theme) by PKief
