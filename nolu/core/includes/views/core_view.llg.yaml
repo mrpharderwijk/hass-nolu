@@ -71,7 +71,7 @@
                 {% if (data.greeting.subtitle is defined) %}
               - greeting_subtitle: {{ data.greeting.subtitle }}
                 {% endif %}
-              {% endif %} 
+              {% endif %}
             {% endif %}
 
             #################################################
@@ -190,7 +190,7 @@
                             widget_icon: {{ widget.icon }}
 
 
-                        
+
                         #################################################
                         #         LIGHT
                         #################################################
@@ -204,7 +204,7 @@
                             {% if widget.icon is defined %}
                             widget_icon: {{ widget.icon }}
                             {% endif %}
-                            widget_template: 
+                            widget_template:
                               {% if ((widget.template is not defined) or
                                 ('light' not in widget.template)) %}
                               - 'light'
@@ -304,11 +304,11 @@
                               {% set total_icons = widget.icons_list | length %}
                               {% set blank_items_amount = 4 - (total_icons | int) %}
                               {% for n in range(blank_items_amount) %}
-                                {% set new_icons_list = widget.icons_list.append({ 
+                                {% set new_icons_list = widget.icons_list.append({
                                   "type": "blank"
                                 }) %}
                               {% endfor %}
-                              
+
                               {% for icon_item in widget.icons_list %}
                                 {% if loop.index <= 4 %}
                               #################################################
@@ -351,7 +351,7 @@
                                       {% if icon_item.icon is defined %}
                                       icon: {{ icon_item.icon }}
                                       {% endif %}
-                                      
+
                                       {% if icon_item.variables is defined %}
                                       variables:
                                         {% if icon_item.variables.icon_color is defined %}
@@ -416,14 +416,14 @@
                                         confirmation: {{ icon_item.tap_action.confirmation }}
                                         {% endif %}
                                       {% endif %}
-                                      
+
                                       template:
                                         - 'app_icon_base'
                                     {% endif %}
                                 {% endif %}
                               {% endfor %}
 
-                        
+
 
                         #################################################
                         #         LIGHT
@@ -438,7 +438,7 @@
                             {% if widget.icon is defined %}
                             widget_icon: {{ widget.icon }}
                             {% endif %}
-                            widget_template: 
+                            widget_template:
                               {% if ((widget.template is not defined) or
                                 ('light' not in widget.template)) %}
                               - 'light'
@@ -470,7 +470,7 @@
                             cover: {{ widget.background.cover }}
                             {% endif %}
                           {% endif %}
-                          
+
                           {% if widget.name is defined %}
                           name: {{ widget.name }}
                           {% endif %}
@@ -491,7 +491,12 @@
                             widget_switch_entity: {{ widget.switch_entity }}
                             {% endif %}
                             {% if (widget.graph_entity is defined) %}
-                            widget_graph_entity: {{ widget.graph_entity }} 
+                            widget_graph_entity: {{ widget.graph_entity }}
+                            {% endif %}
+                            {% if (widget.hours_to_show is defined) %}
+                            widget_hours_to_show: {{ widget.hours_to_show }}
+                            {% else %}
+                            widget_hours_to_show: 24
                             {% endif %}
 
 
