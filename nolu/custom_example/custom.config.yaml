@@ -214,6 +214,19 @@ home:
                 icon_color: 'rgb(255, 255, 255)'
                 bg_color_default: 'rgb(29,161,242)'
 
+        #################################################
+        #         TEMPERATURE SENSOR EXAMPLE
+        #################################################
+        - type: 'temperature'
+          name: 'Baby Room'
+          entity: 'sensor.xxxxxxx'
+
+        #################################################
+        #         WEATHER EXAMPLE
+        #################################################
+        - type: default_weather
+          entity: weather.noluhass
+
 #################################################
 #
 #         NOT-FOUND - 404
