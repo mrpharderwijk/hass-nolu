@@ -123,10 +123,15 @@
                           - widget_entity: {{ widget.entity }}
                             widget_name: {{ widget.name | default('No name') }}
                             widget_lock: {{ widget.lock | default(false) }}
+
+                            {% if widget.type is defined %}
                             widget_type: {{ widget.type }}
+                            {% endif %}
+
                             {% if widget.icon is defined %}
                             widget_icon: {{ widget.icon }}
                             {% endif %}
+
                             {% if widget.template is defined %}
                             widget_template:
                               {% for template in widget.template %}

@@ -7,4 +7,8 @@ contact_window:
   template:
     - base_binary
   icon: |
-    [[[ return entity === undefined || entity.state === 'off' ? `mdi:window-closed-variant` : `mdi:window-open-variant`; ]]]
+    [[[ 
+      return entity === undefined || entity.state === 'off'
+        ? `mdi:window-closed-variant`
+        : `mdi:window-open-variant`;
+    ]]]
