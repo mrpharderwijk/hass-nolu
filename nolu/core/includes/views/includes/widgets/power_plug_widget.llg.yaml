@@ -44,6 +44,7 @@ custom_fields:
       decimals: 1
       hours_to_show: {{ widget_hours_to_show }}
       points_per_hour: 0.25
+      line_color: {{ widget_line_color }}
       show:
         name: false
         icon: false

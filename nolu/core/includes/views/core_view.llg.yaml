@@ -487,18 +487,26 @@
                           - includes/widgets/power_plug_widget.llg.yaml
                           - widget_name: {{ widget.name }}
                             widget_lock: {{ widget.lock }}
+                            
                             {% if widget.switch_entity is defined %}
                             widget_switch_entity: {{ widget.switch_entity }}
                             {% endif %}
-                            {% if (widget.graph_entity is defined) %}
+
+                            {% if widget.graph_entity is defined %}
                             widget_graph_entity: {{ widget.graph_entity }}
                             {% endif %}
-                            {% if (widget.hours_to_show is defined) %}
+
+                            {% if widget.hours_to_show is defined %}
                             widget_hours_to_show: {{ widget.hours_to_show }}
                             {% else %}
                             widget_hours_to_show: 24
                             {% endif %}
 
+                            {% if widget.line_color is defined %}
+                            widget_line_color: {{ widget.line_color }}
+                            {% else %}
+                            widget_line_color: 'orange'
+                            {% endif %}
 
                         #################################################
                         #         MINI MEDIA PLAYER
