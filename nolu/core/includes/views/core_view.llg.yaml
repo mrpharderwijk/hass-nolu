@@ -498,11 +498,6 @@
                             {% else %}
                             widget_hours_to_show: 24
                             {% endif %}
-                            {% if (widget.line_color is defined) %}
-                            widget_line_color: {{ widget.line_color }}
-                            {% else %}
-                            widget_line_color: orange
-                            {% endif %}
 
 
                         #################################################
