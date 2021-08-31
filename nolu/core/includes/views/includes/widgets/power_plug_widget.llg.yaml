@@ -3,8 +3,8 @@
 #################################################
 #         POWER_PLUG
 #################################################
-type: custom:button-card
-entity: {{ widget_switch_entity }}
+type: 'custom:button-card'
+entity: {{ widget_entity }}
 variables:
   entity_state: |
     [[[
@@ -51,8 +51,8 @@ custom_fields:
         labels_secondary: false
         average: false
         points: false
-      align_icon: left
-      align_state: right
+      align_icon: 'left'
+      align_state: 'right'
       style: !include ../styles/graph_embedded.styles.yaml
       state_map:
         - value: 0.0

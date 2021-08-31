@@ -162,64 +162,17 @@
                             {% endif %}
 
 
-                        #################################################
-                        #         CLIMATE
-                        #################################################
-                        {% elif widget.type == 'climate' %}
-                        - !include
-                          - includes/widgets/button_default_widget.llg.yaml
-                          - widget_entity: {{ widget.entity }}
-                            widget_name: {{ widget.name | default('No name') }}
-                            widget_lock: {{ widget.lock | default(false) }}
-                            widget_type: {{ widget.type }}
-                            {% if widget.template is defined %}
-                            widget_template:
-                              {% for template in widget.template %}
-                              - {{ template }}
-                              {% endfor %}
-                            {% endif %}
-
-
 
                         #################################################
                         #         CLIMATE (graph)
                         #################################################
-                        {% elif widget.type == 'energy' or
-                                widget.type == 'temperature' or
-                                widget.type == 'humidity' %}
+                        {% elif widget.type == 'energy' %}
                         - !include
                           - includes/widgets/graph_climate_widget.llg.yaml
                           - widget_entity: {{ widget.entity }}
                             widget_name: {{ widget.name }}
                             widget_type: {{ widget.type }}
                             widget_icon: {{ widget.icon }}
-
-
-
-                        #################################################
-                        #         LIGHT
-                        #################################################
-                        {% elif widget.type == 'light' %}
-                        - !include
-                          - includes/widgets/button_default_widget.llg.yaml
-                          - widget_entity: {{ widget.entity }}
-                            widget_name: {{ widget.name|default('No name') }}
-                            widget_lock: {{ widget.lock|default(false) }}
-                            widget_type: {{ widget.type }}
-                            {% if widget.icon is defined %}
-                            widget_icon: {{ widget.icon }}
-                            {% endif %}
-                            widget_template:
-                              {% if ((widget.template is not defined) or
-                                ('light' not in widget.template)) %}
-                              - 'light'
-                              {% endif %}
-                              {% if widget.template is defined %}
-                                {% for template in widget.template %}
-                              - {{ template }}
-                                {% endfor %}
-                              {% endif %}
-
 
 
                         #################################################
@@ -485,26 +438,76 @@
 
 
                         #################################################
-                        #         POWER_PLUG
+                        #         REFACTORED WIDGET 
+                        # one widget definition to rule them all
                         #################################################
-                        {% elif widget.type == 'power_plug' %}
+                        {% elif widget.type == 'climate' or
+                          widget.type == 'humidity' or
+                          widget.type == 'power_plug' or
+                          widget.type == 'temperature' %}
                         - !include
-                          - includes/widgets/power_plug_widget.llg.yaml
-                          - widget_name: {{ widget.name }}
-                            widget_lock: {{ widget.lock }}
-                            {% if widget.switch_entity is defined %}
-                            widget_switch_entity: {{ widget.switch_entity }}
+                          - includes/widgets/button_default_widget.llg.yaml
+                          - widget_entity: {{ widget.entity }}
+                            widget_type: {{ widget.type }}
+                            widget_lock: {{ widget.lock | default(false) }}
+                            
+                            {% if widget.name is defined %}
+                            widget_name: {{ widget.name }}
                             {% endif %}
-                            {% if (widget.graph_entity is defined) %}
-                            widget_graph_entity: {{ widget.graph_entity }}
+                            
+                            {% if widget.icon is defined %}
+                            widget_icon: {{ widget.icon }}
                             {% endif %}
-                            {% if (widget.hours_to_show is defined) %}
-                            widget_hours_to_show: {{ widget.hours_to_show }}
-                            {% else %}
-                            widget_hours_to_show: 24
+                            
+                            {#
+                             # TEMPLATES
+                             #}
+                            widget_template:
+                              - 'base'
+                              {% if widget.template is defined %}
+                                {% for template in widget.template %}
+                              - {{ template }}
+                                {% endfor %}
+                              {% endif %}
+                            
+                            {#
+                             # BATTERY OPTIONS
+                             #}
+                            {% if widget.battery is defined and
+                              widget.battery.entity is defined %}
+                            widget_battery:
+                              entity: {{ widget.battery.entity }}
                             {% endif %}
 
+                            {#
+                             # GRAPH OPTIONS
+                             #}
+                            {% if widget.graph is defined and
+                              widget.graph.entity is defined %}
+                            widget_graph:
+                              {#
+                               # GRAPH ENTITY
+                               #}
+                              entity: {{ widget.graph.entity }}
 
+                              {#
+                               # GRAPH HOURS_TO_SHOW
+                               #}
+                              {% if widget.graph.hours_to_show is defined %}
+                              hours_to_show: {{ widget.graph.hours_to_show }}
+                              {% else %}
+                              hours_to_show: 24
+                              {% endif %}
+                              
+                              {#
+                               # GRAPH LINE_COLOR
+                               #}
+                              {% if widget.graph.line_color is defined %}
+                              line_color: {{ widget.graph.line_color }}
+                              {% else %}
+                              line_color: 'orange'
+                              {% endif %}
+                            {% endif %}
 
                         #################################################
                         #         MINI MEDIA PLAYER
