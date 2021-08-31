@@ -100,7 +100,7 @@ main_menu_item:
   extra_styles: |
     [[[
       const cardBgColor = variables && variables.active ? 'var(--nolu-color-primary, rgba(32, 89, 201, 1))' : 'rgba(146, 151, 179, 0.13)';
-      const cardBgImage = variables && variables.active ? 'linear-gradient(0deg, rgba(20, 56, 125, 1) 0%, rgba(25, 71, 162, 1) 35%, rgba(32, 89, 201, 1) 100%)' : 'none';
+      const cardBgImage = variables && variables.active ? "var(--nolu-color-primary-gradient, 'none')" : 'none';
 
       const nameDefaultColor = 'rgba(255, 255, 255, 0.7)';
       const nameActiveColor = 'rgba(255, 255, 255, 1)';

@@ -29,6 +29,7 @@ nolu-color-gray-light: rgb(227, 228, 232)
 nolu-color-gray-lighter: rgb(151, 151, 151);
 nolu-color-gray-gradient: linear-gradient(0deg, rgba(155,156,160,1) 0%, rgba(227,228,232,1) 100%)
 
+nolu-color-primary-gradient: linear-gradient(0deg, rgba(20, 56, 125, 1) 0%, rgba(25, 71, 162, 1) 35%, rgba(32, 89, 201, 1) 100%)'
 ##########################################################
 #     NATIVE COLORS
 ##########################################################
