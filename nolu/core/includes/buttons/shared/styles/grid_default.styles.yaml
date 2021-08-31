@@ -1,0 +1,8 @@
+- align-items: start
+- gap: 2%
+- grid-template-areas: |
+    "i    s"
+    "n    n"
+    "l    l"
+- grid-template-columns: repeat(2, 1fr)
+- grid-template-rows: auto repeat(2, min-content)

@@ -11,6 +11,8 @@ home-assistant_v2.*
 
 /blueprints/
 /www/images/
+/www/nolu/profile_images/
+/image/
 
 # Integration / Add-on specific
 /custom_components/

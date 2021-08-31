@@ -4,54 +4,108 @@
 #
 #################################################
 person:
-  template:
-    - base
-    - circle
-  state_display: >
-    [[[ return variables.state === 'home' ? 'Ja' : 'Nej'; ]]]
-  triggers_update: sensor.time
-  styles:
-    custom_fields:
-      icon:
-        - clip-path: circle()
-        - width: 79%
-        - pointer-events: none
-        - display: flex
-  custom_fields:
-    icon: >
-      [[[ return entity === undefined || `<img src="${states[entity.entity_id].attributes.entity_picture}" width="100%">`; ]]]
-    circle: >
+  variables:
+    state: |
       [[[
-        const time = c => {
-          const s = (c / 1000);
-          const m = (c / (1000 * 60));
-          const h = (c / (1000 * 60 * 60));
-          const d = (c / (1000 * 60 * 60 * 24));
-          if (s < 60) {
-            return parseInt(s) + 's';
-          } else if (m < 60) {
-            return parseInt(m) + 'm';
-          } else if (h < 24) {
-            return parseInt(h) + 'h';
-          } else {
-            return parseInt(d) + 'd';
-          }
-        };
-        let last_changed = entity === undefined || time(Date.now() - Date.parse(states[entity.entity_id].last_changed));
-        const stroke_color = variables.state === 'home' ? '#b2b2b2' : '#313638';
-        const fill_color = variables.state === 'home' ? 'none' : '#FFFFFF08';
-        return `
-          <svg viewBox="0 0 50 50">
-            <style>
-              circle {
-                transform: none;
-                transform-origin: none;
-                stroke-dasharray: none;
-                stroke-dashoffset: none;
-              }
-            </style>
-            <circle cx="25" cy="25" r="20.5" stroke="${stroke_color}" stroke-width="1.5" fill="${fill_color}" />
-            <text x="50%" y="54%" fill="#8d8e90" font-size="14" text-anchor="middle" alignment-baseline="middle" dominant-baseline="middle">${last_changed}</text>
-          </svg>
-        `;
+        return entity && entity.state ? entity.state : null; 
       ]]]
+  aspect_ratio: 1/1
+  show_state: true
+  show_icon: false
+  show_label: true
+  state_display: >
+    [[[ return variables.state === 'home' ? 'Home' : 'Away'; ]]]
+  styles:
+    ############################################################################
+    #       GRID (#container)
+    ############################################################################
+    grid:
+      - align-items: start
+      - grid-template-areas: |
+          "i    s"
+          "n    n"
+          "l    l"
+      - grid-template-columns: auto 1fr
+      - grid-template-rows: auto repeat(2, min-content)
+
+    ############################################################################
+    #       ICON (#img-cell > ha-icon)
+    ############################################################################
+    entity_picture:
+      - border-radius: 50%
+      - grid-area: 'i'
+      - height: 75px
+      - position: relative
+      - text-align: left
+      - width: 75px
+      - !include shared/styles/card_color.styles.yaml
+
+    ############################################################################
+    #       NAME (#name)
+    #       The name is used underneath the app icon
+    ############################################################################
+    name: !include shared/styles/name_default.styles.yaml
+
+    ############################################################################
+    #       STATE
+    ############################################################################
+    state: !include shared/styles/state_default.styles.yaml
+
+    ############################################################################
+    #       LABEL (#label)
+    #       Last status change
+    ############################################################################
+    label: !include shared/styles/label_default.styles.yaml
+
+    ############################################################################
+    #       CARD (#ha-card)
+    ############################################################################
+    card: !include shared/styles/card_default.styles.yaml
+
+  extra_styles: |
+    [[[
+      return `
+        #img-cell {
+          align-items: flex-start !important;
+        }
+
+        #name,
+        #state,
+        #label {
+          z-index: 1001;
+        }
+        ${
+            variables && variables.cover
+            ? `
+              #img-cell {
+                position: absolute !important;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                top: 0;
+                z-index: 1000;
+              }
+              
+              #img-cell #icon {
+                border-radius: 0 !important;
+                height: 100% !important;
+                width: 100% !important;
+              }
+              
+              #img-cell:after {
+                content: '';
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                ${
+                  variables && variables.state === 'home'
+                  ? ''
+                  : `
+                    background-color: var(--nolu-color-black-transparent);
+                  `
+              }
+            ` 
+            : '' 
+          }
+      `;
+    ]]]

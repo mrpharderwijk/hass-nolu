@@ -7,10 +7,10 @@ type: custom:button-card
 entity: {{ widget_switch_entity }}
 variables:
   entity_state: |
-    [[[ 
-      return entity && entity.state 
-        ? entity.state 
-        : null; 
+    [[[
+      return entity && entity.state
+        ? entity.state
+        : null;
     ]]]
 
 {% if (widget_graph_entity is defined) %}
@@ -42,6 +42,9 @@ custom_fields:
           show_line: true
           show_fill: false
       decimals: 1
+      hours_to_show: {{ widget_hours_to_show }}
+      points_per_hour: 0.25
+      line_color: {{ widget_line_color }}
       show:
         name: false
         icon: false
@@ -57,7 +60,7 @@ custom_fields:
           label: 'off'
 {% endif %}
 
-# TEMPLATES  
+# TEMPLATES
 template:
   - 'base'
 

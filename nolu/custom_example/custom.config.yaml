@@ -33,9 +33,10 @@ home:
         #################################################
         #         BINARY SENSOR (motion & contact sensors)
         #################################################
-        - type: 'binary'
-          entity: 'binary_sensor.xxxxxxx'
-          name: 'Frontdoor'
+        - type: 'binary' # string | required - widget type
+          entity: 'binary_sensor.xxxxxxx' # string | required - energy entity to use
+          name: 'Frontdoor' # string | required - name to show
+          # icon: ... - string | optional - icon to show
           template:
             - 'contact_door'
             # OR
@@ -46,17 +47,18 @@ home:
         #################################################
         #         CAMERA EXAMPLE
         #################################################
-        - type: 'camera'
-          entity: camera.front_door
+        - type: 'camera' # string | required - widget type
+          entity: 'camera.front_door' # string | required - energy entity to use
           template:
-            - camera
+            - 'camera'
 
         #################################################
         #         CLIMATE EXAMPLE
         #################################################
-        - type: 'climate'
-          entity: 'climate.xxxxxxx'
-          name: 'Living room thermostat'
+        - type: 'climate' # string | required - widget type
+          entity: 'climate.xxxxxxx' # string | required - energy entity to use
+          name: 'Living room thermostat' # string | required - name to show
+          # icon: ... - string | optional - icon to show
           template:
             - 'climate_thermostat'
             # OR
@@ -65,17 +67,18 @@ home:
         #################################################
         #         ENERGY EXAMPLE
         #################################################
-        - type: 'energy'
-          name: 'Current electricity usage'
-          icon: 'mdi:lightning-bolt-outline'
-          entity: 'sensor.xxxxxxx'
+        - type: 'energy' # string | required - widget type
+          entity: 'sensor.xxxxxxx' # string | required - energy entity to use
+          name: 'Current electricity usage' # string | required - name to show
+          icon: 'mdi:lightning-bolt-outline' # string | optional - icon to show
 
         #################################################
         #         FAN EXAMPLE
         #################################################
-        - type: 'fan'
-          entity: 'switch.xxxxxxx'
-          name: 'Bathroom Fan'
+        - type: 'fan' # string | required - widget type
+          entity: 'switch.xxxxxxx' # string | required - switch entity to use
+          name: 'Bathroom Fan' # string | required - name to show
+          # icon: ... - string | optional - icon to show (if a template icon is used this will be overwritten)
           template:
             - 'base'
             - 'icon_fan'
@@ -83,16 +86,18 @@ home:
         #################################################
         #         HUMIDITY SENSOR EXAMPLE
         #################################################
-        - type: 'humidity'
-          name: 'Baby Room'
-          entity: 'sensor.xxxxxxx'
+        - type: 'humidity' # string | required - widget
+          entity: 'sensor.xxxxxxx' # string | required - humidity entity to use
+          name: 'Baby Room' # string | required - name to show
+          # icon: ... - string | optional - icon to show
 
         #################################################
         #         LIGHT EXAMPLE
         #################################################
-        - type: 'light'
-          entity: 'light.xxxxxxx'
-          name: 'Ceiling Spots'
+        - type: 'light' # string | required - widget type
+          entity: 'light.xxxxxxx' # string | required - light entity to use
+          name: 'Ceiling Spots' # string | optional - name to show
+          # icon: ... - string | optional - icon to show (if a template icon is used this will be overwritten)
           template:
             - 'icon_hue_bulb_spot'
             # OR
@@ -113,16 +118,103 @@ home:
         #################################################
         #         MARKDOWN EXAMPLE
         #################################################
-        - type: markdown
-          content: 'Just a markdown card'
+        - type: 'markdown' # string | required - widget type
+          content: 'Just a markdown card' # string | required - content of the markdown card
+
+        #################################################
+        #         PERSON
+        #################################################
+        - type: 'person' # string | required - widget type
+          entity: 'person.xxxxxxx' # string | required - person entity to use
+          name: 'Person' # string | optional - name to show. If not defined the entity name will be used
+
+          # `background`
+          # Defines the options for the person image
+          background:
+            image: '/local/nolu/profile_images/profile.png' # string | required - url of the image
+            cover: true # boolean | optional - default is false
 
         #################################################
         #         POWER PLUG EXAMPLE
         #################################################
-        - type: 'power_plug'
-          name: 'Power plug'
-          switch_entity: 'switch.xxxxxxx'
-          graph_entity: 'sensor.xxxxxxx'
+        - type: 'power_plug' # string | required - widget type
+          name: 'Power plug' # string | required - name to show
+          switch_entity: 'switch.xxxxxxx' # string | required - entity to switch on click
+          graph_entity: 'sensor.xxxxxxx' # string | optional - entity show the graph for
+          hours_to_show: 72 # integer | optional - graph time period
+          line_color: 'blue' # string | optional | default: 'orange' - color of the graph line
+
+        #################################################
+        #         TEMPERATURE SENSOR EXAMPLE
+        #################################################
+        - type: 'temperature' # string | required - widget type
+          entity: 'sensor.xxxxxxx' # string | required - entity to use
+          name: 'Baby Room' # string | required - name to show
+          # icon: ... - string | optional - icon to show
+
+        #################################################
+        #         WEATHER EXAMPLE
+        #################################################
+        - type: 'default_weather' # string | required - widget type
+          entity: 'weather.noluhass' # string | required - name to show
+
+        #################################################
+        #         ICONS
+        #################################################
+        - type: 'icons' # string | required - widget type
+          # `icons_list`
+          # The icons to show, maximum of 4 icons can be
+          # shown. The first 4 will be shown
+          icons_list:
+            - name: 'Whatsapp' # string | optional - name is shown below the icon
+              icon: 'mdi:whatsapp' # string | optional - icon to show
+              # entity: ... - string | optional - entity to use
+
+              # `tap_action`
+              # see for supported properties https://github.com/custom-cards/button-card#action
+              tap_action:
+                action: 'url'
+                url_path: 'https://www.whatsapp.com'
+
+              # `variables`
+              # In the variables section you can define the colors and gradients for your icon
+              # !IMPORTANT! No HEX values can be used since they get interpreted as comments in yaml
+              # `active` state depends on the defined `entity`. For the active state the following state
+              # values are checked:
+              # 'on', 'home', 'active', 'enabled', 'heat', 'cool', 'heat_cool', 'fan', 'open'
+              variables:
+                icon_color: 'rgb(255, 255, 255)' # string | optional - defines the icon color
+                bg_color_default: 'rgb(37, 211, 102)' # string | optional - defines the default background color
+                # bg_color_active: ... - string | optional - defines the active background color
+                # bg_gradient_default: ... - string | optional - defines the default gradient background color
+                # bg_gradient_active: ... - string | optional - defines the active gradient background color
+
+            - name: 'Instagram'
+              icon: 'mdi:instagram'
+              tap_action:
+                action: 'url'
+                url_path: 'https://www.instagram.com'
+              variables:
+                icon_color: 'rgb(255, 255, 255)'
+                bg_gradient_default: 'linear-gradient(45deg, rgb(64, 93, 230), rgb(88, 81, 219), rgb(131, 58, 180), rgb(193, 53, 132), rgb(225, 48, 108), rgb(253, 29, 29))'
+
+            - name: 'Facebook'
+              icon: 'mdi:facebook'
+              tap_action:
+                action: 'url'
+                url_path: 'https://www.facebook.com'
+              variables:
+                icon_color: 'rgb(255, 255, 255)'
+                bg_color_default: 'rgb(59, 89, 152)'
+
+            - name: 'Twitter'
+              icon: 'mdi:twitter'
+              tap_action:
+                action: 'url'
+                url_path: 'https://www.twitter.com'
+              variables:
+                icon_color: 'rgb(255, 255, 255)'
+                bg_color_default: 'rgb(29,161,242)'
 
         #################################################
         #         TEMPERATURE SENSOR EXAMPLE
