@@ -44,13 +44,7 @@ icon: |
       : 'mdi:radiator-disabled'
   ]]]
 {% else %}
-{# icon: |
-  {% if (widget_entity is defined) and 
-    (states(widget_entity) is defined) %}
-    mdi:radiator
-  {% else %}
-    mdi:radiator-disabled
-  {% endif %} #}
+icon: {{ widget_icon }}
 {% endif %}
 
 {% else %}
@@ -123,7 +117,19 @@ extra_styles: |
 
     if (variables) {
       if (variables.battery_entity) {
-        extraStyles = ``;
+        extraStyles = `
+          ha-card #battery {
+            grid-area: unset !important;
+            pointer-events: none !important;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+          }
+        `;
       }
 
       if (variables.graph_entity) {
@@ -147,16 +153,28 @@ custom_fields:
     widget_battery.entity is defined %}
   battery:
     card:
+      style:
+        .: |
+          :host {
+            padding: 0 !important;
+            position: absolute !important;
+            right: 10%;
+            top: 50px;
+          }
+          ha-card {
+            padding: 0 !important;
+          }
       type: 'custom:button-card'
       entity: {{ widget_battery.entity }}
-      icon: 'mdi:battery'
-      state_display: 'off'
-      show_name: false
-      show_state: false
-      show_units: false
-      show_label: false
+      variables:
+        {% if widget_battery.visibility is defined %}
+        visibility: {{ widget_battery.visibility }}
+        {% endif %}
+        {% if widget_battery.show_percentage is defined %}
+        show_percentage: {{ widget_battery.show_percentage }}
+        {% endif %}
       template:
-        - 'app_icon_base'
+        - 'embed_battery_icon'
   {% endif %}
 
   {% if widget_graph is defined and

@@ -115,33 +115,6 @@
 
 
                         #################################################
-                        #         BINARY
-                        #################################################
-                        {% elif widget.type == 'binary' %}
-                        - !include
-                          - includes/widgets/button_default_widget.llg.yaml
-                          - widget_entity: {{ widget.entity }}
-                            widget_name: {{ widget.name | default('No name') }}
-                            widget_lock: {{ widget.lock | default(false) }}
-
-                            {% if widget.type is defined %}
-                            widget_type: {{ widget.type }}
-                            {% endif %}
-
-                            {% if widget.icon is defined %}
-                            widget_icon: {{ widget.icon }}
-                            {% endif %}
-
-                            {% if widget.template is defined %}
-                            widget_template:
-                              {% for template in widget.template %}
-                              - {{ template }}
-                              {% endfor %}
-                            {% endif %}
-
-
-
-                        #################################################
                         #         CAMERA
                         #################################################
                         {% elif widget.type == 'camera' %}
@@ -441,7 +414,8 @@
                         #         REFACTORED WIDGET 
                         # one widget definition to rule them all
                         #################################################
-                        {% elif widget.type == 'climate' or
+                        {% elif widget.type == 'binary' or
+                          widget.type == 'climate' or
                           widget.type == 'humidity' or
                           widget.type == 'power_plug' or
                           widget.type == 'temperature' %}
@@ -463,7 +437,9 @@
                              # TEMPLATES
                              #}
                             widget_template:
+                              {% if widget.type != 'binary' %}
                               - 'base'
+                              {% endif %}
                               {% if widget.template is defined %}
                                 {% for template in widget.template %}
                               - {{ template }}
@@ -477,6 +453,14 @@
                               widget.battery.entity is defined %}
                             widget_battery:
                               entity: {{ widget.battery.entity }}
+                              {% if widget.battery.visibility is defined %}
+                              visibility: {{ widget.battery.visibility }}
+                              {% endif %}
+                              {% if ((widget.battery.show_percentage is defined) and
+                                (widget.battery.show_percentage == true)) or
+                                (widget.battery.show_percentage is not defined) %}
+                              show_percentage: true
+                              {% endif %}
                             {% endif %}
 
                             {#
