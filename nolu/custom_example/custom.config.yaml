@@ -33,10 +33,62 @@ home:
         #################################################
         #         BINARY SENSOR (motion & contact sensors)
         #################################################
-        - type: 'binary' # string | required - widget type
-          entity: 'binary_sensor.xxxxxxx' # string | required - energy entity to use
-          name: 'Frontdoor' # string | required - name to show
-          # icon: ... - string | optional - icon to show
+        # `type`
+        # string - The type of widget
+        # required - no default
+        - type: 'binary'
+
+          # `entity`
+          # string - Entity to use
+          # required - no default
+          entity: 'binary_sensor.xxxxxxx'
+
+          # `name`
+          # string - Name to show in the widget
+          # optional - no default
+          name: 'Frontdoor'
+
+          # `battery`
+          # object - Contains properties to show a battery indicator
+          # optional - no default
+          battery:
+            # `entity`
+            # string - Entity to use
+            # required - no default
+            entity: 'sensor.xxxxxxx_battery'
+
+            # `visibility`
+            # string - The visiblity of the battery indicator
+            # Optional - 'always' | 'low' | 'never' - default = 'low' - will be shown only when under 10% (blinking red)
+            visibility: 'always'
+
+            # `show_percentage`
+            # boolean - Show the battery percentage or not
+            # optional - default = false
+            show_percentage: true
+
+          # `graph`
+          # object - Contains properties for the graph
+          # optional - no default
+          graph:
+            # `entity`
+            # string - The entity that is used for the graph
+            # required - no default
+            entity: 'sensor.xxxxxxx'
+
+            # `hours_to_show`
+            # string - The amount of hours to show the values for
+            # optional - default = 24
+            hours_to_show: 72
+
+            # `line_color`
+            # string - The color the line of the graph should be
+            # optional - default = 'orange'
+            line_color: 'blue'
+
+          # `template`
+          # list - Template definitions to use. This will determine which icon is shown
+          # optional - no default (use one of the below examples)
           template:
             - 'contact_door'
             # OR
@@ -47,18 +99,43 @@ home:
         #################################################
         #         CAMERA EXAMPLE
         #################################################
-        - type: 'camera' # string | required - widget type
-          entity: 'camera.front_door' # string | required - energy entity to use
+        # `type`
+        # string - The type of widget
+        # required - no default
+        - type: 'camera'
+
+          # `entity`
+          # string - Entity to use
+          # required - no default
+          entity: 'camera.front_door'
+
+          # `template`
+          # list - Template definitions to use. This will determine which icon is shown
+          # optional - no default (use one of the below examples)
           template:
             - 'camera'
 
         #################################################
         #         CLIMATE EXAMPLE
         #################################################
+        # `type`
+        # string - The type of widget
+        # required - no default
         - type: 'climate' # string | required - widget type
-          entity: 'climate.xxxxxxx' # string | required - energy entity to use
-          name: 'Living room thermostat' # string | required - name to show
-          # icon: ... - string | optional - icon to show
+
+          # `entity`
+          # string - Entity to use
+          # required - no default
+          entity: 'climate.xxxxxxx'
+
+          # `name`
+          # string - Name to show in the widget
+          # optional - no default
+          name: 'Living room thermostat'
+
+          # `template`
+          # list - Template definitions to use. This will determine which icon is shown
+          # optional - no default (use one of the below examples)
           template:
             - 'climate_thermostat'
             # OR
@@ -67,37 +144,146 @@ home:
         #################################################
         #         ENERGY EXAMPLE
         #################################################
+        # `type`
+        # string - The type of widget
+        # required - no default
         - type: 'energy' # string | required - widget type
-          entity: 'sensor.xxxxxxx' # string | required - energy entity to use
+
+          # `entity`
+          # string - Entity to use
+          # required - no default
+          entity: 'sensor.xxxxxxx'
+
+          # `name`
+          # string - Name to show in the widget
+          # optional - no default
           name: 'Current electricity usage' # string | required - name to show
-          icon: 'mdi:lightning-bolt-outline' # string | optional - icon to show
+
+          # `icon`
+          # string - Icon to use (see https://materialdesignicons.com/)
+          # optional - no default
+          icon: 'mdi:lightning-bolt-outline'
 
         #################################################
         #         FAN EXAMPLE
         #################################################
+        # `type`
+        # string - The type of widget
+        # required - no default
         - type: 'fan' # string | required - widget type
-          entity: 'switch.xxxxxxx' # string | required - switch entity to use
-          name: 'Bathroom Fan' # string | required - name to show
-          # icon: ... - string | optional - icon to show (if a template icon is used this will be overwritten)
+
+          # `entity`
+          # string - Entity to use
+          # required - no default
+          entity: 'switch.xxxxxxx'
+
+          # `name`
+          # string - Name to show in the widget
+          # optional - no default
+          name: 'Bathroom Fan'
+
+          # `graph`
+          # object - Contains properties for the graph
+          # optional - no default
+          graph:
+            # `entity`
+            # string - The entity that is used for the graph
+            # required - no default
+            entity: 'sensor.xxxxxxx'
+
+            # `hours_to_show`
+            # string - The amount of hours to show the values for
+            # optional - default = 24
+            hours_to_show: 72
+
+            # `line_color`
+            # string - The color the line of the graph should be
+            # optional - default = 'orange'
+            line_color: 'blue'
+
+          # `template`
+          # list - Template definitions to use. This will determine which icon is shown
+          # optional - no default (use one of the below examples)
           template:
-            - 'base'
             - 'icon_fan'
 
         #################################################
         #         HUMIDITY SENSOR EXAMPLE
         #################################################
+        # `type`
+        # string - The type of widget
+        # required - no default
         - type: 'humidity' # string | required - widget
-          entity: 'sensor.xxxxxxx' # string | required - humidity entity to use
-          name: 'Baby Room' # string | required - name to show
-          # icon: ... - string | optional - icon to show
+
+          # `entity`
+          # string - Entity to use
+          # required - no default
+          entity: 'sensor.xxxxxxx'
+
+          # `name`
+          # string - Name to show in the widget
+          # optional - no default
+          name: 'Baby Room'
+
+          # `battery`
+          # object - Contains properties to show a battery indicator
+          # optional - no default
+          battery:
+            # `entity`
+            # string - Entity to use
+            # required - no default
+            entity: 'sensor.xxxxxxx_battery'
+
+            # `visibility`
+            # string - The visiblity of the battery indicator
+            # Optional - 'always' | 'low' | 'never' - default = 'low' - will be shown only when under 10% (blinking red)
+            visibility: 'always'
+
+            # `show_percentage`
+            # boolean - Show the battery percentage or not
+            # optional - default = false
+            show_percentage: true
+
+          # `graph`
+          # object - Contains properties for the graph
+          # optional - no default
+          graph:
+            # `entity`
+            # string - The entity that is used for the graph
+            # required - no default
+            entity: 'sensor.xxxxxxx'
+
+            # `hours_to_show`
+            # string - The amount of hours to show the values for
+            # optional - default = 24
+            hours_to_show: 72
+
+            # `line_color`
+            # string - The color the line of the graph should be
+            # optional - default = 'orange'
+            line_color: 'blue'
 
         #################################################
         #         LIGHT EXAMPLE
         #################################################
+        # `type`
+        # string - The type of widget
+        # required - no default
         - type: 'light' # string | required - widget type
-          entity: 'light.xxxxxxx' # string | required - light entity to use
-          name: 'Ceiling Spots' # string | optional - name to show
-          # icon: ... - string | optional - icon to show (if a template icon is used this will be overwritten)
+
+          # `entity`
+          # string - Entity to use
+          # required - no default
+          entity: 'light.xxxxxxx'
+
+          # `name`
+          # string - Name to show in the widget
+          # optional - no default
+          name: 'Ceiling Spots'
+
+          # `template`
+          # list - Template definitions to use. This will determine which icon is shown
+          # optional - no default (use one of the below examples)
           template:
             - 'icon_hue_bulb_spot'
             # OR
@@ -118,57 +304,233 @@ home:
         #################################################
         #         MARKDOWN EXAMPLE
         #################################################
+        # `type`
+        # string - The type of widget
+        # required - no default
         - type: 'markdown' # string | required - widget type
+
+          # `content`
+          # string - The markdown content
+          # required - no default
           content: 'Just a markdown card' # string | required - content of the markdown card
 
         #################################################
         #         PERSON
         #################################################
-        - type: 'person' # string | required - widget type
-          entity: 'person.xxxxxxx' # string | required - person entity to use
-          name: 'Person' # string | optional - name to show. If not defined the entity name will be used
+        # `type`
+        # string - The type of widget
+        # required - no default
+        - type: 'person'
+
+          # `entity`
+          # string - Entity to use
+          # required - no default
+          entity: 'person.xxxxxxx'
+
+          # `name`
+          # string - Name to show in the widget
+          # optional - no default
+          name: 'Person'
 
           # `background`
-          # Defines the options for the person image
+          # object - Defines the options for the person image
+          # required - no default
           background:
-            image: '/local/nolu/profile_images/profile.png' # string | required - url of the image
-            cover: true # boolean | optional - default is false
+            # `image`
+            # string - The url of the image
+            # required - no default
+            image: '/local/nolu/profile_images/profile.png'
+
+            # `cover`
+            # boolean - Covers the complete widget
+            # optional - default = false
+            cover: true
 
         #################################################
         #         POWER PLUG EXAMPLE
         #################################################
-        - type: 'power_plug' # string | required - widget type
-          name: 'Power plug' # string | required - name to show
-          switch_entity: 'switch.xxxxxxx' # string | required - entity to switch on click
-          graph_entity: 'sensor.xxxxxxx' # string | optional - entity show the graph for
-          hours_to_show: 72 # integer | optional - graph time period
-          line_color: 'blue' # string | optional | default: 'orange' - color of the graph line
+        # `type`
+        # string - The type of widget
+        # required - no default
+        - type: 'power_plug'
+
+          # `entity`
+          # string - Entity to use
+          # required - no default
+          entity: 'switch.xxxxxxx'
+
+          # `name`
+          # string - Name to show in the widget
+          # optional - no default
+          name: 'Power plug'
+
+          # `battery`
+          # object - Contains properties to show a battery indicator
+          # optional - no default
+          battery:
+            # `entity`
+            # string - Entity to use
+            # required - no default
+            entity: 'sensor.xxxxxxx_battery'
+
+            # `visibility`
+            # string - The visiblity of the battery indicator
+            # Optional - 'always' | 'low' | 'never' - default = 'low' - will be shown only when under 10% (blinking red)
+            visibility: 'always'
+
+            # `show_percentage`
+            # boolean - Show the battery percentage or not
+            # optional - default = false
+            show_percentage: true
+
+          # `graph`
+          # object - Contains properties for the graph
+          # optional - no default
+          graph:
+            # `entity`
+            # string - The entity that is used for the graph
+            # required - no default
+            entity: 'sensor.xxxxxxx'
+
+            # `hours_to_show`
+            # string - The amount of hours to show the values for
+            # optional - default = 24
+            hours_to_show: 72
+
+            # `line_color`
+            # string - The color the line of the graph should be
+            # optional - default = 'orange'
+            line_color: 'blue'
 
         #################################################
         #         TEMPERATURE SENSOR EXAMPLE
         #################################################
-        - type: 'temperature' # string | required - widget type
-          entity: 'sensor.xxxxxxx' # string | required - entity to use
-          name: 'Baby Room' # string | required - name to show
-          # icon: ... - string | optional - icon to show
+        # `type`
+        # string - The type of widget
+        # required - no default
+        - type: 'temperature'
+
+          # `entity`
+          # string - Entity to use
+          # required - no default
+          entity: 'sensor.xxxxxxx'
+
+          # `name`
+          # string - Name to show in the widget
+          # optional - no default
+          name: 'Baby Room'
+
+          # `battery`
+          # object - Contains properties to show a battery indicator
+          # optional - no default
+          battery:
+            # `entity`
+            # string - Entity to use
+            # required - no default
+            entity: 'sensor.xxxxxxx_battery'
+
+            # `visibility`
+            # string - The visiblity of the battery indicator
+            # Optional - 'always' | 'low' | 'never' - default = 'low' - will be shown only when under 10% (blinking red)
+            visibility: 'always'
+
+            # `show_percentage`
+            # boolean - Show the battery percentage or not
+            # optional - default = false
+            show_percentage: true
+
+          # `graph`
+          # object - Contains properties for the graph
+          # optional - no default
+          graph:
+            # `entity`
+            # string - The entity that is used for the graph
+            # required - no default
+            entity: 'sensor.xxxxxxx'
+
+            # `hours_to_show`
+            # string - The amount of hours to show the values for
+            # optional - default = 24
+            hours_to_show: 72
+
+            # `line_color`
+            # string - The color the line of the graph should be
+            # optional - default = 'orange'
+            line_color: 'blue'
 
         #################################################
         #         WEATHER EXAMPLE
         #################################################
-        - type: 'default_weather' # string | required - widget type
-          entity: 'weather.noluhass' # string | required - name to show
+        # `type`
+        # string - The type of widget
+        # required - no default
+        - type: 'default_weather'
+
+          # `entity`
+          # string - Entity to use
+          # required - no default
+          entity: 'weather.noluhass'
 
         #################################################
-        #         ICONS
+        #         BATTERIES
         #################################################
+        # `type`
+        # string - The type of widget
+        # required - no default
+        - type: 'batteries'
+          # `icons_list`
+          # The icons to show, maximum of 4 icons can be
+          # shown. The first 4 will be shown
+          icons_list:
+            # `name`
+            # string - Name to show in the widget
+            # optional - no default
+            - name: 'Hue Motion'
+              # `type`
+              # string - The type of widget
+              # required - no default
+              entity: 'sensor.xxxxx_battery'
+              # `icon`
+              # string - Icon to use (see https://materialdesignicons.com/)
+              # optional - no default - If `icon` is not defined it will show the
+              # percentage in its place
+              icon: 'mdi:motion-sensor'
+
+            - name: 'Temperature'
+              entity: 'sensor.xxxxx_battery'
+
+            - name: 'Window'
+              entity: 'sensor.xxxxx_battery'
+              icon: 'mdi:window-open'
+
+            - name: 'Patio Doors'
+              entity: 'sensor.xxxxx_battery'
+
+        #################################################
+        #         ICONS EXAMPLE
+        #################################################
+        # `type`
+        # string - The type of widget
+        # required - no default
         - type: 'icons' # string | required - widget type
           # `icons_list`
           # The icons to show, maximum of 4 icons can be
           # shown. The first 4 will be shown
           icons_list:
-            - name: 'Whatsapp' # string | optional - name is shown below the icon
-              icon: 'mdi:whatsapp' # string | optional - icon to show
-              # entity: ... - string | optional - entity to use
+            # `name`
+            # string - Name to show in the widget
+            # optional - no default
+            - name: 'Whatsapp'
+
+              # `icon`
+              # string - Icon to use (see https://materialdesignicons.com/)
+              # optional - no default
+              icon: 'mdi:whatsapp'
+
+              # `entity`
+              # string - Entity to use
+              # optional - no default - entity is optional since this can also be a link or other type of icon
+              entity: 'weather.noluhass'
 
               # `tap_action`
               # see for supported properties https://github.com/custom-cards/button-card#action
@@ -177,11 +539,14 @@ home:
                 url_path: 'https://www.whatsapp.com'
 
               # `variables`
-              # In the variables section you can define the colors and gradients for your icon
+              # object - In the variables section you can define the colors and gradients for your icon
+              #
               # !IMPORTANT! No HEX values can be used since they get interpreted as comments in yaml
               # `active` state depends on the defined `entity`. For the active state the following state
               # values are checked:
               # 'on', 'home', 'active', 'enabled', 'heat', 'cool', 'heat_cool', 'fan', 'open'
+              #
+              # optional - default colors are used
               variables:
                 icon_color: 'rgb(255, 255, 255)' # string | optional - defines the icon color
                 bg_color_default: 'rgb(37, 211, 102)' # string | optional - defines the default background color
@@ -219,15 +584,71 @@ home:
         #################################################
         #         TEMPERATURE SENSOR EXAMPLE
         #################################################
+        # `type`
+        # string - The type of widget
+        # required - no default
         - type: 'temperature'
-          name: 'Baby Room'
+
+          # `entity`
+          # string - Entity to use
+          # required - no default
           entity: 'sensor.xxxxxxx'
+
+          # `name`
+          # string - Name to show in the widget
+          # optional - no default
+          name: 'Baby Room'
+
+          # `battery`
+          # object - Contains properties to show a battery indicator
+          # optional - no default
+          battery:
+            # `entity`
+            # string - Entity to use
+            # required - no default
+            entity: 'sensor.xxxxxxx_battery'
+
+            # `visibility`
+            # string - The visiblity of the battery indicator
+            # Optional - 'always' | 'low' | 'never' - default = 'low' - will be shown only when under 10% (blinking red)
+            visibility: 'always'
+
+            # `show_percentage`
+            # boolean - Show the battery percentage or not
+            # optional - default = false
+            show_percentage: true
+
+          # `graph`
+          # object - Contains properties for the graph
+          # optional - no default
+          graph:
+            # `entity`
+            # string - The entity that is used for the graph
+            # required - no default
+            entity: 'sensor.xxxxxxx'
+
+            # `hours_to_show`
+            # string - The amount of hours to show the values for
+            # optional - default = 24
+            hours_to_show: 72
+
+            # `line_color`
+            # string - The color the line of the graph should be
+            # optional - default = 'orange'
+            line_color: 'blue'
 
         #################################################
         #         WEATHER EXAMPLE
         #################################################
-        - type: default_weather
-          entity: weather.noluhass
+        # `type`
+        # string - The type of widget
+        # required - no default
+        - type: 'default_weather'
+
+          # `entity`
+          # string - Entity to use
+          # required - no default
+          entity: 'weather.noluhass'
 
 #################################################
 #

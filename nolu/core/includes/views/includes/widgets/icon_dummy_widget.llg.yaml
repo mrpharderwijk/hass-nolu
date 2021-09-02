@@ -7,7 +7,7 @@ style:
       width: 94px !important;
       height: 94px !important;
     }
-    ha-markdown$: |
+  ha-markdown$: |
     ha-markdown-element p {
       display: none;
     }

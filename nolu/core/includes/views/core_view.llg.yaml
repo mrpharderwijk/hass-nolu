@@ -115,28 +115,6 @@
 
 
                         #################################################
-                        #         BINARY
-                        #################################################
-                        {% elif widget.type == 'binary' %}
-                        - !include
-                          - includes/widgets/button_default_widget.llg.yaml
-                          - widget_entity: {{ widget.entity }}
-                            widget_name: {{ widget.name | default('No name') }}
-                            widget_lock: {{ widget.lock | default(false) }}
-                            widget_type: {{ widget.type }}
-                            {% if widget.icon is defined %}
-                            widget_icon: {{ widget.icon }}
-                            {% endif %}
-                            {% if widget.template is defined %}
-                            widget_template:
-                              {% for template in widget.template %}
-                              - {{ template }}
-                              {% endfor %}
-                            {% endif %}
-
-
-
-                        #################################################
                         #         CAMERA
                         #################################################
                         {% elif widget.type == 'camera' %}
@@ -157,64 +135,17 @@
                             {% endif %}
 
 
-                        #################################################
-                        #         CLIMATE
-                        #################################################
-                        {% elif widget.type == 'climate' %}
-                        - !include
-                          - includes/widgets/button_default_widget.llg.yaml
-                          - widget_entity: {{ widget.entity }}
-                            widget_name: {{ widget.name | default('No name') }}
-                            widget_lock: {{ widget.lock | default(false) }}
-                            widget_type: {{ widget.type }}
-                            {% if widget.template is defined %}
-                            widget_template:
-                              {% for template in widget.template %}
-                              - {{ template }}
-                              {% endfor %}
-                            {% endif %}
-
-
 
                         #################################################
                         #         CLIMATE (graph)
                         #################################################
-                        {% elif widget.type == 'energy' or
-                                widget.type == 'temperature' or
-                                widget.type == 'humidity' %}
+                        {% elif widget.type == 'energy' %}
                         - !include
                           - includes/widgets/graph_climate_widget.llg.yaml
                           - widget_entity: {{ widget.entity }}
                             widget_name: {{ widget.name }}
                             widget_type: {{ widget.type }}
                             widget_icon: {{ widget.icon }}
-
-
-
-                        #################################################
-                        #         LIGHT
-                        #################################################
-                        {% elif widget.type == 'light' %}
-                        - !include
-                          - includes/widgets/button_default_widget.llg.yaml
-                          - widget_entity: {{ widget.entity }}
-                            widget_name: {{ widget.name|default('No name') }}
-                            widget_lock: {{ widget.lock|default(false) }}
-                            widget_type: {{ widget.type }}
-                            {% if widget.icon is defined %}
-                            widget_icon: {{ widget.icon }}
-                            {% endif %}
-                            widget_template:
-                              {% if ((widget.template is not defined) or
-                                ('light' not in widget.template)) %}
-                              - 'light'
-                              {% endif %}
-                              {% if widget.template is defined %}
-                                {% for template in widget.template %}
-                              - {{ template }}
-                                {% endfor %}
-                              {% endif %}
-
 
 
                         #################################################
@@ -252,52 +183,7 @@
                         #################################################
                         {% elif widget.type == 'icons' %}
                         - type: 'custom:mod-card'
-                          style:
-                            .: |
-                              :host {
-                                align-items: flex-start;
-                                display: flex;
-                                justify-content: flex-start;
-                                padding: 0rem !important;
-                              }
-                              #states {
-                                padding: 0;
-                              }
-                              ha-card {
-                                width: 100%;
-                                height: 100%;
-                              }
-                            hui-horizontal-stack-card$: |
-                              #root {
-                                flex-flow: row wrap;
-                              }
-                              #root > * {
-                                display: flex;
-                                flex: 1 1 50%;
-                                margin: 0 !important;
-                              }
-                              {# @media only screen
-                              and (min-width: 600px) {
-                                #root > * {
-                                  flex: 1 1 auto;
-                                }
-                              } #}
-                              #root > mod-card:nth-child(1) {
-                                align-items: flex-start;
-                                justify-content: center;
-                              }
-                              #root > mod-card:nth-child(2) {
-                                align-items: flex-start;
-                                justify-content: center;
-                              }
-                              #root > mod-card:nth-child(3) {
-                                align-items: flex-end;
-                                justify-content: center;
-                              }
-                              #root > mod-card:nth-child(4) {
-                                align-items: flex-end;
-                                justify-content: center;
-                              }
+                          style: !include includes/styles/widget_icons.styles.yaml
                           card:
                             type: 'horizontal-stack'
                             cards:
@@ -426,6 +312,80 @@
 
 
                         #################################################
+                        #         BATTERIES
+                        # TODO: transform into include, however passing
+                        # lists is still an issue in lovelace_gen
+                        #################################################
+                        {% elif widget.type == 'batteries' %}
+                        - type: 'custom:mod-card'
+                          style: !include includes/styles/widget_icons.styles.yaml
+                          card:
+                            type: 'horizontal-stack'
+                            cards:
+                              {% set total_icons = widget.icons_list | length %}
+                              {% set blank_items_amount = 4 - (total_icons | int) %}
+                              {% for n in range(blank_items_amount) %}
+                                {% set new_icons_list = widget.icons_list.append({
+                                  "type": "blank"
+                                }) %}
+                              {% endfor %}
+
+                              {% for icon_item in widget.icons_list %}
+                                {% if loop.index <= 4 %}
+                              #################################################
+                              #         ENTITY
+                              #################################################
+                              - type: custom:mod-card
+                                style:
+                                  hui-vertical-stack-card$: |
+                                    #root {
+                                      align-items: center;
+                                      justify-content: center;
+                                    }
+                                    #root > * {
+                                      margin-right: 0 !important;
+                                    }
+                                card:
+                                  type: 'vertical-stack'
+                                  cards:
+                                    {% if icon_item.type is defined and
+                                      icon_item.type == 'blank' %}
+                                    #################################################
+                                    #         DUMMY ICON
+                                    #################################################
+                                    - !include
+                                      - includes/widgets/icon_dummy_widget.llg.yaml
+                                      - icon_item_type: {{ icon_item.type }}
+                                    {% else %}
+                                    #################################################
+                                    #         ICON BUTTON
+                                    #################################################
+                                    - type: 'custom:button-card'
+                                      {% if icon_item.entity is defined %}
+                                      entity: {{ icon_item.entity }}
+                                      {% endif %}
+
+                                      {% if icon_item.name is defined %}
+                                      name: {{ icon_item.name }}
+                                      {% endif %}
+
+                                      {% if icon_item.icon is defined %}
+                                      icon: {{ icon_item.icon }}
+
+                                      variables:
+                                        has_icon: true
+                                      {% endif %}
+                                      
+                                      template:
+                                        - 'battery_base'
+                                    {% endif %}
+                                {% endif %}
+                              {% endfor %}
+
+
+
+
+                        #################################################
                         #         LIGHT
                         #################################################
                         {% elif widget.type == 'light' %}
@@ -480,32 +440,86 @@
 
 
                         #################################################
-                        #         POWER_PLUG
+                        #         REFACTORED WIDGET 
+                        # one widget definition to rule them all
                         #################################################
-                        {% elif widget.type == 'power_plug' %}
+                        {% elif widget.type == 'binary' or
+                          widget.type == 'climate' or
+                          widget.type == 'humidity' or
+                          widget.type == 'power_plug' or
+                          widget.type == 'temperature' %}
                         - !include
-                          - includes/widgets/power_plug_widget.llg.yaml
-                          - widget_name: {{ widget.name }}
-                            widget_lock: {{ widget.lock }}
+                          - includes/widgets/button_default_widget.llg.yaml
+                          - widget_entity: {{ widget.entity }}
+                            widget_type: {{ widget.type }}
+                            widget_lock: {{ widget.lock | default(false) }}
                             
-                            {% if widget.switch_entity is defined %}
-                            widget_switch_entity: {{ widget.switch_entity }}
+                            {% if widget.name is defined %}
+                            widget_name: {{ widget.name }}
+                            {% endif %}
+                            
+                            {% if widget.icon is defined %}
+                            widget_icon: {{ widget.icon }}
+                            {% endif %}
+                            
+                            {#
+                             # TEMPLATES
+                             #}
+                            widget_template:
+                              {% if widget.type != 'binary' %}
+                              - 'base'
+                              {% endif %}
+                              {% if widget.template is defined %}
+                                {% for template in widget.template %}
+                              - {{ template }}
+                                {% endfor %}
+                              {% endif %}
+                            
+                            {#
+                             # BATTERY OPTIONS
+                             #}
+                            {% if widget.battery is defined and
+                              widget.battery.entity is defined %}
+                            widget_battery:
+                              entity: {{ widget.battery.entity }}
+                              {% if widget.battery.visibility is defined %}
+                              visibility: {{ widget.battery.visibility }}
+                              {% endif %}
+                              {% if ((widget.battery.show_percentage is defined) and
+                                (widget.battery.show_percentage == true)) or
+                                (widget.battery.show_percentage is not defined) %}
+                              show_percentage: true
+                              {% endif %}
                             {% endif %}
 
-                            {% if widget.graph_entity is defined %}
-                            widget_graph_entity: {{ widget.graph_entity }}
-                            {% endif %}
+                            {#
+                             # GRAPH OPTIONS
+                             #}
+                            {% if widget.graph is defined and
+                              widget.graph.entity is defined %}
+                            widget_graph:
+                              {#
+                               # GRAPH ENTITY
+                               #}
+                              entity: {{ widget.graph.entity }}
 
-                            {% if widget.hours_to_show is defined %}
-                            widget_hours_to_show: {{ widget.hours_to_show }}
-                            {% else %}
-                            widget_hours_to_show: 24
-                            {% endif %}
-
-                            {% if widget.line_color is defined %}
-                            widget_line_color: {{ widget.line_color }}
-                            {% else %}
-                            widget_line_color: 'orange'
+                              {#
+                               # GRAPH HOURS_TO_SHOW
+                               #}
+                              {% if widget.graph.hours_to_show is defined %}
+                              hours_to_show: {{ widget.graph.hours_to_show }}
+                              {% else %}
+                              hours_to_show: 24
+                              {% endif %}
+                              
+                              {#
+                               # GRAPH LINE_COLOR
+                               #}
+                              {% if widget.graph.line_color is defined %}
+                              line_color: {{ widget.graph.line_color }}
+                              {% else %}
+                              line_color: 'orange'
+                              {% endif %}
                             {% endif %}
 
                         #################################################
