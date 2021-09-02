@@ -170,9 +170,19 @@ custom_fields:
         {% if widget_battery.visibility is defined %}
         visibility: {{ widget_battery.visibility }}
         {% endif %}
+
         {% if widget_battery.show_percentage is defined %}
         show_percentage: {{ widget_battery.show_percentage }}
         {% endif %}
+
+        # `main_state`
+        # Needed to pass the state to the template and style the color on active/non-active
+        main_state: |
+          [[[
+            const onStates = ['on', 'home', 'active', 'enabled', 'heat', 'cool', 'open'];
+            return entity && entity.state && onStates.some(state => state === entity.state) ? true : false;
+          ]]]
+        
       template:
         - 'embed_battery_icon'
   {% endif %}

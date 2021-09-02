@@ -1,0 +1,205 @@
+#################################################
+#
+#         BATTERY_BASE
+#
+#################################################
+battery_base:
+  show_state: false
+  show_icon: true
+  show_label: |
+    [[[
+      return variables && variables.badge_count;
+    ]]]
+  label: |
+    [[[ return variables && variables.badge_count ? variables.badge_count : 0 ]]]
+
+  ############################################################################
+  #       TAP ACTION (bounce)
+  ############################################################################
+  tap_action:
+    animation_card: |
+      [[[
+        const animation_speed_ms = 900;
+        const animation = `card_bounce ${animation_speed_ms}ms cubic-bezier(0.22, 1, 0.36, 1)`;
+        this.shadowRoot.getElementById("card").style.animation = animation;
+        window.setTimeout(() => {
+          this.shadowRoot.getElementById("card").style.animation = "none";
+        }, animation_speed_ms)
+      ]]]
+    action: toggle
+    haptic: medium
+
+  styles:
+    ############################################################################
+    #       GRID (#container)
+    ############################################################################
+    grid:
+      - grid-template-areas: |
+          "c"
+          "i"
+          "n"
+      - grid-template-columns: auto
+      - grid-template-rows: auto min-content auto
+      - gap: 2%
+      - align-items: center
+
+    ############################################################################
+    #       ICON (#img-cell > ha-icon)
+    ############################################################################
+    icon:
+      - grid-area: 'i'
+      - width: 100%
+      - height: auto
+      - color: rgb(255, 255, 255)
+      - --mdc-icon-size: 25px
+
+    ############################################################################
+    #       NAME (#name)
+    #       The name is used underneath the app icon
+    ############################################################################
+    name:
+      - grid-area: 'n'
+      - font-size: 0.85rem
+      - font-weight: 400
+      - letter-spacing: 0.05vw
+      - line-height: 1.4rem
+      - text-align: center
+      - width: 80px
+      - justify-self: center
+      - padding-top: 0.1rem
+      - color: rgb(255, 255, 255)
+
+    ############################################################################
+    #       LABEL (#label)
+    #       The label is used as a badge to show (device) count
+    ############################################################################
+    label:
+      - background-color: '#F02849'
+      - border-radius: 50%
+      - color: '#FFFFFF'
+      - display: inline
+      - font-size: 1rem
+      - font-weight: 400
+      - line-height: 1.25rem
+      - padding: 0.3rem 0.6rem 0.2rem 0.6rem
+      - position: absolute
+      - right: -10px
+      - top: -10px
+      - vertical-align: middle
+
+    ############################################################################
+    #       CARD (#ha-card)
+    ############################################################################
+    card:
+      - background-color: transparent
+      - overflow: visible
+      - width: auto
+      - height: auto
+      - padding: 0
+      - --mdc-ripple-color: rgba(255, 255, 255, 0.3)
+
+    ############################################################################
+    #       CUSTOM FIELDS
+    ############################################################################
+    custom_fields:
+      c:
+        - grid-area: 'c'
+        - display: block
+        - width: 100%
+        - height: 60px
+        - letter-spacing: 0.03vw
+        - opacity: 1
+        - text-align: center
+
+  custom_fields:
+    # TODO: themeing
+    c: >
+      [[[
+        if (entity && entity.state) {
+          const input =  Number.isNaN(Number(entity.state)) ? 0 : Number(entity.state);
+          const radius = 20.5;
+          const circumference = radius * 2 * Math.PI;
+          const textSize = '12';
+          const textColor = 'white';
+
+          const entityState = Number.isNaN(Number(entity.state)) ? entity.state : Number(entity.state);
+          let strokeColor = 'rgb(104, 203, 102)';
+          if (typeof entityState === 'number') {
+            if (entityState < 30) {
+              strokeColor = 'rgb(218, 95, 77)';
+            }
+            if (entityState < 50) {
+              strokeColor = 'rgb(248, 212, 74)'
+            }
+            if (entityState <= 100) {
+              strokeColor = 'rgb(104, 203, 102)'
+            }
+          }
+
+          if (typeof entityState === 'string') {
+            if (entityState !== 'off') {
+              strokeColor = 'rgb(104, 203, 102)';
+            }
+            strokeColor = 'rgb(218, 95, 77)';
+          }
+
+          return `
+            <svg viewBox="0 0 50 50">
+              <style>
+                circle {
+                  transform: rotate(-90deg);
+                  transform-origin: 50% 50%;
+                  stroke-dasharray: ${circumference};
+                  stroke-dashoffset: ${circumference - input / 100 * circumference};
+                }
+                tspan {
+                  font-size: 10px;
+                }
+                text {
+                  display: ${variables && variables.has_icon ? 'none' : 'block'};
+                }
+              </style>
+              <circle cx="25" cy="25" r="${radius}" stroke="${strokeColor}" stroke-width="5" fill="none" stroke-linecap="round" />
+              <text x="50%" y="54%" fill="${textColor}" font-size="${textSize}" font-weight="600" text-anchor="middle" alignment-baseline="middle" dominant-baseline="middle">${input}<tspan font-size="${textSize}">%</tspan></text>
+            </svg>
+          `;
+        }
+      ]]]
+
+  extra_styles: |
+    [[[
+      return `
+        #img-cell {
+          padding: 0.5rem!important;
+          width: 46px !important;
+          height: 46px !important;
+          position: absolute !important;
+          top: 0 !important;
+        }
+        
+        #c svg {
+          width: 60px !important;
+          height: 60px !important;
+          margin: 0 auto;
+          display: block;
+        }
+
+        @keyframes card_bounce {
+          0% {
+            transform: scale(1);
+          }
+          15% {
+            transform: scale(0.9);
+          }
+          25% {
+            transform: scale(1);
+          }
+          30% {
+            transform: scale(0.98);
+          }
+          100% {
+            transform: scale(1);
+          }
+        }
+      `;
+    ]]]

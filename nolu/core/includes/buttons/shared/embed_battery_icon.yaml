@@ -81,7 +81,7 @@ embed_battery_icon:
       - width: auto
       - height: auto
       - opacity: 1
-      - --mdc-icon-size: 45px
+      - --mdc-icon-size: 25px
       - animation: |
           [[[
             if (variables && variables.visibility && variables.visibility === 'never') {
@@ -115,21 +115,31 @@ embed_battery_icon:
 
             return 'none'
           ]]]
+
+      # TODO: themeing
       - color: |
           [[[
             if (entity && entity.state) {
-              if (entity.state < 30) {
-                return 'red';
+              if (typeof entity.state === 'number') {
+                if (entity.state < 30) {
+                  return 'rgb(218, 95, 77)';
+                }
+                if (entity.state < 50) {
+                  return 'rgb(248, 212, 74)';
+                }
+                if (entity.state <= 100) {
+                  return 'rgb(104, 203, 102)';
+                }
               }
-              if (entity.state < 50) {
-                return 'orange';
+
+              if (typeof entity.state === 'string') {
+                if (entity.state !== 'off') {
+                  return 'rgb(104, 203, 102)';
+                }
+                return 'rgb(218, 95, 77)';
               }
-              if (entity.state < 70) {
-                return 'yellow'
-              }
-              if (entity.state <= 100) {
-                return 'green'
-              }
+              
+              return 'rgb(218, 95, 77)';
             }
           ]]]
 
@@ -137,14 +147,18 @@ embed_battery_icon:
     #       LABEL (#label)
     ############################################################################
     label:
-      - font-size: 0.65rem
+      # TODO: themeing
+      - color: |
+          [[[
+            return variables && variables.main_state ? 'rgb(22, 22, 22)' : 'rgb(255, 255, 255)';
+          ]]]
+      - font-size: 0.8rem
       - grid-area: l
       - height: auto
-      - margin-left: -2px
       - opacity: 1
-      - position: absolute
       - font-weight: bolder
-      - line-height: 0.55rem
+      - line-height: 0.75rem
+      - margin-right: .25rem
 
   extra_styles: |
     #img-cell {
