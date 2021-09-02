@@ -472,6 +472,41 @@ home:
           entity: 'weather.noluhass'
 
         #################################################
+        #         BATTERIES
+        #################################################
+        # `type`
+        # string - The type of widget
+        # required - no default
+        - type: 'batteries'
+          # `icons_list`
+          # The icons to show, maximum of 4 icons can be
+          # shown. The first 4 will be shown
+          icons_list:
+            # `name`
+            # string - Name to show in the widget
+            # optional - no default
+            - name: 'Hue Motion'
+              # `type`
+              # string - The type of widget
+              # required - no default
+              entity: 'sensor.xxxxx_battery'
+              # `icon`
+              # string - Icon to use (see https://materialdesignicons.com/)
+              # optional - no default - If `icon` is not defined it will show the
+              # percentage in its place
+              icon: 'mdi:motion-sensor'
+
+            - name: 'Temperature'
+              entity: 'sensor.xxxxx_battery'
+
+            - name: 'Window'
+              entity: 'sensor.xxxxx_battery'
+              icon: 'mdi:window-open'
+
+            - name: 'Patio Doors'
+              entity: 'sensor.xxxxx_battery'
+
+        #################################################
         #         ICONS EXAMPLE
         #################################################
         # `type`
