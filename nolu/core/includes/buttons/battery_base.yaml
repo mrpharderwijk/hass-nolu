@@ -52,6 +52,10 @@ battery_base:
       - height: auto
       - color: rgb(255, 255, 255)
       - --mdc-icon-size: 25px
+      - display: |
+          [[[
+            return variables && variables.has_icon ? 'block' : 'none';
+          ]]]
 
     ############################################################################
     #       NAME (#name)
