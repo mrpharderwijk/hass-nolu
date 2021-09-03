@@ -1,0 +1,16 @@
+# lovelace_gen
+
+type: markdown
+style:
+  .: |
+    :host {
+      background-color: transparent;
+      border: none;
+      padding: 1rem;
+    }
+  ha-markdown$: |
+    ha-markdown-element {
+      color: transparent;
+    }
+
+content: {{ widget_content }}

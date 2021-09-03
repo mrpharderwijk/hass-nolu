@@ -375,7 +375,7 @@
                                       variables:
                                         has_icon: true
                                       {% endif %}
-                                      
+
                                       template:
                                         - 'battery_base'
                                     {% endif %}
@@ -440,7 +440,7 @@
 
 
                         #################################################
-                        #         REFACTORED WIDGET 
+                        #         REFACTORED WIDGET
                         # one widget definition to rule them all
                         #################################################
                         {% elif widget.type == 'binary' or
@@ -453,15 +453,15 @@
                           - widget_entity: {{ widget.entity }}
                             widget_type: {{ widget.type }}
                             widget_lock: {{ widget.lock | default(false) }}
-                            
+
                             {% if widget.name is defined %}
                             widget_name: {{ widget.name }}
                             {% endif %}
-                            
+
                             {% if widget.icon is defined %}
                             widget_icon: {{ widget.icon }}
                             {% endif %}
-                            
+
                             {#
                              # TEMPLATES
                              #}
@@ -474,7 +474,7 @@
                               - {{ template }}
                                 {% endfor %}
                               {% endif %}
-                            
+
                             {#
                              # BATTERY OPTIONS
                              #}
@@ -511,7 +511,7 @@
                               {% else %}
                               hours_to_show: 24
                               {% endif %}
-                              
+
                               {#
                                # GRAPH LINE_COLOR
                                #}
@@ -598,6 +598,16 @@
                           - widget_content: {{ widget.content }}
                             widget_background_color: {{ widget.background_color|default('var(--nolu-background-color-inactive, rgb(22, 22, 22))') }}
                             widget_text_color: {{ widget.text_color|default('var(--nolu-color-inactive, rgb(245, 245, 245))') }}
+
+                        #################################################
+                        #         BLANK
+                        #################################################
+                        {% elif widget.type == 'blank' %}
+                        - !include
+                          - includes/widgets/blank_widget.llg.yaml
+                          - widget_content: {{ widget.content }}
+                            widget_background_color: transparent
+                            widget_text_color: transparent
 
                         #################################################
                         #         CUSTOM_ENTITIES
