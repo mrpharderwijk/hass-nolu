@@ -522,6 +522,8 @@
                               {% endif %}
                             {% endif %}
 
+
+
                         #################################################
                         #         MINI MEDIA PLAYER
                         #################################################
@@ -589,6 +591,7 @@
                         #}
 
 
+
                         #################################################
                         #         MARKDOWN
                         #################################################
@@ -599,15 +602,15 @@
                             widget_background_color: {{ widget.background_color|default('var(--nolu-background-color-inactive, rgb(22, 22, 22))') }}
                             widget_text_color: {{ widget.text_color|default('var(--nolu-color-inactive, rgb(245, 245, 245))') }}
 
+
+
                         #################################################
-                        #         BLANK
+                        #         SEPARATOR
                         #################################################
-                        {% elif widget.type == 'blank' %}
-                        - !include
-                          - includes/widgets/blank_widget.llg.yaml
-                          - widget_content: {{ widget.content }}
-                            widget_background_color: transparent
-                            widget_text_color: transparent
+                        {% elif widget.type == 'separator' %}
+                        - !include includes/widgets/separator_widget.llg.yaml
+
+
 
                         #################################################
                         #         CUSTOM_ENTITIES

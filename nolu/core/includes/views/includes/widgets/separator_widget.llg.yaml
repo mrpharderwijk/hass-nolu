@@ -13,4 +13,4 @@ style:
       color: transparent;
     }
 
-content: {{ widget_content }}
+content: '&nbsp;'

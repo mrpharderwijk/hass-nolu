@@ -314,20 +314,6 @@ home:
           # required - no default
           content: 'Just a markdown card' # string | required - content of the markdown card
 
-
-        #################################################
-        #         BLANK EXAMPLE
-        #################################################
-        # `type`
-        # string - The type of widget
-        # required - no default
-        - type: 'blank' # string | required - widget type
-
-          # `content`
-          # string - The blank content
-          # required - no default
-          content: '' # string | required - content of the blank card
-
         #################################################
         #         PERSON
         #################################################
@@ -650,6 +636,14 @@ home:
             # string - The color the line of the graph should be
             # optional - default = 'orange'
             line_color: 'blue'
+
+        #################################################
+        #         SEPARATOR EXAMPLE
+        #################################################
+        # `type`
+        # string - The type of widget
+        # required - no default
+        - type: 'separator'
 
         #################################################
         #         WEATHER EXAMPLE
