@@ -638,6 +638,14 @@ home:
             line_color: 'blue'
 
         #################################################
+        #         SEPARATOR EXAMPLE
+        #################################################
+        # `type`
+        # string - The type of widget
+        # required - no default
+        - type: 'separator'
+
+        #################################################
         #         WEATHER EXAMPLE
         #################################################
         # `type`
