@@ -8,6 +8,7 @@ scripts.yaml
 secrets.yaml
 home-assistant_v2.*
 *.log
+*.log.*
 
 /blueprints/
 /www/images/
@@ -27,6 +28,8 @@ google_assistant.service_account.json
 harmony_*.conf
 known_devices.yaml
 zigbee2mqtt
+zigbee.*
+airsonos.xml
 
 # Nolu custom specific
 configuration.yaml
