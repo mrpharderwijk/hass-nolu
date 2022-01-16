@@ -53,7 +53,8 @@ icon: {{ widget_icon }}
  #}
 {% if widget_type == 'humidity' %}
 icon: 'mdi:water-outline'
-
+tap_action:
+  action: more-info
 {% elif widget_type == 'power_plug' %}
 icon: |
   [[[
@@ -63,6 +64,8 @@ icon: |
   ]]]
 {% elif widget_type == 'temperature' %}
 icon: 'mdi:thermometer'
+tap_action:
+  action: more-info
 
 {% elif widget_type == 'thermostat' %}
 icon: 'mdi:thermostat'

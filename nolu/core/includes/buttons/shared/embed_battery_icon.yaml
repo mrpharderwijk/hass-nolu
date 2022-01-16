@@ -57,6 +57,10 @@ embed_battery_icon:
       }
       return null;
     ]]]
+  tap_action:
+    action: more-info
+    haptic: medium
+
   styles:
     ############################################################################
     #       GRID (#container)

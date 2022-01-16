@@ -26,7 +26,7 @@ battery_base:
           this.shadowRoot.getElementById("card").style.animation = "none";
         }, animation_speed_ms)
       ]]]
-    action: toggle
+    action: more-info
     haptic: medium
 
   styles:
