@@ -31,6 +31,15 @@ show_name: false
 show_last_changed: {{ widget_show_last_changed }}
 {% endif %}
 
+{% if widget_type == 'camera' %}
+show_live_stream: false
+{% endif %}
+
+{% if (widget_lock is defined) and (widget_lock is true) %}
+lock:
+  enabled: true
+{% endif %}
+
 {#
  # ICON
  #}

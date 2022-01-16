@@ -71,7 +71,7 @@
                 {% if (data.greeting.subtitle is defined) %}
               - greeting_subtitle: {{ data.greeting.subtitle }}
                 {% endif %}
-              {% endif %}
+              {% endif %} 
             {% endif %}
 
             #################################################
@@ -237,7 +237,6 @@
                                       {% if icon_item.icon is defined %}
                                       icon: {{ icon_item.icon }}
                                       {% endif %}
-
                                       {% if icon_item.variables is defined %}
                                       variables:
                                         {% if icon_item.variables.icon_color is defined %}
@@ -302,14 +301,13 @@
                                         confirmation: {{ icon_item.tap_action.confirmation }}
                                         {% endif %}
                                       {% endif %}
-
                                       template:
                                         - 'app_icon_base'
                                     {% endif %}
                                 {% endif %}
                               {% endfor %}
 
-
+                        
 
                         #################################################
                         #         BATTERIES
