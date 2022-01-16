@@ -1,0 +1,45 @@
+.: |
+  :host {
+    align-items: flex-start;
+    display: flex;
+    justify-content: flex-start;
+    padding: 0rem !important;
+  }
+  #states {
+    padding: 0;
+  }
+  ha-card {
+    width: 100%;
+    height: 100%;
+  }
+hui-horizontal-stack-card$: |
+  #root {
+    flex-flow: row wrap;
+  }
+  #root > * {
+    display: flex;
+    flex: 1 1 50% !important;
+    margin: 0 !important;
+  }
+  {# @media only screen
+  and (min-width: 600px) {
+    #root > * {
+      flex: 1 1 auto;
+    }
+  } #}
+  #root > mod-card:nth-child(1) {
+    align-items: flex-start;
+    justify-content: center;
+  }
+  #root > mod-card:nth-child(2) {
+    align-items: flex-start;
+    justify-content: center;
+  }
+  #root > mod-card:nth-child(3) {
+    align-items: flex-end;
+    justify-content: center;
+  }
+  #root > mod-card:nth-child(4) {
+    align-items: flex-end;
+    justify-content: center;
+  }

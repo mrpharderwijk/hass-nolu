@@ -3,14 +3,14 @@
 #################################################
 #         POWER_PLUG
 #################################################
-type: custom:button-card
-entity: {{ widget_switch_entity }}
+type: 'custom:button-card'
+entity: {{ widget_entity }}
 variables:
   entity_state: |
-    [[[ 
-      return entity && entity.state 
-        ? entity.state 
-        : null; 
+    [[[
+      return entity && entity.state
+        ? entity.state
+        : null;
     ]]]
 
 {% if (widget_graph_entity is defined) %}
@@ -42,6 +42,9 @@ custom_fields:
           show_line: true
           show_fill: false
       decimals: 1
+      hours_to_show: {{ widget_hours_to_show }}
+      points_per_hour: 0.25
+      line_color: {{ widget_line_color }}
       show:
         name: false
         icon: false
@@ -49,15 +52,15 @@ custom_fields:
         labels_secondary: false
         average: false
         points: false
-      align_icon: left
-      align_state: right
+      align_icon: 'left'
+      align_state: 'right'
       style: !include ../styles/graph_embedded.styles.yaml
       state_map:
         - value: 0.0
           label: 'off'
 {% endif %}
 
-# TEMPLATES  
+# TEMPLATES
 template:
   - 'base'
 

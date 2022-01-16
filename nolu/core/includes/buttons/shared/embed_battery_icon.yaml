@@ -1,0 +1,179 @@
+#################################################
+#
+#         EMBED_BATTERY_ICON
+#
+#################################################
+embed_battery_icon:
+  show_state: false
+  show_icon: true
+  show_label: |
+    [[[
+      return variables && variables.show_percentage 
+        ? Boolean(variables.show_percentage)
+        : false;
+    ]]]
+  show_name: false
+  icon: |
+    [[[
+      if (entity && entity.state) {
+        if (entity.state <= 10) {
+          return 'mdi:battery-10';
+        }
+        if (entity.state <= 20) {
+          return 'mdi:battery-20';
+        }
+        if (entity.state <= 30) {
+          return 'mdi:battery-30';
+        }
+        if (entity.state <= 40) {
+          return 'mdi:battery-40';
+        }
+        if (entity.state <= 50) {
+          return 'mdi:battery-50';
+        }
+        if (entity.state <= 60) {
+          return 'mdi:battery-60';
+        }
+        if (entity.state <= 70) {
+          return 'mdi:battery-70';
+        }
+        if (entity.state <= 80) {
+          return 'mdi:battery-80';
+        }
+        if (entity.state <= 99) {
+          return 'mdi:battery-90';
+        }
+        if (entity.state <= 100) {
+          return 'mdi:battery';
+        }
+      }
+    ]]]
+  label: |
+    [[[
+      if (variables && variables.show_percentage) {
+        return entity && entity.state 
+          ? `${entity.state}${entity.attributes && entity.attributes.unit_of_measurement ? `${entity.attributes.unit_of_measurement}` : ''}`
+          : '';
+      }
+      return null;
+    ]]]
+  tap_action:
+    action: more-info
+    haptic: medium
+
+  styles:
+    ############################################################################
+    #       GRID (#container)
+    ############################################################################
+    grid:
+      - display: flex
+      - flex-flow: row-reverse nowrap
+      - align-items: center
+      - justify-content: center
+      - grid-template-areas: |
+          "l i"
+        grid-template-columns: 1fr 1fr
+        grid-template-rows: 1fr
+      - width: auto !important;
+      - height: auto !important;
+
+    ############################################################################
+    #       ICON (#img-cell > ha-icon)
+    ############################################################################
+    icon:
+      - grid-area: i
+      - width: auto
+      - height: auto
+      - opacity: 1
+      - --mdc-icon-size: 25px
+      - animation: |
+          [[[
+            if (variables && variables.visibility && variables.visibility === 'never') {
+              return 'none';
+            }
+            
+            if (entity && entity.state && entity.state < 10) {
+              return 'blinker 1s linear infinite';
+            }
+
+            return 'none';
+          ]]]
+      - display: |
+          [[[
+            if (variables && variables.visibility && variables.visibility === 'always') {
+              return 'block';
+            }
+
+            if (variables && variables.visibility && variables.visibility === 'never') {
+              return 'none'
+            }
+
+            if (
+              (!variables || !variables.visibility) ||
+              (variables && variables.visibility === 'low')
+            ) {
+              if (entity && entity.state && entity.state < 10) {
+                return 'block';
+              }
+            }
+
+            return 'none'
+          ]]]
+
+      # TODO: themeing
+      - color: |
+          [[[
+            if (entity && entity.state) {
+              if (typeof entity.state === 'number') {
+                if (entity.state < 30) {
+                  return 'rgb(218, 95, 77)';
+                }
+                if (entity.state < 50) {
+                  return 'rgb(248, 212, 74)';
+                }
+                if (entity.state <= 100) {
+                  return 'rgb(104, 203, 102)';
+                }
+              }
+
+              if (typeof entity.state === 'string') {
+                if (entity.state !== 'off') {
+                  return 'rgb(104, 203, 102)';
+                }
+                return 'rgb(218, 95, 77)';
+              }
+              
+              return 'rgb(218, 95, 77)';
+            }
+          ]]]
+
+    ############################################################################
+    #       LABEL (#label)
+    ############################################################################
+    label:
+      # TODO: themeing
+      - color: |
+          [[[
+            return variables && variables.main_state ? 'rgb(22, 22, 22)' : 'rgb(255, 255, 255)';
+          ]]]
+      - font-size: 0.8rem
+      - grid-area: l
+      - height: auto
+      - opacity: 1
+      - font-weight: bolder
+      - line-height: 0.75rem
+      - margin-right: .25rem
+
+  extra_styles: |
+    #img-cell {
+      width: auto !important;
+      height: auto !important;
+    }
+    #img-cell ha-icon {
+      transform: rotate(90deg) !important;
+    }
+    @keyframes blinker {
+      50% {
+        opacity: 0;
+      }
+    }
