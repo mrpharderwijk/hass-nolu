@@ -382,33 +382,6 @@
 
 
 
-
-                        #################################################
-                        #         LIGHT
-                        #################################################
-                        {% elif widget.type == 'light' %}
-                        - !include
-                          - includes/widgets/button_default_widget.llg.yaml
-                          - widget_entity: {{ widget.entity }}
-                            widget_name: {{ widget.name | default('No name') }}
-                            widget_lock: {{ widget.lock | default(false) }}
-                            widget_type: {{ widget.type }}
-                            {% if widget.icon is defined %}
-                            widget_icon: {{ widget.icon }}
-                            {% endif %}
-                            widget_template:
-                              {% if ((widget.template is not defined) or
-                                ('light' not in widget.template)) %}
-                              - 'light'
-                              {% endif %}
-                              {% if widget.template is defined %}
-                                {% for template in widget.template %}
-                              - {{ template }}
-                                {% endfor %}
-                              {% endif %}
-
-
-
                         #################################################
                         #         PERSON
                         #################################################
@@ -434,6 +407,8 @@
                           {% endif %}
                           template:
                             - 'person'
+                        
+
 
 
 
@@ -444,17 +419,15 @@
                         {% elif widget.type == 'binary' or
                           widget.type == 'climate' or
                           widget.type == 'humidity' or
+                          widget.type == 'light' or
                           widget.type == 'power_plug' or
                           widget.type == 'temperature' %}
                         - !include
                           - includes/widgets/button_default_widget.llg.yaml
                           - widget_entity: {{ widget.entity }}
-                            widget_type: {{ widget.type }}
                             widget_lock: {{ widget.lock | default(false) }}
-
-                            {% if widget.name is defined %}
-                            widget_name: {{ widget.name }}
-                            {% endif %}
+                            widget_name: {{ widget.name | default('No name') }}
+                            widget_type: {{ widget.type }}
 
                             {% if widget.icon is defined %}
                             widget_icon: {{ widget.icon }}
@@ -464,7 +437,9 @@
                              # TEMPLATES
                              #}
                             widget_template:
-                              {% if widget.type != 'binary' %}
+                              {% if widget.type == 'light' %}
+                              - 'light'
+                              {% elif widget.type != 'binary' %}
                               - 'base'
                               {% endif %}
                               {% if widget.template is defined %}
@@ -540,6 +515,10 @@
                               ha-card .mmp__container {
                                 border-radius: 1rem;
                                 overflow: hidden !important;
+                              }
+
+                              ha-card .mmp-player__core.flex {
+                                flex-flow: row wrap !important;
                               }
                           artwork: 'full-cover'
                           hide:
