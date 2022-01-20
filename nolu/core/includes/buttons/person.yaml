@@ -35,7 +35,7 @@ person:
       - border-radius: 50%
       - grid-area: 'i'
       - height: 75px
-      - position: relative
+      - position: absolute
       - text-align: left
       - width: 75px
       - !include shared/styles/card_color.styles.yaml
