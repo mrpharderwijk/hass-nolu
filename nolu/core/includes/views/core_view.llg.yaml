@@ -508,7 +508,16 @@
                               ha-card {
                                 border-radius: 1rem;
                                 overflow: hidden !important;
+                                height: 100%;
+                                flex-flow: column wrap;
+                                align-content: center;
+                                justify-content: center;
                               }
+
+                              ha-card .mmp__bg {
+                                background-color: rgb(22, 22, 22);
+                              }
+
                               ha-card .mmp__bg,
                               ha-card[artwork*="full-cover"].--has-artwork .mmp-player,
                               ha-card .mmp-player,
@@ -618,79 +627,44 @@
                               #states {
                                 padding: 0;
                               }
-                            hui-vertical-stack-card$: |
-                              #root > *:not(:first-child) {
-                                margin-top: 1.5rem !important;
+                              ha-card {
+                                height: 100%;
+                                width: 100%;
+                              }
+                            hui-horizontal-stack-card$: |
+                              #root {
+                                flex-flow: row wrap;
+                                align-items: center;
+                                justify-content: flex-start;
+                              }
+                              #root > * {
+                                flex: 0 1 50% !important;
+                                margin: 0 !important;
+                              }
+                              #root > mod-card {
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
                               }
                           card:
-                            type: vertical-stack
+                            type: horizontal-stack
                             cards:
 
                               # FIXME: couldn't use entities for some reason?
                               {% for entity_item in widget.entity_list %}
-                              #################################################
-                              #         ENTITY
-                              #################################################
                               - type: custom:mod-card
                                 style:
-                                  hui-horizontal-stack-card$: |
-                                    #root {
-                                      align-items: center;
-                                      justify-content: center;
-                                    }
-                                    #root > * {
-                                      margin-right: 0 !important;
-                                    }
-                                card:
-                                  type: horizontal-stack
-                                  cards:
-                                    #################################################
-                                    #         BUTTON
-                                    #################################################
-                                    - type: custom:button-card
-                                      entity: {{ entity_item.entity }}
-                                      name: {{ entity_item.name }}
-                                      icon: {{ entity_item.icon }}
-                                      template:
-                                        - round_icon
+                                  .: |
 
-                                    #################################################
-                                    #         TITLE
-                                    #################################################
-                                    - type: markdown
-                                      style:
-                                        .: |
-                                          :host {
-                                            margin-left: 1rem !important;
-                                          }
-                                          ha-card {
-                                            background-color: transparent !important;
-                                            outline: 0 !important;
-                                            box-shadow: none !important;
-                                          }
-                                          ha-markdown {
-                                            padding: 0 !important;
-                                          }
-                                        ha-markdown$: |
-                                          ha-markdown-element > * {
-                                            font-weight: 300 !important;
-                                          }
-                                          ha-markdown-element h1 {
-                                            color: var(--nolu-color-white, rgb(245, 245, 245));
-                                            font-size: 1.25rem;
-                                            line-height: 1rem !important;
-                                            margin: 0 0 .75rem 0 !important;
-                                          }
-                                          ha-markdown-element h2 {
-                                            color: var(--nolu-color-gray-lighter, rgb(151, 151, 151));
-                                            font-size: 1rem !important;
-                                            line-height: 0.85rem !important;
-                                            margin: 0 !important;
-                                            text-transform: capitalize;
-                                          }
-                                      content: |
-                                        # {{ entity_item.name }}
-                                        {# ## {{ states({{ entity_item.entity }}) }} #}
+                                card:
+                                  #################################################
+                                  #         BUTTON
+                                  #################################################
+                                  type: custom:button-card
+                                  entity: {{ entity_item.entity }}
+                                  icon: {{ entity_item.icon }}
+                                  template:
+                                    - round_icon
                               {% endfor %}
 
                         #################################################
