@@ -507,13 +507,19 @@
                             .: |
                               ha-card {
                                 border-radius: 1rem;
-                                overflow: hidden !important;
-                                height: 100%;
+                                display: block;
                                 flex-flow: column wrap;
+                                height: 100%;
+                                overflow: hidden !important;
+                                position: relative;
                                 align-content: center;
                                 justify-content: center;
                               }
-
+                              
+                              ha-card[artwork*="full-cover"].--has-artwork::before {
+                                padding-top: 0 !important;
+                              }
+                              
                               ha-card .mmp__bg {
                                 background-color: rgb(22, 22, 22);
                               }
@@ -525,7 +531,14 @@
                                 border-radius: 1rem;
                                 overflow: hidden !important;
                               }
-
+                              
+                              ha-card .mmp-player {
+                                display: flex;
+                                flex-flow: column wrap;
+                                align-items: center;
+                                justify-content: center;
+                                height: 100%;
+                              }
                               ha-card .mmp-player__core.flex {
                                 flex-flow: row wrap !important;
                               }
